@@ -1,5 +1,7 @@
 package di.uniba.map.game.games;
 
+import di.uniba.map.game.type.Item;
+import di.uniba.map.game.type.Room;
 import di.uniba.map.game.type.Command;
 import di.uniba.map.game.type.CommandType;
 import di.uniba.map.game.GameDescription;
@@ -39,6 +41,29 @@ public class GothicGame extends GameDescription {
         //push.setAlias(new String[]{"spingi","attiva"});
         getCommands().add(push);
 
+        //Rooms
+        Room entrylevel = new Room(0, "Ingresso", "Sei appena arrivato in questo nuovo mondo."
+                + " Trova il modo di uscirne vivo..");
+
+
+        Room woods = new Room(1, "Bosco", "Sei nel bosco!");
+        Room testRoom = new Room(2, "Test Room", "Stanza Test");
+
+        getRooms().add(testRoom);
+        getRooms().add(entrylevel);
+        getRooms().add(woods);
+
+        entrylevel.setNorth(woods);
+        entrylevel.setEast(testRoom);
+        woods.setSouth(entrylevel);
+        testRoom.setWest(entrylevel);
+
+        //oggetti
+        Item foglio = new Item(1, "foglio", "Un foglio su cui potrebbe esserci scritto qualcosa di interessante...");
+        testRoom.getItems().add(foglio);
+
+        //Starting room
+        setCurrentRoom(entrylevel);
 
     }
 }

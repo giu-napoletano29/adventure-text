@@ -21,7 +21,12 @@ public class Parser {
                 break;
             }
         }
-        cmd = new ParserOutput(token, null);
+
+        if(key.length > 1){
+            cmd = new ParserOutput(token, key[1]);
+        }else{
+            cmd = new ParserOutput(token, null);
+        }
         return cmd;
     }
 }

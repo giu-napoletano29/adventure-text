@@ -1,6 +1,5 @@
 package di.uniba.map.game.type;
 
-import di.uniba.map.b.adventure.type.AdvObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +25,44 @@ public class Room {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+    public String getName(){ return name;}
+
+    public String getDescription() { return description;}
+
+    public Room getSouth() {
+        return south;
+    }
+
+    public void setSouth(Room south) {
+        this.south = south;
+    }
+
+    public Room getNorth() {
+        return north;
+    }
+
+    public void setNorth(Room north) {
+        this.north = north;
+    }
+
+    public Room getEast() {
+        return east;
+    }
+
+    public void setEast(Room east) {
+        this.east = east;
+    }
+
+    public Room getWest() {
+        return west;
+    }
+
+    public void setWest(Room west) {
+        this.west = west;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 }

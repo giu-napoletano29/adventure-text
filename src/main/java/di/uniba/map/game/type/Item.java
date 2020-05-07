@@ -1,8 +1,6 @@
 package di.uniba.map.game.type;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Item {
     private final int id;
@@ -13,6 +11,8 @@ public class Item {
 
     //private Set<String> alias;
 
+    private List<Item> list = new ArrayList<>();
+
     private boolean openable = false;
 
     private boolean pickupable = true;
@@ -20,6 +20,8 @@ public class Item {
     private boolean weapon = false;
 
     private boolean pushable = false;
+
+    private boolean container = false;
 
     private boolean open = false;
 
@@ -35,6 +37,14 @@ public class Item {
         return id;
     }
 
+    //Impostazione Oggetto che può contenere oggetti
+    public void setIsContainer() { this.container = true;}
+
+    public boolean getIsContainer() { return this.container;}
+
+    public List<Item> getItemList() { return this.list;}
+
+    //Fine
     public String getName() {
         return name;
     }

@@ -12,6 +12,7 @@ public class Engine {
 
     private final GameDescription game;
     private final Parser cmd;
+    private final Utils u = new Utils();
 
     public Engine(GameDescription game) {
         this.game = game;
@@ -30,6 +31,7 @@ public class Engine {
     }
 
     public void run() {
+        u.printRoom(game);
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine()){
             ParserOutput command = cmd.parseCmd(scanner.nextLine(), game);
@@ -37,7 +39,8 @@ public class Engine {
                 System.out.println("Chiusura....");
                 break;
             }else{
-
+                u.move(command, game);
+                u.printRoom(game); //Inserire enum per capire quale messaggio stampare in base a movimento o azione
             }
         }
     }

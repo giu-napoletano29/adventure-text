@@ -1,8 +1,6 @@
 package di.uniba.map.game;
 
-import di.uniba.map.game.type.Item;
-import di.uniba.map.game.type.Command;
-import di.uniba.map.game.type.Room;
+import di.uniba.map.game.type.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +8,13 @@ import java.util.List;
 public abstract class GameDescription {
     private final List<Room> rooms = new ArrayList<>();
 
+    private Room currentRoom;
+
     private final List<Command> commands = new ArrayList<>();
 
-    private final List<Item> inventory = new ArrayList<>();
+    private final Player player = new Player(100, "Hero", "Brave Man"); //Instanza giocatore
+
+    //private final List<Item> inventory = new ArrayList<>();
 
     public abstract void init() throws Exception;
 
@@ -20,4 +22,19 @@ public abstract class GameDescription {
         return commands;
     }
 
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
+    public Inventory getInventory(){
+        return player.getInventory();
+    }
 }
