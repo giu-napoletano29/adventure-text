@@ -51,11 +51,36 @@ public class Utils {
             }
             else if(cmd.getCommand().getType() == CommandType.PICK_UP){
                 if(cmd.getItem() != null){
-                    game.getInventory().add(cmd.getItem());
-                    game.getCurrentRoom().getItems().remove(cmd.getItem());
+                    if(cmd.getItem().isPickupable()){
+                        game.getInventory().add(cmd.getItem());
+                        game.getCurrentRoom().getItems().remove(cmd.getItem());
+                    }else{
+                        System.out.println("Ehi non puoi mica raccogliere " + cmd.getItem().getName());
+                    }
                 }else{
                     System.out.println("L'oggetto che cerchi non c'è!");
                 }
+            }
+            else if(cmd.getCommand().getType() == CommandType.OPEN){
+                if(cmd.getItem() != null){
+                    if(cmd.getItem().isOpenable()){
+                        System.out.println("Guardando dentro..");
+                        if(cmd.getItem().getItemList().size() > 0){
+                            for (Item o : cmd.getItem().getItemList()) {
+                                System.out.println(o.getName() + ": " + o.getDescription());
+                            }
+                        }else{
+                            System.out.println("E' vuoto!");
+                        }
+                    }else{
+                        System.out.println("Non riesco ad aprire " + cmd.getItem().getName());
+                    }
+                }else{
+                    System.out.println("L'oggetto che cerchi non c'è!");
+                }
+            }
+            else if(cmd.getCommand().getType() == CommandType.LOOK_AT){
+                System.out.println(game.getCurrentRoom().getLook());
             }
         }else{
             System.out.println("Ehm... non ho capito il comando");

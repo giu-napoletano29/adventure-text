@@ -38,7 +38,7 @@ public class Item {
     }
 
     //Impostazione Oggetto che può contenere oggetti
-    public void setIsContainer() { this.container = true;}
+    public void setIsContainer(boolean cont) { this.container = cont;}
 
     public boolean getIsContainer() { return this.container;}
 

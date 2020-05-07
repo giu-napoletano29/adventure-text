@@ -18,7 +18,7 @@ public class Parser {
         String[] key = command.split(" ");
 
         for(int i = 0; i<game.getCommands().size(); i++){
-            if(key[0].contains(game.getCommands().get(i).getName())){
+            if(key[0].contains(game.getCommands().get(i).getName()) || game.getCommands().get(i).getAlias().contains(key[0])){
                 token = new Command(game.getCommands().get(i).getType(),game.getCommands().get(i).getName());
                 break;
             }

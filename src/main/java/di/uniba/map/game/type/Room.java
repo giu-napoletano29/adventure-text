@@ -11,6 +11,8 @@ public class Room {
 
     private String description;
 
+    private String look= "Vuoto";
+
     private Room south = null;
 
     private Room north = null;
@@ -64,5 +66,13 @@ public class Room {
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public String getLook() {
+        return look;
+    }
+
+    public void setLook(String look) {
+        this.look = look;
     }
 }
