@@ -39,5 +39,6 @@ public class GothicGame extends GameDescription {
         //push.setAlias(new String[]{"spingi","attiva"});
         getCommands().add(push);
 
+
     }
 }

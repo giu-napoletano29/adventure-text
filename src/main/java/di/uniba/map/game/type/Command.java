@@ -10,7 +10,7 @@ public class Command {
 
     private final String name;
 
-    //private Set<String> alias;
+    private Set<String> alias;
 
     public Command(CommandType type, String name) {
         this.type = type;
@@ -20,5 +20,8 @@ public class Command {
 
     public CommandType getType() {
         return type;
+    }
+    public String getName() {
+        return name;
     }
 }
