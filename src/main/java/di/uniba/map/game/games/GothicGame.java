@@ -60,6 +60,7 @@ public class GothicGame extends GameDescription {
 
         //oggetti
         Item foglio = new Item(1, "foglio", "Un foglio su cui potrebbe esserci scritto qualcosa di interessante...");
+        getItemList().add(foglio);
         testRoom.getItems().add(foglio);
 
         //Starting room

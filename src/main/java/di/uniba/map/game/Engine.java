@@ -40,7 +40,7 @@ public class Engine {
                 break;
             }else{
                 u.move(command, game);
-                u.printRoom(game); //Inserire enum per capire quale messaggio stampare in base a movimento o azione
+                //u.printRoom(game); //Inserire enum per capire quale messaggio stampare in base a movimento o azione
             }
         }
     }

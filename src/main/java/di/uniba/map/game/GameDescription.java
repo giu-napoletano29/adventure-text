@@ -14,9 +14,13 @@ public abstract class GameDescription {
 
     private final Player player = new Player(100, "Hero", "Brave Man"); //Instanza giocatore
 
-    //private final List<Item> inventory = new ArrayList<>();
+    private final List<Item> itemList = new ArrayList<>();
 
     public abstract void init() throws Exception;
+
+    public List<Item> getItemList() {
+        return itemList;
+    }
 
     public List<Command> getCommands() {
         return commands;

@@ -2,6 +2,7 @@ package di.uniba.map.game.parser;
 
 import di.uniba.map.game.GameDescription;
 import di.uniba.map.game.type.Command;
+import di.uniba.map.game.type.Item;
 
 import java.util.Scanner;
 
@@ -13,6 +14,7 @@ public class Parser {
     public ParserOutput parseCmd(String command, GameDescription game){
         ParserOutput cmd;
         Command token = new Command(null, null);
+        Item item = null;
         String[] key = command.split(" ");
 
         for(int i = 0; i<game.getCommands().size(); i++){
@@ -21,12 +23,22 @@ public class Parser {
                 break;
             }
         }
-
-        if(key.length > 1){
-            cmd = new ParserOutput(token, key[1]);
-        }else{
-            cmd = new ParserOutput(token, null);
+        for(int i = 0; i<game.getItemList().size(); i++){
+            try{
+                if(key[1].contains(game.getItemList().get(i).getName())){
+                    item = game.getItemList().get(i);
+                    break;
+                }
+            }catch (Exception ArrayIndexOutOfBoundsException){
+                break;
+            }
         }
+
+       // if(key.length > 1){
+            cmd = new ParserOutput(token, item);
+       // }else{
+       //     cmd = new ParserOutput(token);
+       // }
         return cmd;
     }
 }
