@@ -72,6 +72,7 @@ public class GothicGame extends GameDescription {
         cassa.setIsContainer(true);
         cassa.getItemList().add(foglio);
         getItemList().add(cassa);
+        testRoom.getItems().add(cassa);
 
         List<Talk> talk2 = new ArrayList<>();
         Talk talk1 = new Talk();
@@ -84,7 +85,9 @@ public class GothicGame extends GameDescription {
         talk1.getAnswerTrigger().add(AnswerType.END);
 
         talk2.add(talk1);
-        Npc alessandra = new Npc(100, "Alessandra", "Sisisi sono perfettissimissima fantasticas adhfghgksjdhgksd", talk2);
+        Npc alessandra = new Npc(100, "Alessandra", "A volte sono anche simpatica");
+        alessandra.setTalk(talk2);
+        alessandra.setSpeakable(true);
         getNpcList().add(alessandra);
         testRoom.getNpcs().add(alessandra);
 

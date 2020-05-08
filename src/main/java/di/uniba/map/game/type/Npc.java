@@ -11,37 +11,48 @@ public class Npc {
 
     private String description;
 
-    private boolean enemy = false;
+    private boolean isEnemy = false;
+
+    private boolean isSpeakable = false;
 
     private List<Talk> talk;
 
-    public Npc(int hp, String name, String description, List<Talk> talk) {
+    public Npc(int hp, String name, String description) {
         this.hp = hp;
         this.name = name;
         this.description = description;
-        this.talk = talk;
     }
 
     public void talking(){
         Scanner scanner = new Scanner(System.in);
         int answer;
+        boolean error = true;
 
         for(int i = 0; i<talk.size(); i++){
             System.out.println(name + ": " + talk.get(i).getSpeech());
-            System.out.println("Come rispondi?");
             for(int j = 0; j<talk.get(i).getAnswerList().size(); j++){
                 System.out.println(j+1 + ": " + talk.get(i).getAnswerList().get(j));
             }
-            answer = Integer.parseInt(scanner.nextLine());  //TODO: aggiungere controllo sull'input
+            while(error) {
+                try{
+                    answer = Integer.parseInt(scanner.nextLine());
+                    if (talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.END) {
+                        System.out.println("Tu: Arrivederci.");
+                        System.out.println(name + ": " + "Allora è tutto.");
+                        error = false;
+                        break;
+                    } else {
+                        System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer - 1));
+                        //System.out.println("Altro trigger");
+                        error = false;
+                        break;
+                    }
+                }catch (Exception e){
+                    //System.out.println("Error: " + e);
+                    System.out.println(name + ": " + "Dammi una risposta sensata.");
+                    error = true;
+                }
 
-            if(talk.get(i).getAnswerTrigger().get(answer-1) == AnswerType.END){
-                System.out.println("Tu: Arrivederci.");
-                System.out.println(name + ": " + "Allora è tutto.");
-                break;
-            }else{
-                System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer-1));
-                //System.out.println("Altro trigger");
-                break;
             }
 
         }
@@ -49,5 +60,21 @@ public class Npc {
 
     public String getName() {
         return name;
+    }
+
+    public void setSpeakable(boolean speakable) {
+        isSpeakable = speakable;
+    }
+
+    public boolean getSpeakable(){
+        return isSpeakable;
+    }
+
+    public void isEnemy(boolean enemy) {
+        isEnemy = enemy;
+    }
+
+    public void setTalk(List<Talk> talk){
+        this.talk = talk;
     }
 }

@@ -84,7 +84,12 @@ public class Utils {
             }
             else if(cmd.getCommand().getType() == CommandType.TALK){
                 if(cmd.getNpc() != null && game.getCurrentRoom().getNpcs().contains(cmd.getNpc())){
-                    cmd.getNpc().talking();
+                    if(cmd.getNpc().getSpeakable()){
+                        cmd.getNpc().talking();
+                    }else{
+                        System.out.println(cmd.getNpc().getName() + ": Non mi disturbare.");
+                    }
+
                 }else{
                     System.out.println("Quel tizio non c'è!");
                 }

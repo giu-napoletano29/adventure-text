@@ -11,6 +11,7 @@ public class Talk {
 
     private List<AnswerType> answerTrigger = new ArrayList<>();; // Lista di risposte che triggerano azioni
 
+    //TODO: aggiungere lista risposte di tipo BAD
 
     public String getSpeech() {
         return speech;
