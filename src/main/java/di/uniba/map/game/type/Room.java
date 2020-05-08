@@ -23,6 +23,8 @@ public class Room {
 
     private final List<Item> items=new ArrayList<>();
 
+    private final List<Npc> npc=new ArrayList<>();
+
     public Room(int id, String name, String description) {
         this.id = id;
         this.name = name;
@@ -66,6 +68,10 @@ public class Room {
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public List<Npc> getNpcs() {
+        return npc;
     }
 
     public String getLook() {

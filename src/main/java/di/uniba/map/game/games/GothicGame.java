@@ -1,10 +1,10 @@
 package di.uniba.map.game.games;
 
-import di.uniba.map.game.type.Item;
-import di.uniba.map.game.type.Room;
-import di.uniba.map.game.type.Command;
-import di.uniba.map.game.type.CommandType;
+import di.uniba.map.game.type.*;
 import di.uniba.map.game.GameDescription;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GothicGame extends GameDescription {
     @Override
@@ -40,6 +40,9 @@ public class GothicGame extends GameDescription {
         Command push = new Command(CommandType.PUSH, "premi");
         push.setAlias(new String[]{"spingi","attiva"});
         getCommands().add(push);
+        Command talk = new Command(CommandType.TALK, "parla");
+        push.setAlias(new String[]{"Parla","PARLA"});
+        getCommands().add(talk);
 
         //Rooms
         Room entrylevel = new Room(0, "Ingresso", "Sei appena arrivato in questo nuovo mondo."
@@ -69,6 +72,21 @@ public class GothicGame extends GameDescription {
         cassa.setIsContainer(true);
         cassa.getItemList().add(foglio);
         getItemList().add(cassa);
+
+        List<Talk> talk2 = new ArrayList<>();
+        Talk talk1 = new Talk();
+        talk1.setSpeech("Ehi ciao come va?");
+        talk1.getAnswerList().add("Bene");
+        talk1.getAnswerList().add("Male");
+        talk1.getAnswerList().add("Fine");
+        talk1.getAnswerTrigger().add(AnswerType.GOOD);
+        talk1.getAnswerTrigger().add(AnswerType.BAD);
+        talk1.getAnswerTrigger().add(AnswerType.END);
+
+        talk2.add(talk1);
+        Npc alessandra = new Npc(100, "Alessandra", "Sisisi sono perfettissimissima fantasticas adhfghgksjdhgksd", talk2);
+        getNpcList().add(alessandra);
+        testRoom.getNpcs().add(alessandra);
 
         //Starting room
         setCurrentRoom(entrylevel);

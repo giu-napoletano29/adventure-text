@@ -6,7 +6,7 @@ import di.uniba.map.game.type.CommandType;
 
 public class Utils {
     public void move(ParserOutput cmd, GameDescription game){
-        if(cmd != null){
+        if(cmd.getCommand().getType() != null){
             if(cmd.getCommand().getType() == CommandType.NORD){
                 if(game.getCurrentRoom().getNorth() != null){
                     game.setCurrentRoom(game.getCurrentRoom().getNorth());
@@ -81,6 +81,13 @@ public class Utils {
             }
             else if(cmd.getCommand().getType() == CommandType.LOOK_AT){
                 System.out.println(game.getCurrentRoom().getLook());
+            }
+            else if(cmd.getCommand().getType() == CommandType.TALK){
+                if(cmd.getNpc() != null && game.getCurrentRoom().getNpcs().contains(cmd.getNpc())){
+                    cmd.getNpc().talking();
+                }else{
+                    System.out.println("Quel tizio non c'è!");
+                }
             }
         }else{
             System.out.println("Ehm... non ho capito il comando");

@@ -16,10 +16,16 @@ public abstract class GameDescription {
 
     private final List<Item> itemList = new ArrayList<>();
 
+    private final List<Npc> npcList = new ArrayList<>();
+
     public abstract void init() throws Exception;
 
     public List<Item> getItemList() {
         return itemList;
+    }
+
+    public List<Npc> getNpcList() {
+        return npcList;
     }
 
     public List<Command> getCommands() {
