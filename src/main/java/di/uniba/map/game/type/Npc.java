@@ -26,26 +26,30 @@ public class Npc {
     public void talking(){
         Scanner scanner = new Scanner(System.in);
         int answer;
-        boolean error = true;
 
         for(int i = 0; i<talk.size(); i++){
             System.out.println(name + ": " + talk.get(i).getSpeech());
             for(int j = 0; j<talk.get(i).getAnswerList().size(); j++){
                 System.out.println(j+1 + ": " + talk.get(i).getAnswerList().get(j));
             }
+            boolean error = true;
             while(error) {
                 try{
                     answer = Integer.parseInt(scanner.nextLine());
                     if (talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.END) {
                         System.out.println("Tu: Arrivederci.");
                         System.out.println(name + ": " + "Allora è tutto.");
-                        error = false;
                         break;
-                    } else {
+                    }else if(talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.DESC){
+                        System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer - 1));
+                        System.out.println(name + ": " + description);
+                        i -= 1;
+                        break;
+                    }
+                    else {
                         System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer - 1));
                         //System.out.println("Altro trigger");
                         error = false;
-                        break;
                     }
                 }catch (Exception e){
                     //System.out.println("Error: " + e);

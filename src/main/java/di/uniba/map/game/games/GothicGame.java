@@ -26,13 +26,16 @@ public class GothicGame extends GameDescription {
         ovest.setAlias(new String[]{"o", "O", "Ovest", "OVEST"});
         getCommands().add(ovest);
         Command end = new Command(CommandType.END, "end");
-        end.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati","exit"});
+        end.setAlias(new String[]{"end", "fine", "esci","exit"});
         getCommands().add(end);
         Command look = new Command(CommandType.LOOK_AT, "osserva");
-        look.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi"});
+        look.setAlias(new String[]{"guarda", "vedi", "descrivi"});
         getCommands().add(look);
+        Command search = new Command(CommandType.SEARCH, "cerca");
+        search.setAlias(new String[]{"trova", "controlla"});
+        getCommands().add(search);
         Command pickup = new Command(CommandType.PICK_UP, "raccogli");
-        pickup.setAlias(new String[]{"prendi"});
+        pickup.setAlias(new String[]{"prendi", "pick", "prendere"});
         getCommands().add(pickup);
         Command open = new Command(CommandType.OPEN, "apri");
         open.setAlias(new String[]{});
@@ -50,7 +53,8 @@ public class GothicGame extends GameDescription {
         entrylevel.setLook("Circondato dal nulla, si può solo andare avanti.");
 
         Room woods = new Room(1, "Bosco", "Sei nel bosco!");
-        Room testRoom = new Room(2, "Test Room", "Stanza Test");
+        Room testRoom = new Room(2, "Test Room", "Stanza Test"); //TODO: da rendere stanza reward con password per accedere e bonus
+        testRoom.setLook("Che bella stanza di test! Sembra ci sia da provare un foglio, una cassa e Alessandra con cui parlare!");
 
         getRooms().add(testRoom);
         getRooms().add(entrylevel);
@@ -79,13 +83,15 @@ public class GothicGame extends GameDescription {
         talk1.setSpeech("Ehi ciao come va?");
         talk1.getAnswerList().add("Bene");
         talk1.getAnswerList().add("Male");
+        talk1.getAnswerList().add("Chi sei?");
         talk1.getAnswerList().add("Fine");
         talk1.getAnswerTrigger().add(AnswerType.GOOD);
         talk1.getAnswerTrigger().add(AnswerType.BAD);
+        talk1.getAnswerTrigger().add(AnswerType.DESC);
         talk1.getAnswerTrigger().add(AnswerType.END);
 
         talk2.add(talk1);
-        Npc alessandra = new Npc(100, "Alessandra", "A volte sono anche simpatica");
+        Npc alessandra = new Npc(100, "alessandra", "A volte sono anche simpatica");
         alessandra.setTalk(talk2);
         alessandra.setSpeakable(true);
         getNpcList().add(alessandra);

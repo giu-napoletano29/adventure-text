@@ -36,7 +36,7 @@ public class Engine {
         while(scanner.hasNextLine()){
             ParserOutput command = cmd.parseCmd(scanner.nextLine(), game);
             if(command.getCommand() != null && command.getCommand().getType() == CommandType.END){
-                System.out.println("Chiusura....");
+                System.out.println("Forse una decisione poco saggia, ma è pur sempre una decisione!");
                 break;
             }else{
                 u.move(command, game);

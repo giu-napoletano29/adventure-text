@@ -94,6 +94,25 @@ public class Utils {
                     System.out.println("Quel tizio non c'è!");
                 }
             }
+            else if(cmd.getCommand().getType() == CommandType.SEARCH){
+                System.out.print("Cerchiamo un po'...");
+                if(game.getCurrentRoom().getItems().size() != 0 || game.getCurrentRoom().getNpcs().size() != 0){
+                    System.out.println("Trovato qualcosa!");
+                    for(int i = 0; i<game.getCurrentRoom().getItems().size(); i++){
+                        System.out.print(game.getCurrentRoom().getItems().get(i).getName() + ", ");
+                    }
+                    for(int i = 0; i<game.getCurrentRoom().getNpcs().size(); i++){
+                        if(i == 0){
+                            System.out.println("\nC'è qualcuno..");
+                        }
+                        System.out.print(game.getCurrentRoom().getNpcs().get(i).getName() + ", ");
+                    }
+                    System.out.println("tutto qui!");
+                }else{
+                    System.out.println("Non ho trovato nulla di interessante!");
+                }
+
+            }
         }else{
             System.out.println("Ehm... non ho capito il comando");
         }
