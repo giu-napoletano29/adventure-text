@@ -50,7 +50,7 @@ public class Utils {
                 }
             }
             else if(cmd.getCommand().getType() == CommandType.PICK_UP){
-                if(cmd.getItem() != null){
+                if(cmd.getItem() != null && game.getCurrentRoom().getItems().contains(cmd.getItem())){
                     if(cmd.getItem().isPickupable()){
                         game.getInventory().add(cmd.getItem());
                         game.getCurrentRoom().getItems().remove(cmd.getItem());
@@ -62,7 +62,7 @@ public class Utils {
                 }
             }
             else if(cmd.getCommand().getType() == CommandType.OPEN){
-                if(cmd.getItem() != null){
+                if(cmd.getItem() != null && game.getCurrentRoom().getItems().contains(cmd.getItem())){
                     if(cmd.getItem().isOpenable()){
                         System.out.println("Guardando dentro..");
                         if(cmd.getItem().getItemList().size() > 0){
