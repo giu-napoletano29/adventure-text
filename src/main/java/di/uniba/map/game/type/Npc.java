@@ -4,14 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Npc {
-    private int hp;
-
-    private int armor = 0;
-
-    private String name;
-
-    private String description;
+public class Npc extends Character{
 
     private boolean isEnemy = false;
 
@@ -20,10 +13,15 @@ public class Npc {
     private List<Talk> talk;
 
     public Npc(int hp, String name, String description) {
+        super(hp, name, description);
+    }
+
+    /*
+    public Npc(int hp, String name, String description) {
         this.hp = hp;
         this.name = name;
         this.description = description;
-    }
+    }*/
 
     public void talking(){
         Scanner scanner = new Scanner(System.in);
@@ -64,10 +62,6 @@ public class Npc {
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setSpeakable(boolean speakable) {
         isSpeakable = speakable;
     }
@@ -76,7 +70,7 @@ public class Npc {
         return isSpeakable;
     }
 
-    public void isEnemy(boolean enemy) {
+    public void setEnemy(boolean enemy) {
         isEnemy = enemy;
     }
 
