@@ -44,8 +44,14 @@ public class GothicGame extends GameDescription {
         push.setAlias(new String[]{"spingi","attiva"});
         getCommands().add(push);
         Command talk = new Command(CommandType.TALK, "parla");
-        push.setAlias(new String[]{"Parla","PARLA"});
+        talk.setAlias(new String[]{"Parla","PARLA"});
         getCommands().add(talk);
+        Command equip = new Command(CommandType.EQUIP, "equipaggia");
+        equip.setAlias(new String[]{"equip"});
+        getCommands().add(equip);
+        Command stats = new Command(CommandType.STATS, "statistica");
+        stats.setAlias(new String[]{"stat", "stats", "statistiche", "vita", "info", "informazioni"});
+        getCommands().add(stats);
 
         //Rooms
         Room entrylevel = new Room(0, "Ingresso", "Sei appena arrivato in questo nuovo mondo."
@@ -69,6 +75,12 @@ public class GothicGame extends GameDescription {
         Item foglio = new Item(1, "foglio", "Un foglio su cui potrebbe esserci scritto qualcosa di interessante...");
         getItemList().add(foglio);
         testRoom.getItems().add(foglio);
+
+        Item spada = new Item(3, "spada", "Sembra abbastanza affilata..");
+        spada.setWeapon(true);
+        spada.setPower(40);
+        getItemList().add(spada);
+        testRoom.getItems().add(spada);
 
         Item cassa = new Item (2, "cassa", "Potrà contenere sicuramente qualcosa..");
         cassa.setPickupable(false);

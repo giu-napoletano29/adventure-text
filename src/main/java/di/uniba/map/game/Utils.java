@@ -125,6 +125,22 @@ public class Utils {
                 }
 
             }
+            else if(cmd.getCommand().getType() == CommandType.EQUIP){
+                if(cmd.getItem() != null && game.getPlayer().getInventory().getList().contains(cmd.getItem())){
+                    if(cmd.getItem().isWeapon()){
+                        game.getPlayer().setWeaponEquip(cmd.getItem());
+                    }else{
+                        System.out.println("Non si può equipaggiare questo oggetto!");
+                    }
+                }
+                else{
+                    System.out.println("Questo oggetto non è in inventario!");
+                }
+
+            }
+            else if(cmd.getCommand().getType() == CommandType.STATS){
+                printPlayerStats(game);
+            }
         }else{
             System.out.println("Ehm... non ho capito il comando");
         }
@@ -136,7 +152,11 @@ public class Utils {
         System.out.println(game.getCurrentRoom().getDescription());
     }
 
-    public void printPlayerStats(){
-        System.out.println("Hp: ");
+    public void printPlayerStats(GameDescription game){
+        if(game.getPlayer().getWeaponEquip() != null){
+            System.out.println("Hp: " + game.getPlayer().getHp() + " Armor: " + game.getPlayer().getArmor() + " Equip: " + game.getPlayer().getWeaponEquip().getName());
+        }else{
+            System.out.println("Hp: " + game.getPlayer().getHp() + " Armor: " + game.getPlayer().getArmor());
+        }
     }
 }

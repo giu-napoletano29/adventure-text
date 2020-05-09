@@ -47,4 +47,6 @@ public abstract class GameDescription {
     public Inventory getInventory(){
         return player.getInventory();
     }
+
+    public Player getPlayer(){ return this.player;}
 }
