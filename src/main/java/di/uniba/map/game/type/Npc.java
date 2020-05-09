@@ -8,6 +8,8 @@ public class Npc extends Character{
 
     private boolean isEnemy = false;
 
+    private boolean isAttacking = false;
+
     private boolean isSpeakable = false;
 
     private List<Talk> talk;
@@ -62,6 +64,12 @@ public class Npc extends Character{
         }
     }
 
+    public boolean getAttacking(){return this.isAttacking;};
+
+    public void setAttacking(boolean attacking){
+        this.isAttacking = attacking;
+    }
+
     public void setSpeakable(boolean speakable) {
         isSpeakable = speakable;
     }
@@ -73,6 +81,8 @@ public class Npc extends Character{
     public void setEnemy(boolean enemy) {
         isEnemy = enemy;
     }
+
+    public boolean getEnemy(){return this.isEnemy;}
 
     public void setTalk(List<Talk> talk){
         this.talk = talk;

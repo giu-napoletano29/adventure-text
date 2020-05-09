@@ -141,6 +141,28 @@ public class Utils {
             else if(cmd.getCommand().getType() == CommandType.STATS){
                 printPlayerStats(game);
             }
+            else if(cmd.getCommand().getType() == CommandType.ATTACK){
+                if(cmd.getNpc() != null && game.getCurrentRoom().getNpcs().contains(cmd.getNpc())){
+                    if(game.getPlayer().getWeaponEquip() != null){
+                        cmd.getNpc().setHp(cmd.getNpc().getHp() - (game.getPlayer().getWeaponEquip().getPower() - (game.getPlayer().getWeaponEquip().getPower() * (cmd.getNpc().getArmor()/200))));
+                        if(cmd.getNpc().getHp() <= 0){
+                            System.out.println(cmd.getNpc().getName() + ": Ouch..");
+                            game.getCurrentRoom().getNpcs().remove(cmd.getNpc());
+                        }else{
+                            if(cmd.getNpc().getEnemy()){
+                                System.out.println(cmd.getNpc().getName() + ": E no eh");
+                                cmd.getNpc().setAttacking(true);
+                                game.getPlayer().setHp(game.getPlayer().getHp() - (cmd.getNpc().getWeaponEquip().getPower() - (cmd.getNpc().getWeaponEquip().getPower() * (game.getPlayer().getArmor()/200))));
+                            }
+                        }
+                    }else{
+                        System.out.println("Non conviene attaccare qualcuno senza armi..");
+                    }
+                }else{
+                    System.out.println("Non si può attaccare qualcuno che non c'è..");
+                }
+            }
+
         }else{
             System.out.println("Ehm... non ho capito il comando");
         }

@@ -52,6 +52,9 @@ public class GothicGame extends GameDescription {
         Command stats = new Command(CommandType.STATS, "statistica");
         stats.setAlias(new String[]{"stat", "stats", "statistiche", "vita", "info", "informazioni"});
         getCommands().add(stats);
+        Command attack = new Command(CommandType.ATTACK, "attacca");
+        attack.setAlias(new String[]{"attack", "combatti"});
+        getCommands().add(attack);
 
         //Rooms
         Room entrylevel = new Room(0, "Ingresso", "Sei appena arrivato in questo nuovo mondo."
@@ -106,6 +109,8 @@ public class GothicGame extends GameDescription {
         Npc alessandra = new Npc(100, "alessandra", "A volte sono anche simpatica");
         alessandra.setTalk(talk2);
         alessandra.setSpeakable(true);
+        alessandra.setEnemy(true);
+        alessandra.setWeaponEquip(spada);
         getNpcList().add(alessandra);
         testRoom.getNpcs().add(alessandra);
 
