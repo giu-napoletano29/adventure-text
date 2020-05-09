@@ -51,13 +51,24 @@ public class Utils {
             }
             else if(cmd.getCommand().getType() == CommandType.PICK_UP){
                 if(cmd.getItem() != null && game.getCurrentRoom().getItems().contains(cmd.getItem())){
-                    if(cmd.getItem().isPickupable()){
-                        game.getInventory().add(cmd.getItem());
-                        game.getCurrentRoom().getItems().remove(cmd.getItem());
-                    }else{
-                        System.out.println("Ehi non puoi mica raccogliere " + cmd.getItem().getName());
+                    if(cmd.getItem().getIsContainer() && cmd.getContainerItem() != null){
+                        if(cmd.getItem().isOpen()){
+                            game.getInventory().add(cmd.getContainerItem());
+                            cmd.getItem().getItemList().remove(cmd.getContainerItem());
+                        }else{
+                            System.out.println("Non puoi prendere qualcosa se " + cmd.getItem().getName() + " è chiuso!");
+                        }
                     }
-                }else{
+                    else{
+                        if(cmd.getItem().isPickupable()){
+                            game.getInventory().add(cmd.getItem());
+                            game.getCurrentRoom().getItems().remove(cmd.getItem());
+                        }else{
+                            System.out.println("Ehi non puoi mica raccogliere " + cmd.getItem().getName());
+                        }
+                    }
+                }
+                else{
                     System.out.println("L'oggetto che cerchi non c'è!");
                 }
             }
@@ -69,6 +80,7 @@ public class Utils {
                             for (Item o : cmd.getItem().getItemList()) {
                                 System.out.println(o.getName() + ": " + o.getDescription());
                             }
+                            cmd.getItem().setOpen(true);
                         }else{
                             System.out.println("E' vuoto!");
                         }

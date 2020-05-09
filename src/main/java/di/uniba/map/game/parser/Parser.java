@@ -16,6 +16,7 @@ public class Parser {
         ParserOutput cmd;
         Command token = new Command(null, null);
         Item item = null;
+        Item containerItem = null;
         Npc npc = null;
         String[] key = command.toLowerCase().split(" ");
 
@@ -33,6 +34,18 @@ public class Parser {
             try{
                 if(key[1].equals(game.getItemList().get(i).getName())){
                     item = game.getItemList().get(i);
+                    if(item.getIsContainer()){
+                        for(int j = 0; j<game.getItemList().size(); j++) {
+                            try {
+                                if(key[2].equals(game.getItemList().get(j).getName())){
+                                    containerItem = game.getItemList().get(j);
+                                    break;
+                                }
+                            } catch (Exception ArrayIndexOutOfBoundsException) {
+                                break;
+                            }
+                        }
+                    }
                     break;
                 } else if(key[1].contains(game.getNpcList().get(i).getName())) {
                     npc = game.getNpcList().get(i);
@@ -46,7 +59,11 @@ public class Parser {
         if(npc != null){
             cmd = new ParserOutput(token, npc);
         }else{
-            cmd = new ParserOutput(token, item);
+            if(containerItem != null){
+                cmd = new ParserOutput(token, item, containerItem);
+            }else{
+                cmd = new ParserOutput(token, item);
+            }
         }
 
         return cmd;

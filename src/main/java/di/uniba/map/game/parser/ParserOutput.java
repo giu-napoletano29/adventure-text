@@ -11,6 +11,8 @@ public class ParserOutput {
 
     private Item item;
 
+    private Item containerItem;
+
     private Npc npc;
 
     private String obj;
@@ -25,6 +27,12 @@ public class ParserOutput {
         this.item = item;
     }
 
+    public ParserOutput(Command command, Item container, Item item) {
+        this.command = command;
+        this.item = container;
+        this.containerItem = item;
+    }
+
     public ParserOutput(Command command, Npc npc) {
         this.command = command;
         this.npc = npc;
@@ -37,5 +45,6 @@ public class ParserOutput {
     public Command getCommand() { return command;}
     public String getObj() { return obj;}
     public Item getItem() { return item;}
+    public Item getContainerItem() { return containerItem;}
     public Npc getNpc() { return npc;}
 }

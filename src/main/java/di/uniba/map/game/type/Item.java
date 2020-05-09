@@ -1,5 +1,8 @@
 package di.uniba.map.game.type;
 
+import di.uniba.map.game.parser.Parser;
+import di.uniba.map.game.parser.ParserOutput;
+
 import java.util.*;
 
 public class Item {
