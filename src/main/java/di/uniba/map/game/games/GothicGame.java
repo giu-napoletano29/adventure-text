@@ -93,24 +93,40 @@ public class GothicGame extends GameDescription {
         getItemList().add(cassa);
         testRoom.getItems().add(cassa);
 
+        Npc alessandra = new Npc(100, "alessandra", "Sono qui a spiegarti le basi del gioco!");
+
         List<Talk> talk2 = new ArrayList<>();
         Talk talk1 = new Talk();
-        talk1.setSpeech("Ehi ciao come va?");
-        talk1.getAnswerList().add("Bene");
-        talk1.getAnswerList().add("Male");
+        talk1.setSpeech("Hai bisogno di aiuto?");
+        talk1.setSpeechtrigger(AnswerType.NOTHING);
+        talk1.getAnswerList().add("Che comandi posso usare?");
+        talk1.getAnswerList().add("Cosa bisogna fare?");
         talk1.getAnswerList().add("Chi sei?");
         talk1.getAnswerList().add("Fine");
         talk1.getAnswerTrigger().add(AnswerType.GOOD);
         talk1.getAnswerTrigger().add(AnswerType.BAD);
         talk1.getAnswerTrigger().add(AnswerType.DESC);
         talk1.getAnswerTrigger().add(AnswerType.END);
-
         talk2.add(talk1);
-        Npc alessandra = new Npc(100, "alessandra", "A volte sono anche simpatica");
+
+        talk1 = new Talk();
+        talk1.setSpeech("Questi sono i comandi che puoi usare.");
+        talk1.setSpeechtrigger(AnswerType.GOOD);
+        talk1.getAnswerList().add("Grazie!");
+        talk1.getAnswerTrigger().add(AnswerType.BACK);
+        talk2.add(talk1);
+
+        talk1 = new Talk();
+        talk1.setSpeech("Devi arrivare alla fine per vincere.");
+        talk1.setSpeechtrigger(AnswerType.BAD);
+        talk1.getAnswerList().add("Ok,grazie!");
+        talk1.getAnswerTrigger().add(AnswerType.BACK);
+        talk2.add(talk1);
+
         alessandra.setTalk(talk2);
         alessandra.setSpeakable(true);
-        alessandra.setEnemy(true);
-        alessandra.setWeaponEquip(spada);
+        //alessandra.setEnemy(true);
+        //alessandra.setWeaponEquip(spada);
         getNpcList().add(alessandra);
         testRoom.getNpcs().add(alessandra);
 

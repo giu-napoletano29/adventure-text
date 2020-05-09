@@ -27,7 +27,7 @@ public class Npc extends Character{
 
     public void talking(){
         Scanner scanner = new Scanner(System.in);
-        int answer;
+        int answer, temp = 0;
 
         for(int i = 0; i<talk.size(); i++){
             System.out.println(name + ": " + talk.get(i).getSpeech());
@@ -41,17 +41,38 @@ public class Npc extends Character{
                     if (talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.END) {
                         System.out.println("Tu: Arrivederci.");
                         System.out.println(name + ": " + "Allora è tutto.");
+                        i = talk.size();
                         break;
                     }else if(talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.DESC){
                         System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer - 1));
                         System.out.println(name + ": " + description);
                         i -= 1;
                         break;
+                    }else if(talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.BACK){
+                        System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer - 1));
+                        i = temp;
+                        break;
                     }
                     else {
+                        temp = i-1;
                         System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer - 1));
-                        //System.out.println("Altro trigger");
-                        error = false;
+                        if(talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.GOOD){
+                            for(int j = i; j<talk.size(); j++){
+                                if(talk.get(j).getSpeechtrigger() == AnswerType.GOOD){
+                                    i = j-1;
+                                    error = false;
+                                    break;
+                                }
+                            }
+                        }else if(talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.BAD){
+                            for(int j = i; j<talk.size(); j++){
+                                if(talk.get(j).getSpeechtrigger() == AnswerType.BAD){
+                                    i = j-1;
+                                    error = false;
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }catch (Exception e){
                     //System.out.println("Error: " + e);
