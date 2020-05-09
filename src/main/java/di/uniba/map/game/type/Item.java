@@ -22,6 +22,8 @@ public class Item {
 
     private boolean weapon = false;
 
+    private int power = 0;
+
     private boolean pushable = false;
 
     private boolean container = false;
@@ -39,6 +41,21 @@ public class Item {
     public int getId() {
         return id;
     }
+    //weapon set
+
+    public boolean isWeapon(){return weapon;}
+
+    public void setWeapon(boolean weapon){
+        this.weapon = weapon;
+    }
+
+    public int getPower(){ return power;};
+
+    public void setPower(int power){
+        this.power = power;
+    }
+
+    //end weapon
 
     //Impostazione Oggetto che può contenere oggetti
     public void setIsContainer(boolean cont) { this.container = cont;}

@@ -7,6 +7,8 @@ import java.util.Scanner;
 public class Npc {
     private int hp;
 
+    private int armor = 0;
+
     private String name;
 
     private String description;
