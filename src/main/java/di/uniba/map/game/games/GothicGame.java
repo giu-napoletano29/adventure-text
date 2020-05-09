@@ -93,8 +93,8 @@ public class GothicGame extends GameDescription {
         getItemList().add(cassa);
         testRoom.getItems().add(cassa);
 
+        //NPC ALESSANDRA
         Npc alessandra = new Npc(100, "alessandra", "Sono qui a spiegarti le basi del gioco!");
-
         List<Talk> talk2 = new ArrayList<>();
         Talk talk1 = new Talk();
         talk1.setSpeech("Hai bisogno di aiuto?");
@@ -108,14 +108,12 @@ public class GothicGame extends GameDescription {
         talk1.getAnswerTrigger().add(AnswerType.DESC);
         talk1.getAnswerTrigger().add(AnswerType.END);
         talk2.add(talk1);
-
         talk1 = new Talk();
         talk1.setSpeech("Questi sono i comandi che puoi usare.");
         talk1.setSpeechtrigger(AnswerType.GOOD);
         talk1.getAnswerList().add("Grazie!");
         talk1.getAnswerTrigger().add(AnswerType.BACK);
         talk2.add(talk1);
-
         talk1 = new Talk();
         talk1.setSpeech("Devi arrivare alla fine per vincere.");
         talk1.setSpeechtrigger(AnswerType.BAD);
@@ -128,6 +126,8 @@ public class GothicGame extends GameDescription {
         //alessandra.setEnemy(true);
         //alessandra.setWeaponEquip(spada);
         getNpcList().add(alessandra);
+        //END NPC ALESSANDRA
+
         testRoom.getNpcs().add(alessandra);
 
         //Starting room
