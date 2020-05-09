@@ -3,9 +3,11 @@ package di.uniba.map.game;
 import di.uniba.map.game.type.Item;
 import di.uniba.map.game.parser.ParserOutput;
 import di.uniba.map.game.type.CommandType;
+import di.uniba.map.game.type.Npc;
 
 public class Utils {
     public void move(ParserOutput cmd, GameDescription game){
+        boolean attack = false;
         if(cmd.getCommand().getType() != null){
             if(cmd.getCommand().getType() == CommandType.NORD){
                 if(game.getCurrentRoom().getNorth() != null){
@@ -67,6 +69,7 @@ public class Utils {
                             System.out.println("Ehi non puoi mica raccogliere " + cmd.getItem().getName());
                         }
                     }
+                    attack = true;
                 }
                 else{
                     System.out.println("L'oggetto che cerchi non c'è!");
@@ -87,6 +90,7 @@ public class Utils {
                     }else{
                         System.out.println("Non riesco ad aprire " + cmd.getItem().getName());
                     }
+                    attack = true;
                 }else{
                     System.out.println("L'oggetto che cerchi non c'è!");
                 }
@@ -101,7 +105,7 @@ public class Utils {
                     }else{
                         System.out.println(cmd.getNpc().getName() + ": Non mi disturbare.");
                     }
-
+                    attack = true;
                 }else{
                     System.out.println("Quel tizio non c'è!");
                 }
@@ -129,6 +133,7 @@ public class Utils {
                 if(cmd.getItem() != null && game.getPlayer().getInventory().getList().contains(cmd.getItem())){
                     if(cmd.getItem().isWeapon()){
                         game.getPlayer().setWeaponEquip(cmd.getItem());
+                        attack = true;
                     }else{
                         System.out.println("Non si può equipaggiare questo oggetto!");
                     }
@@ -145,26 +150,37 @@ public class Utils {
                 if(cmd.getNpc() != null && game.getCurrentRoom().getNpcs().contains(cmd.getNpc())){
                     if(game.getPlayer().getWeaponEquip() != null){
                         cmd.getNpc().setHp(cmd.getNpc().getHp() - (game.getPlayer().getWeaponEquip().getPower() - (game.getPlayer().getWeaponEquip().getPower() * (cmd.getNpc().getArmor()/200))));
-                        if(cmd.getNpc().getHp() <= 0){
-                            System.out.println(cmd.getNpc().getName() + ": Ouch..");
-                            game.getCurrentRoom().getNpcs().remove(cmd.getNpc());
-                        }else{
-                            if(cmd.getNpc().getEnemy()){
-                                System.out.println(cmd.getNpc().getName() + ": E no eh");
-                                cmd.getNpc().setAttacking(true);
-                                game.getPlayer().setHp(game.getPlayer().getHp() - (cmd.getNpc().getWeaponEquip().getPower() - (cmd.getNpc().getWeaponEquip().getPower() * (game.getPlayer().getArmor()/200))));
-                            }
-                        }
+                        cmd.getNpc().setAttacking(true);
                     }else{
                         System.out.println("Non conviene attaccare qualcuno senza armi..");
                     }
+                    attack = true;
                 }else{
                     System.out.println("Non si può attaccare qualcuno che non c'è..");
                 }
             }
-
+            if(attack){
+                for(int i = 0; i<game.getCurrentRoom().getNpcs().size(); i++){
+                    if(game.getCurrentRoom().getNpcs().get(i).getAttacking()){
+                        npcResponse(game.getCurrentRoom().getNpcs().get(i), game);
+                        printPlayerStats(game);
+                    }
+                }
+            }
         }else{
             System.out.println("Ehm... non ho capito il comando");
+        }
+    }
+
+    private void npcResponse(Npc cmd, GameDescription game) {
+        if(cmd.getHp() <= 0){
+            System.out.println(cmd.getName() + ": Ouch..");
+            game.getCurrentRoom().getNpcs().remove(cmd);
+        }else{
+            if(cmd.getEnemy()){
+                System.out.println(cmd.getName() + ": E no eh");
+                game.getPlayer().setHp(game.getPlayer().getHp() - (cmd.getWeaponEquip().getPower() - (cmd.getWeaponEquip().getPower() * (game.getPlayer().getArmor()/200))));
+            }
         }
     }
 

@@ -1,6 +1,6 @@
 package di.uniba.map.game.type;
 
-public class Character {
+public abstract class Character {
     protected int hp;
 
     protected int armor = 0;
