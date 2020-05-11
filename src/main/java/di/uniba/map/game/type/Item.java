@@ -24,6 +24,10 @@ public class Item {
 
     private int power = 0;
 
+    private boolean healer = false;
+
+    private int heal = 0;
+
     private boolean pushable = false;
 
     private boolean container = false;
@@ -120,4 +124,12 @@ public class Item {
     public void setPush(boolean push) {
         this.push = push;
     }
+
+    public void setHealer(boolean healer){this.healer = healer;}
+
+    public boolean getHealer(){return this.healer;}
+
+    public void setHeal(int heal){this.heal = heal;}
+
+    public int getHeal(){return this.heal;}
 }

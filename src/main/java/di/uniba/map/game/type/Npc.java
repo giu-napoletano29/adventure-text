@@ -8,6 +8,8 @@ public class Npc extends Character{
 
     private boolean isEnemy = false;
 
+    private boolean isGod = false;
+
     private boolean isAttacking = false;
 
     private boolean isSpeakable = false;
@@ -17,13 +19,6 @@ public class Npc extends Character{
     public Npc(int hp, String name, String description) {
         super(hp, name, description);
     }
-
-    /*
-    public Npc(int hp, String name, String description) {
-        this.hp = hp;
-        this.name = name;
-        this.description = description;
-    }*/
 
     public void talking(){
         Scanner scanner = new Scanner(System.in);
@@ -108,4 +103,8 @@ public class Npc extends Character{
     public void setTalk(List<Talk> talk){
         this.talk = talk;
     }
+
+    public boolean getGod(){ return isGod;}
+
+    public void setGod(boolean god){ isGod = god;}
 }

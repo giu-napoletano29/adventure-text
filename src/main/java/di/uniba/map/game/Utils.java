@@ -143,15 +143,33 @@ public class Utils {
                 }
 
             }
+            else if(cmd.getCommand().getType() == CommandType.EAT){
+                if(cmd.getItem() != null && game.getPlayer().getInventory().getList().contains(cmd.getItem())){
+                    if(cmd.getItem().getHealer()){
+                        game.getPlayer().setHp(game.getPlayer().getHp() + cmd.getItem().getHeal());
+                        game.getPlayer().getInventory().getList().remove(cmd.getItem());
+                        attack = true;
+                    }else{
+                        System.out.println("Non si può mangiare questo!");
+                    }
+                }
+                else{
+                    System.out.println("Questo oggetto non è in inventario!");
+                }
+
+            }
             else if(cmd.getCommand().getType() == CommandType.STATS){
                 printPlayerStats(game);
             }
             else if(cmd.getCommand().getType() == CommandType.ATTACK){
                 if(cmd.getNpc() != null && game.getCurrentRoom().getNpcs().contains(cmd.getNpc())){
-                    if(game.getPlayer().getWeaponEquip() != null){
+                    if(game.getPlayer().getWeaponEquip() != null && cmd.getNpc().getGod() == false){
                         cmd.getNpc().setHp(cmd.getNpc().getHp() - (game.getPlayer().getWeaponEquip().getPower() - (game.getPlayer().getWeaponEquip().getPower() * (cmd.getNpc().getArmor()/200))));
                         cmd.getNpc().setAttacking(true);
-                    }else{
+                    }else if(cmd.getNpc().getGod() == true){
+                        System.out.println(cmd.getNpc().getName() + ": Non perdere tempo con me. Sono invincibile.");
+                    }
+                    else{
                         System.out.println("Non conviene attaccare qualcuno senza armi..");
                     }
                     attack = true;
