@@ -39,4 +39,6 @@ public abstract class Character {
     public void setWeaponEquip(Item weapon){
         this.weaponEquip = weapon;
     }
+
+    public String getDescription() {return description;}
 }

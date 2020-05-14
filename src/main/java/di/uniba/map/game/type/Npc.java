@@ -14,7 +14,9 @@ public class Npc extends Character{
 
     private boolean isSpeakable = false;
 
-    private List<Talk> talk;
+    //private List<Talk> talk;
+
+    private Talk talk;
 
     public Npc(int hp, String name, String description) {
         super(hp, name, description);
@@ -22,62 +24,30 @@ public class Npc extends Character{
 
     public void talking(){
         Scanner scanner = new Scanner(System.in);
-        int answer, temp = 0;
+        Talk temp = new Talk();
+        temp = talk;
+        int answer;
+        boolean error = true;
 
-        for(int i = 0; i<talk.size(); i++){
-            System.out.println(name + ": " + talk.get(i).getSpeech());
-            for(int j = 0; j<talk.get(i).getAnswerList().size(); j++){
-                System.out.println(j+1 + ": " + talk.get(i).getAnswerList().get(j));
+        while(error){
+            System.out.println(name + ": " + temp.getSpeech());
+            for(int j = 0; j<temp.getAns().size(); j++){
+                System.out.println(j+1 + ": " + temp.getAns().get(j).getAnswer());
             }
-            boolean error = true;
-            while(error) {
-                try{
-                    answer = Integer.parseInt(scanner.nextLine());
-                    if (talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.END) {
-                        System.out.println("Tu: Arrivederci.");
-                        System.out.println(name + ": " + "Allora è tutto.");
-                        i = talk.size();
-                        break;
-                    }else if(talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.DESC){
-                        System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer - 1));
-                        System.out.println(name + ": " + description);
-                        i -= 1;
-                        break;
-                    }else if(talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.BACK){
-                        System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer - 1));
-                        i = temp;
-                        break;
-                    }
-                    else {
-                        temp = i-1;
-                        System.out.println("Tu: " + talk.get(i).getAnswerList().get(answer - 1));
-                        if(talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.GOOD){
-                            for(int j = i; j<talk.size(); j++){
-                                if(talk.get(j).getSpeechtrigger() == AnswerType.GOOD){
-                                    i = j-1;
-                                    error = false;
-                                    break;
-                                }
-                            }
-                        }else if(talk.get(i).getAnswerTrigger().get(answer - 1) == AnswerType.BAD){
-                            for(int j = i; j<talk.size(); j++){
-                                if(talk.get(j).getSpeechtrigger() == AnswerType.BAD){
-                                    i = j-1;
-                                    error = false;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }catch (Exception e){
-                    //System.out.println("Error: " + e);
-                    System.out.println(name + ": " + "Dammi una risposta sensata.");
-                    error = true;
+            try{
+                answer = Integer.parseInt(scanner.nextLine());
+                System.out.println("Tu: " + temp.getAns().get(answer-1).getAnswer());
+                if(temp.getAns().get(answer-1).getWarp() == null){
+                    System.out.println(name + ": " + "Allora è tutto.");
+                    error = false;
+                }else{
+                    temp = temp.getAns().get(answer-1).getWarp();
                 }
-
+            }catch (Exception e){
+            System.out.println(name + ": " + "Dammi una risposta sensata.");
             }
-
         }
+
     }
 
     public boolean getAttacking(){return this.isAttacking;};
@@ -100,9 +70,12 @@ public class Npc extends Character{
 
     public boolean getEnemy(){return this.isEnemy;}
 
-    public void setTalk(List<Talk> talk){
+    //public void setTalk(List<Talk> talk){
+    public void setTalk(Talk talk){
         this.talk = talk;
     }
+
+    public Talk getTalk() {return this.talk;}
 
     public boolean getGod(){ return isGod;}
 

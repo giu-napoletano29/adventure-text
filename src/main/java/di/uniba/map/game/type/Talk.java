@@ -7,6 +7,8 @@ public class Talk {
 
     private String speech = new String();  //Lista di frasi che il personaggio può dire
 
+    private List<Answer> ans = new ArrayList<>();
+
     private AnswerType speechtrigger;
 
     private List<String> answerList = new ArrayList<>();
@@ -36,4 +38,6 @@ public class Talk {
     public void setSpeechtrigger(AnswerType a){
         speechtrigger = a;
     }
+
+    public List<Answer> getAns() {return ans;}
 }

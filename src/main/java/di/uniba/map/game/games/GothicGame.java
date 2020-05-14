@@ -172,6 +172,11 @@ public class GothicGame extends GameDescription {
         spada.setPower(40);
         getItemList().add(spada);
 
+        Item zanne = new Item(3, "zanne", "Zanne di lupo");
+        zanne.setWeapon(true);
+        zanne.setPower(15);
+        getItemList().add(zanne);
+
 
         Item broken_spada = new Item(3, "spada rotta", "Non molto affilata...contro qualche animale dovrebbe comunque andare bene");
         broken_spada.setWeapon(true);
@@ -189,33 +194,49 @@ public class GothicGame extends GameDescription {
 
         //NPC HELPER
         Npc helper = new Npc(100, "helper", "Sono qui a spiegarti le basi del gioco!");
-        List<Talk> talk2 = new ArrayList<>();
         Talk talk1 = new Talk();
+        Talk talk2 = new Talk();
+        Answer answer = new Answer();
         talk1.setSpeech("Hai bisogno di aiuto?");
-        talk1.setSpeechtrigger(AnswerType.NOTHING);
-        talk1.getAnswerList().add("Che comandi posso usare?");
-        talk1.getAnswerList().add("Cosa bisogna fare?");
-        talk1.getAnswerList().add("Chi sei?");
-        talk1.getAnswerList().add("Fine");
-        talk1.getAnswerTrigger().add(AnswerType.GOOD);
-        talk1.getAnswerTrigger().add(AnswerType.BAD);
-        talk1.getAnswerTrigger().add(AnswerType.DESC);
-        talk1.getAnswerTrigger().add(AnswerType.END);
-        talk2.add(talk1);
-        talk1 = new Talk();
-        talk1.setSpeech("Questi sono i comandi che puoi usare: \n-parla (nome): per parlare con un npc \n-attacca (nome): per attaccare un npc \n-osserva: descrive la stanza corrente \n-cerca: lista di oggetti o npc presenti nella stanza \n-nord,sud,ovest,est: navigazione \n-inventario: mostra inventario \n-stats: mostra statistiche giocatore \n-equip (nome arma): per equipaggiare un'arma \n-prendi: raccogliere oggetto \n-apri: aprire oggetto");
-        talk1.setSpeechtrigger(AnswerType.GOOD);
-        talk1.getAnswerList().add("Grazie!");
-        talk1.getAnswerTrigger().add(AnswerType.BACK);
-        talk2.add(talk1);
-        talk1 = new Talk();
-        talk1.setSpeech("Devi arrivare alla fine per vincere.");
-        talk1.setSpeechtrigger(AnswerType.BAD);
-        talk1.getAnswerList().add("Ok,grazie!");
-        talk1.getAnswerTrigger().add(AnswerType.BACK);
-        talk2.add(talk1);
+        answer.setAnswer("Che comandi posso usare?");
+        answer.setWarp(talk2);
+        talk1.getAns().add(answer);
 
-        helper.setTalk(talk2);
+        answer = new Answer();
+        talk2.setSpeech("Questi sono i comandi che puoi usare: \n-parla (nome): per parlare con un npc \n-attacca (nome): per attaccare un npc \n-osserva: descrive la stanza corrente \n-cerca: lista di oggetti o npc presenti nella stanza \n-nord,sud,ovest,est: navigazione \n-inventario: mostra inventario \n-stats: mostra statistiche giocatore \n-equip (nome arma): per equipaggiare un'arma \n-prendi: raccogliere oggetto \n-apri: aprire oggetto");
+        answer.setAnswer("Grazie!");
+        answer.setWarp(talk1);
+        talk2.getAns().add(answer);
+
+        talk2 = new Talk();
+        answer = new Answer();
+        answer.setAnswer("Cosa bisogna fare?");
+        answer.setWarp(talk2);
+        talk1.getAns().add(answer);
+
+        answer = new Answer();
+        talk2.setSpeech("Devi arrivare alla fine per vincere.");
+        answer.setAnswer("Ho capito!");
+        answer.setWarp(talk1);
+        talk2.getAns().add(answer);
+
+        talk2 = new Talk();
+        answer = new Answer();
+        answer.setAnswer("Chi sei?");
+        answer.setWarp(talk2);
+        talk1.getAns().add(answer);
+
+        answer = new Answer();
+        talk2.setSpeech(helper.getDescription());
+        answer.setAnswer("Ho capito!");
+        answer.setWarp(talk1);
+        talk2.getAns().add(answer);
+
+        answer = new Answer();
+        answer.setAnswer("Fine");
+        talk1.getAns().add(answer);
+
+        helper.setTalk(talk1); //Set di dialogo iniziale
         helper.setSpeakable(true);
         helper.setGod(true);
         getNpcList().add(helper);
@@ -225,6 +246,11 @@ public class GothicGame extends GameDescription {
         Npc enemy = new Npc(100, "nemico", "Un tipo.");
         enemy.setEnemy(true);
         enemy.setWeaponEquip(spada);
+        getNpcList().add(enemy);
+
+        Npc wolf = new Npc(40, "lupo", "Un lupo, potrebbe essere aggressivo.");
+        enemy.setEnemy(true);
+        enemy.setWeaponEquip(zanne);
         getNpcList().add(enemy);
         //NPC ENEMY
 
@@ -239,6 +265,7 @@ public class GothicGame extends GameDescription {
         //NPC
         entrylevel.getNpcs().add(helper);
         testRoom.getNpcs().add(enemy);
+        woods_4.getNpcs().add(wolf);
 
         //ned insert
 
