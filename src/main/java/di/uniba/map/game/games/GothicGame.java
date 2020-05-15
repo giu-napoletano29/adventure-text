@@ -5,6 +5,7 @@ import di.uniba.map.game.GameDescription;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GothicGame extends GameDescription {
     @Override
@@ -167,12 +168,17 @@ public class GothicGame extends GameDescription {
         mela.setHeal(20);
         getItemList().add(mela);
 
+        Item potion = new Item(6, "pozione", "Restituisce 50 hp.");
+        potion.setHealer(true);
+        potion.setHeal(20);
+        getItemList().add(potion);
+
         Item spada = new Item(3, "spada", "Sembra abbastanza affilata..");
         spada.setWeapon(true);
         spada.setPower(40);
         getItemList().add(spada);
 
-        Item zanne = new Item(3, "zanne", "Zanne di lupo");
+        Item zanne = new Item(5, "zanne", "Zanne di lupo");
         zanne.setWeapon(true);
         zanne.setPower(15);
         getItemList().add(zanne);
@@ -252,6 +258,12 @@ public class GothicGame extends GameDescription {
         enemy.setEnemy(true);
         enemy.setWeaponEquip(zanne);
         getNpcList().add(enemy);
+
+        Npc boss = new Npc(1, "boss", "E' il boss finale");
+        boss.setEnemy(true);
+        boss.setArmor(100);
+        boss.setWeaponEquip(spada);
+        getNpcList().add(boss);
         //NPC ENEMY
 
         //item insert
@@ -261,16 +273,31 @@ public class GothicGame extends GameDescription {
         testRoom.getItems().add(cassa);
         entry_woods.getItems().add(mela);
         entry_woods.getItems().add(broken_spada);
+        woods_4.getItems().add(potion);
 
         //NPC
         entrylevel.getNpcs().add(helper);
         testRoom.getNpcs().add(enemy);
+        woods_2.getNpcs().add(wolf);
+        woods_3.getNpcs().add(wolf);
         woods_4.getNpcs().add(wolf);
+        final_room.getNpcs().add(boss);
 
-        //ned insert
+        //end insert
 
         //Starting room
         setCurrentRoom(entrylevel);
 
+    }
+    public boolean isWin(){
+        boolean win = false;
+        List<Npc> boss = getNpcList().stream()
+                .filter(item -> item.getName().equals("boss"))
+                .filter(item -> item.getHp() > 0)
+                .collect(Collectors.toList());
+        if(boss.isEmpty() == true){
+            win = true;
+        }
+        return win;
     }
 }

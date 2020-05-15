@@ -20,6 +20,8 @@ public abstract class GameDescription {
 
     public abstract void init() throws Exception;
 
+    public abstract boolean isWin();
+
     public List<Item> getItemList() {
         return itemList;
     }

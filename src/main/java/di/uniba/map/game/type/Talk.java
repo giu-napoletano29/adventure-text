@@ -9,12 +9,6 @@ public class Talk {
 
     private List<Answer> ans = new ArrayList<>();
 
-    private AnswerType speechtrigger;
-
-    private List<String> answerList = new ArrayList<>();
-
-    private List<AnswerType> answerTrigger = new ArrayList<>();; // Lista di risposte che triggerano azioni
-
     //TODO: aggiungere lista risposte di tipo BAD
 
     public String getSpeech() {
@@ -23,20 +17,6 @@ public class Talk {
 
     public void setSpeech(String s){
         speech = s;
-    }
-
-    public List<String> getAnswerList() {
-        return answerList;
-    }
-
-    public List<AnswerType> getAnswerTrigger() {
-        return answerTrigger;
-    }
-
-    public AnswerType getSpeechtrigger(){return speechtrigger;}
-
-    public void setSpeechtrigger(AnswerType a){
-        speechtrigger = a;
     }
 
     public List<Answer> getAns() {return ans;}

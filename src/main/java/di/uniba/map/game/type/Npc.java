@@ -24,8 +24,7 @@ public class Npc extends Character{
 
     public void talking(){
         Scanner scanner = new Scanner(System.in);
-        Talk temp = new Talk();
-        temp = talk;
+        Talk temp = talk;
         int answer;
         boolean error = true;
 
