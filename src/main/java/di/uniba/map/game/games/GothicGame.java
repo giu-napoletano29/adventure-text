@@ -259,7 +259,7 @@ public class GothicGame extends GameDescription {
         enemy.setWeaponEquip(zanne);
         getNpcList().add(enemy);
 
-        Npc boss = new Npc(1, "boss", "E' il boss finale");
+        Npc boss = new Npc(100, "boss", "E' il boss finale");
         boss.setEnemy(true);
         boss.setArmor(100);
         boss.setWeaponEquip(spada);
@@ -295,7 +295,7 @@ public class GothicGame extends GameDescription {
                 .filter(item -> item.getName().equals("boss"))
                 .filter(item -> item.getHp() > 0)
                 .collect(Collectors.toList());
-        if(boss.isEmpty() == true){
+        if(boss.isEmpty()){
             win = true;
         }
         return win;
