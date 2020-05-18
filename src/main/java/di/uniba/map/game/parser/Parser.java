@@ -47,11 +47,18 @@ public class Parser {
                         }
                     }
                     break;
-                } else if(key[1].contains(game.getNpcList().get(i).getName())) {
+                }
+            }catch (Exception e){
+                break;
+            }
+        }
+        for(int i = 0; i<game.getNpcList().size(); i++){
+            try{
+                if(key[1].contains(game.getNpcList().get(i).getName())) {
                     npc = game.getNpcList().get(i);
                     break;
                 }
-            }catch (Exception ArrayIndexOutOfBoundsException){
+            }catch (Exception e){
                 break;
             }
         }

@@ -184,7 +184,7 @@ public class GothicGame extends GameDescription {
         getItemList().add(zanne);
 
 
-        Item broken_spada = new Item(3, "spada rotta", "Non molto affilata...contro qualche animale dovrebbe comunque andare bene");
+        Item broken_spada = new Item(7, "spada_rotta", "Non molto affilata...contro qualche animale dovrebbe comunque andare bene");
         broken_spada.setWeapon(true);
         broken_spada.setPower(20);
         getItemList().add(broken_spada);

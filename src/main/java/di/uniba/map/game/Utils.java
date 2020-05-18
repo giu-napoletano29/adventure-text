@@ -166,6 +166,7 @@ public class Utils {
                     if(game.getPlayer().getWeaponEquip() != null && cmd.getNpc().getGod() == false){
                         cmd.getNpc().setHp(cmd.getNpc().getHp() - (game.getPlayer().getWeaponEquip().getPower() - (game.getPlayer().getWeaponEquip().getPower() * (cmd.getNpc().getArmor()/200))));
                         cmd.getNpc().setAttacking(true);
+                        System.out.println("NPC HP: " + cmd.getNpc().getHp());
                     }else if(cmd.getNpc().getGod() == true){
                         System.out.println(cmd.getNpc().getName() + ": Non perdere tempo con me. Sono invincibile.");
                     }
