@@ -158,15 +158,31 @@ public class Utils {
                 }
 
             }
+            else if(cmd.getCommand().getType() == CommandType.USE){
+                if(cmd.getItem() != null && game.getPlayer().getInventory().getList().contains(cmd.getItem())){
+                    if(cmd.getItem().isArmor()){
+                        game.getPlayer().setClothesEquip(cmd.getItem());
+                        game.getPlayer().setArmor(cmd.getItem().getProtection());
+
+                        attack = true;
+                    }else{
+                        System.out.println("Non si può indossare questo!");
+                    }
+                }
+                else{
+                    System.out.println("Questo oggetto non è in inventario!");
+                }
+
+            }
             else if(cmd.getCommand().getType() == CommandType.STATS){
                 printPlayerStats(game);
             }
             else if(cmd.getCommand().getType() == CommandType.ATTACK){
                 if(cmd.getNpc() != null && game.getCurrentRoom().getNpcs().contains(cmd.getNpc())){
                     if(game.getPlayer().getWeaponEquip() != null && cmd.getNpc().getGod() == false){
-                        cmd.getNpc().setHp(cmd.getNpc().getHp() - (game.getPlayer().getWeaponEquip().getPower() - (game.getPlayer().getWeaponEquip().getPower() * (cmd.getNpc().getArmor()/200))));
+                        cmd.getNpc().setHp((int) Math.round(cmd.getNpc().getHp() - (game.getPlayer().getWeaponEquip().getPower() - (game.getPlayer().getWeaponEquip().getPower() * (cmd.getNpc().getArmor()/200.000)))));
                         cmd.getNpc().setAttacking(true);
-                        System.out.println("NPC HP: " + cmd.getNpc().getHp());
+                        System.out.println(cmd.getNpc().getName() + " HP: " + cmd.getNpc().getHp());
                     }else if(cmd.getNpc().getGod() == true){
                         System.out.println(cmd.getNpc().getName() + ": Non perdere tempo con me. Sono invincibile.");
                     }
@@ -198,7 +214,7 @@ public class Utils {
         }else{
             if(cmd.getEnemy()){
                 System.out.println(cmd.getName() + ": E no eh");
-                game.getPlayer().setHp(game.getPlayer().getHp() - (cmd.getWeaponEquip().getPower() - (cmd.getWeaponEquip().getPower() * (game.getPlayer().getArmor()/200))));
+                game.getPlayer().setHp((int) Math.round(game.getPlayer().getHp() - (cmd.getWeaponEquip().getPower() - (cmd.getWeaponEquip().getPower() * (game.getPlayer().getArmor()/200.000)))));
             }
         }
     }

@@ -59,6 +59,9 @@ public class GothicGame extends GameDescription {
         Command eat = new Command(CommandType.EAT, "mangia");
         eat.setAlias(new String[]{"eat", "bevi", "assumi"});
         getCommands().add(eat);
+        Command use = new Command(CommandType.USE, "usa");
+        use.setAlias(new String[]{"indossa", "vesti", "use"});
+        getCommands().add(use);
 
         //Rooms
         Room entrylevel = new Room(0, "Ingresso", "Sei appena arrivato in questo nuovo mondo."
@@ -160,8 +163,8 @@ public class GothicGame extends GameDescription {
         testRoom.setWest(entrylevel);
 
         //oggetti
-        Item foglio = new Item(1, "foglio", "Un foglio su cui potrebbe esserci scritto qualcosa di interessante...");
-        getItemList().add(foglio);
+        Item letter = new Item(1, "lettera", "Askfhak shfak hskfhkaaff sfaagfege ... E' una lettera incomprensibile.");
+        getItemList().add(letter);
 
         Item mela = new Item(4, "mela", "Restituisce 20 hp.");
         mela.setHealer(true);
@@ -183,7 +186,6 @@ public class GothicGame extends GameDescription {
         zanne.setPower(15);
         getItemList().add(zanne);
 
-
         Item broken_spada = new Item(7, "spada_rotta", "Non molto affilata...contro qualche animale dovrebbe comunque andare bene");
         broken_spada.setWeapon(true);
         broken_spada.setPower(20);
@@ -204,8 +206,16 @@ public class GothicGame extends GameDescription {
         cassa.setPickupable(false);
         cassa.setOpenable(true);
         cassa.setIsContainer(true);
-        cassa.getItemList().add(foglio);
+        cassa.getItemList().add(letter);
         getItemList().add(cassa);
+
+        Item key = new Item(10, "chiave", "Utile per aprire qualche forziere..");
+        getItemList().add(key);
+
+        Item w_clothes = new Item(11, "vestiti_pesanti", "Vestiti pesanti da lavoratore. Fornisce 15 punti di armatura.");
+        w_clothes.setArmor(true);
+        w_clothes.setProtection(15);
+        getItemList().add(w_clothes);
 
 
         //NPC HELPER
@@ -296,19 +306,19 @@ public class GothicGame extends GameDescription {
         getNpcList().add(bully_3);
 
         Npc wolf = new Npc(40, "lupo", "Un lupo, potrebbe essere aggressivo.");
-        enemy.setEnemy(true);
-        enemy.setWeaponEquip(zanne);
+        wolf.setEnemy(true);
+        wolf.setWeaponEquip(zanne);
         getNpcList().add(wolf);
 
         Npc wolf2 = new Npc(30, "lupo_piccolo", "Un lupo piccolo, potrebbe essere aggressivo.");
-        enemy.setEnemy(true);
-        enemy.setWeaponEquip(zanne);
-        getNpcList().add(wolf);
+        wolf2.setEnemy(true);
+        wolf2.setWeaponEquip(zanne);
+        getNpcList().add(wolf2);
 
         Npc wolf3 = new Npc(50, "lupo_forte", "Un lupo, potrebbe essere aggressivo.");
-        enemy.setEnemy(true);
-        enemy.setWeaponEquip(zanne);
-        getNpcList().add(wolf);
+        wolf3.setEnemy(true);
+        wolf3.setWeaponEquip(zanne);
+        getNpcList().add(wolf3);
 
         Npc boss = new Npc(100, "boss", "E' il boss finale");
         boss.setEnemy(true);
@@ -318,10 +328,11 @@ public class GothicGame extends GameDescription {
         //NPC ENEMY
 
         //item insert
-        testRoom.getItems().add(foglio);
+        testRoom.getItems().add(letter);
         testRoom.getItems().add(mela);
         testRoom.getItems().add(spada);
         testRoom.getItems().add(cassa);
+        testRoom.getItems().add(w_clothes);
         entry_woods.getItems().add(mela);
         entry_woods.getItems().add(broken_spada);
         woods_4.getItems().add(potion);

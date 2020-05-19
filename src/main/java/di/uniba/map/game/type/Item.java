@@ -28,6 +28,10 @@ public class Item {
 
     private int heal = 0;
 
+    private boolean armor = false;
+
+    private int protection = 0;
+
     private boolean pushable = false;
 
     private boolean container = false;
@@ -60,6 +64,22 @@ public class Item {
     }
 
     //end weapon
+
+    //armor set
+
+    public boolean isArmor(){return armor;}
+
+    public void setArmor(boolean armor){
+        this.armor = armor;
+    }
+
+    public int getProtection(){ return protection;};
+
+    public void setProtection(int protection){
+        this.protection = protection;
+    }
+
+    //end armor
 
     //Impostazione Oggetto che può contenere oggetti
     public void setIsContainer(boolean cont) { this.container = cont;}
