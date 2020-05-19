@@ -189,6 +189,16 @@ public class GothicGame extends GameDescription {
         broken_spada.setPower(20);
         getItemList().add(broken_spada);
 
+        Item club = new Item(8, "Mazza", "Una mazza, efficace contro le persone");
+        club.setWeapon(true);
+        club.setPower(25);
+        getItemList().add(club);
+
+        Item super_spada = new Item(9, "super_spada", "E' una delle spade più forti che esistano");
+        super_spada.setWeapon(true);
+        super_spada.setPower(55);
+        getItemList().add(super_spada);
+
 
         Item cassa = new Item (2, "cassa", "Potrà contenere sicuramente qualcosa..");
         cassa.setPickupable(false);
@@ -248,21 +258,62 @@ public class GothicGame extends GameDescription {
         getNpcList().add(helper);
         //END NPC HELPER
 
+        Npc fabbro = new Npc(100, "fabbro", "Sono il fabbro del campo");
+        fabbro.setGod(true);
+        fabbro.setSpeakable(true);
+        getNpcList().add(fabbro);
+
         //NPC ENEMY
         Npc enemy = new Npc(100, "nemico", "Un tipo.");
         enemy.setEnemy(true);
         enemy.setWeaponEquip(spada);
         getNpcList().add(enemy);
 
+        Npc e_guard = new Npc(100, "guardia", "Un tipo.");
+        e_guard.setEnemy(true);
+        e_guard.setWeaponEquip(spada);
+        getNpcList().add(e_guard);
+
+        Npc gate_guard = new Npc(100, "thorus", "Un tipo.");
+        e_guard.setEnemy(true);
+        gate_guard.setArmor(70);
+        gate_guard.setWeaponEquip(spada);
+        getNpcList().add(gate_guard);
+
+        Npc bully_1 = new Npc(100, "Bullo", "Un tipo.");
+        bully_1.setEnemy(true);
+        bully_1.setWeaponEquip(club);
+        getNpcList().add(bully_1);
+
+        Npc bully_2 = new Npc(100, "Bullo_2", "Un tipo.");
+        bully_2.setEnemy(true);
+        bully_2.setWeaponEquip(club);
+        getNpcList().add(bully_2);
+
+        Npc bully_3 = new Npc(100, "Bullo_3", "Un tipo.");
+        bully_3.setEnemy(true);
+        bully_3.setWeaponEquip(club);
+        getNpcList().add(bully_3);
+
         Npc wolf = new Npc(40, "lupo", "Un lupo, potrebbe essere aggressivo.");
         enemy.setEnemy(true);
         enemy.setWeaponEquip(zanne);
-        getNpcList().add(enemy);
+        getNpcList().add(wolf);
+
+        Npc wolf2 = new Npc(30, "lupo_piccolo", "Un lupo piccolo, potrebbe essere aggressivo.");
+        enemy.setEnemy(true);
+        enemy.setWeaponEquip(zanne);
+        getNpcList().add(wolf);
+
+        Npc wolf3 = new Npc(50, "lupo_forte", "Un lupo, potrebbe essere aggressivo.");
+        enemy.setEnemy(true);
+        enemy.setWeaponEquip(zanne);
+        getNpcList().add(wolf);
 
         Npc boss = new Npc(100, "boss", "E' il boss finale");
         boss.setEnemy(true);
         boss.setArmor(100);
-        boss.setWeaponEquip(spada);
+        boss.setWeaponEquip(super_spada);
         getNpcList().add(boss);
         //NPC ENEMY
 
@@ -279,8 +330,14 @@ public class GothicGame extends GameDescription {
         entrylevel.getNpcs().add(helper);
         testRoom.getNpcs().add(enemy);
         woods_2.getNpcs().add(wolf);
-        woods_3.getNpcs().add(wolf);
-        woods_4.getNpcs().add(wolf);
+        woods_3.getNpcs().add(wolf2);
+        woods_end.getNpcs().add(wolf3);
+        entry_old_camp.getNpcs().add(e_guard);
+        old_camp_gate.getNpcs().add(gate_guard);
+        old_camp_1.getNpcs().add(bully_1);
+        old_camp_3.getNpcs().add(bully_2);
+        old_camp_3.getNpcs().add(bully_3);
+        old_camp_3.getNpcs().add(fabbro);
         final_room.getNpcs().add(boss);
 
         //end insert
