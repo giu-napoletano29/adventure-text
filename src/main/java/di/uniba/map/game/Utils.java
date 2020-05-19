@@ -4,61 +4,21 @@ import di.uniba.map.game.type.Item;
 import di.uniba.map.game.parser.ParserOutput;
 import di.uniba.map.game.type.CommandType;
 import di.uniba.map.game.type.Npc;
+import di.uniba.map.game.type.Room;
 
 public class Utils {
     public void move(ParserOutput cmd, GameDescription game){
         boolean attack = false;
         if(cmd.getCommand().getType() != null){
             if(cmd.getCommand().getType() == CommandType.NORD){
-                if(game.getCurrentRoom().getNorth() != null){
-                    if(!game.getCurrentRoom().getNorth().getLock()){
-                        game.setCurrentRoom(game.getCurrentRoom().getNorth());
-                        printRoom(game);
-                    }else{
-                        System.out.println("Non si può passare");
-                    }
-                }
-                else{
-                    System.out.println("Ehi non c'è niente qui.");  //TODO: cambiare i print in base al gioco, impostabile da file
-                }
+                checkLock(game, game.getCurrentRoom().getNorth());
             } else if(cmd.getCommand().getType() == CommandType.SOUTH){
-                if(game.getCurrentRoom().getSouth() != null){
-                    if(!game.getCurrentRoom().getSouth().getLock()){
-                        game.setCurrentRoom(game.getCurrentRoom().getSouth());
-                        printRoom(game);
-                    }else{
-                        System.out.println("Non si può passare");
-                    }
-                }
-                else{
-                    System.out.println("Ehi non c'è niente qui.");
-                }
+                checkLock(game, game.getCurrentRoom().getSouth());
             }else if(cmd.getCommand().getType() == CommandType.EAST){
-                if(game.getCurrentRoom().getEast() != null){
-                    if(!game.getCurrentRoom().getEast().getLock()){
-                        game.setCurrentRoom(game.getCurrentRoom().getEast());
-                        printRoom(game);
-                    }else{
-                        System.out.println("Non si può passare");
-                    }
-                }
-                else{
-                    System.out.println("Ehi non c'è niente qui.");
-                }
-            }else if(cmd.getCommand().getType() == CommandType.WEST){
-                if(game.getCurrentRoom().getWest() != null){
-                    if(!game.getCurrentRoom().getWest().getLock()){
-                        game.setCurrentRoom(game.getCurrentRoom().getWest());
-                        printRoom(game);
-                    }else{
-                        System.out.println("Non si può passare");
-                    }
-                }
-                else{
-                    System.out.println("Ehi non c'è niente qui.");
-                }
-            }
-            else if(cmd.getCommand().getType() == CommandType.INVENTORY){
+                checkLock(game, game.getCurrentRoom().getEast());
+            }else if(cmd.getCommand().getType() == CommandType.WEST) {
+                checkLock(game, game.getCurrentRoom().getWest());
+            }else if(cmd.getCommand().getType() == CommandType.INVENTORY){
                 if(game.getInventory().getList().size() > 0){
                     for (Item o : game.getInventory().getList()) {
                         System.out.println(o.getName() + ": " + o.getDescription());
@@ -246,6 +206,19 @@ public class Utils {
             System.out.println("Hp: " + game.getPlayer().getHp() + " Armor: " + game.getPlayer().getArmor() + " Equip: " + game.getPlayer().getWeaponEquip().getName());
         }else{
             System.out.println("Hp: " + game.getPlayer().getHp() + " Armor: " + game.getPlayer().getArmor());
+        }
+    }
+
+    private void checkLock(GameDescription game, Room room){
+        if(room != null){
+            if(!room.getLock()){
+                game.setCurrentRoom(room);
+                printRoom(game);
+            }else{
+                System.out.println("Non si può passare");
+            }
+        }else{
+            System.out.println("Ehi non c'è niente qui.");  //TODO: cambiare i print in base al gioco, impostabile da file
         }
     }
 }
