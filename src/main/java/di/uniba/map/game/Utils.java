@@ -11,32 +11,48 @@ public class Utils {
         if(cmd.getCommand().getType() != null){
             if(cmd.getCommand().getType() == CommandType.NORD){
                 if(game.getCurrentRoom().getNorth() != null){
-                    game.setCurrentRoom(game.getCurrentRoom().getNorth());
-                    printRoom(game);
+                    if(!game.getCurrentRoom().getNorth().getLock()){
+                        game.setCurrentRoom(game.getCurrentRoom().getNorth());
+                        printRoom(game);
+                    }else{
+                        System.out.println("Non si può passare");
+                    }
                 }
                 else{
                     System.out.println("Ehi non c'è niente qui.");  //TODO: cambiare i print in base al gioco, impostabile da file
                 }
             } else if(cmd.getCommand().getType() == CommandType.SOUTH){
                 if(game.getCurrentRoom().getSouth() != null){
-                    game.setCurrentRoom(game.getCurrentRoom().getSouth());
-                    printRoom(game);
+                    if(!game.getCurrentRoom().getSouth().getLock()){
+                        game.setCurrentRoom(game.getCurrentRoom().getSouth());
+                        printRoom(game);
+                    }else{
+                        System.out.println("Non si può passare");
+                    }
                 }
                 else{
                     System.out.println("Ehi non c'è niente qui.");
                 }
             }else if(cmd.getCommand().getType() == CommandType.EAST){
                 if(game.getCurrentRoom().getEast() != null){
-                    game.setCurrentRoom(game.getCurrentRoom().getEast());
-                    printRoom(game);
+                    if(!game.getCurrentRoom().getEast().getLock()){
+                        game.setCurrentRoom(game.getCurrentRoom().getEast());
+                        printRoom(game);
+                    }else{
+                        System.out.println("Non si può passare");
+                    }
                 }
                 else{
                     System.out.println("Ehi non c'è niente qui.");
                 }
             }else if(cmd.getCommand().getType() == CommandType.WEST){
                 if(game.getCurrentRoom().getWest() != null){
-                    game.setCurrentRoom(game.getCurrentRoom().getWest());
-                    printRoom(game);
+                    if(!game.getCurrentRoom().getWest().getLock()){
+                        game.setCurrentRoom(game.getCurrentRoom().getWest());
+                        printRoom(game);
+                    }else{
+                        System.out.println("Non si può passare");
+                    }
                 }
                 else{
                     System.out.println("Ehi non c'è niente qui.");

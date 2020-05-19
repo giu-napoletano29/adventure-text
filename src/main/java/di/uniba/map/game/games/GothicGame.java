@@ -72,8 +72,8 @@ public class GothicGame extends GameDescription {
         Room entry_woods = new Room(1, "Bosco", "Ingresso del bosco ");
         entry_woods.setLook("Meglio trovare qualcosa qua intorno, potrebbe essere pericoloso d'ora in poi..");
 
-        Room woods_1 = new Room(3, "Bosco_1", "Bosco_1");
-        woods_1.setLook("Sei nel bosco_1");
+        Room woods_1 = new Room(3, "Bosco_1", "Sentiero del bosco");
+        woods_1.setLook("Sembra ci siano i resti di qualcuno qui..");
 
         Room woods_2 = new Room(4, "Bosco_2", "Bosco_2");
         woods_2.setLook("Sei nel bosco_2");
@@ -129,6 +129,7 @@ public class GothicGame extends GameDescription {
         getRooms().add(old_camp_3);
         getRooms().add(old_camp_4);
         getRooms().add(baron_room);
+        baron_room.setLock(true);
         getRooms().add(final_room);
 
         entrylevel.setNorth(entry_woods);
@@ -201,21 +202,31 @@ public class GothicGame extends GameDescription {
         super_spada.setPower(55);
         getItemList().add(super_spada);
 
+        Item key = new Item(10, "chiave", "Utile per aprire qualche forziere..");
+        getItemList().add(key);
+
+        Item w_clothes = new Item(11, "vestiti", "Vestiti pesanti da lavoratore. Fornisce 15 punti di armatura.");
+        w_clothes.setArmor(true);
+        w_clothes.setProtection(15);
+        getItemList().add(w_clothes);
+
+        Item light_armor = new Item(12, "armatura_leggera", "Armatura leggera consumata. Fornisce 35 punti di armatura.");
+        light_armor.setArmor(true);
+        light_armor.setProtection(35);
+        getItemList().add(light_armor);
+
+        Item heavy_armor = new Item(13, "armatura_leggera", "Armatura leggera consumata. Fornisce 35 punti di armatura.");
+        heavy_armor.setArmor(true);
+        heavy_armor.setProtection(70);
+        getItemList().add(heavy_armor);
 
         Item cassa = new Item (2, "cassa", "Potrà contenere sicuramente qualcosa..");
         cassa.setPickupable(false);
         cassa.setOpenable(true);
         cassa.setIsContainer(true);
         cassa.getItemList().add(letter);
+        cassa.getItemList().add(heavy_armor);
         getItemList().add(cassa);
-
-        Item key = new Item(10, "chiave", "Utile per aprire qualche forziere..");
-        getItemList().add(key);
-
-        Item w_clothes = new Item(11, "vestiti_pesanti", "Vestiti pesanti da lavoratore. Fornisce 15 punti di armatura.");
-        w_clothes.setArmor(true);
-        w_clothes.setProtection(15);
-        getItemList().add(w_clothes);
 
 
         //NPC HELPER
@@ -335,6 +346,8 @@ public class GothicGame extends GameDescription {
         testRoom.getItems().add(w_clothes);
         entry_woods.getItems().add(mela);
         entry_woods.getItems().add(broken_spada);
+        entry_woods.getItems().add(w_clothes);
+        woods_1.getItems().add(light_armor);
         woods_4.getItems().add(potion);
 
         //NPC
@@ -368,4 +381,6 @@ public class GothicGame extends GameDescription {
         }
         return win;
     }
+
+
 }

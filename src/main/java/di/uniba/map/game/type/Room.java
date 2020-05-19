@@ -13,6 +13,8 @@ public class Room {
 
     private String look= "Vuoto";
 
+    private boolean locked = false;
+
     private Room south = null;
 
     private Room north = null;
@@ -81,4 +83,8 @@ public class Room {
     public void setLook(String look) {
         this.look = look;
     }
+
+    public boolean getLock(){return locked;}
+
+    public void setLock(boolean lock){this.locked = lock;}
 }
