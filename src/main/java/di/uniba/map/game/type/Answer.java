@@ -5,6 +5,8 @@ public class Answer {
 
     private Talk warp = null;
 
+    //insert trigger to answer
+
     public String getAnswer(){return answer;}
 
     public void setAnswer(String answer){this.answer = answer;}

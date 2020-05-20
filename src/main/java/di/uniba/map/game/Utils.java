@@ -11,13 +11,13 @@ public class Utils {
         boolean attack = false;
         if(cmd.getCommand().getType() != null){
             if(cmd.getCommand().getType() == CommandType.NORD){
-                checkLock(game, game.getCurrentRoom().getNorth());
+                checkRoom(game, game.getCurrentRoom().getNorth());
             } else if(cmd.getCommand().getType() == CommandType.SOUTH){
-                checkLock(game, game.getCurrentRoom().getSouth());
+                checkRoom(game, game.getCurrentRoom().getSouth());
             }else if(cmd.getCommand().getType() == CommandType.EAST){
-                checkLock(game, game.getCurrentRoom().getEast());
+                checkRoom(game, game.getCurrentRoom().getEast());
             }else if(cmd.getCommand().getType() == CommandType.WEST) {
-                checkLock(game, game.getCurrentRoom().getWest());
+                checkRoom(game, game.getCurrentRoom().getWest());
             }else if(cmd.getCommand().getType() == CommandType.INVENTORY){
                 if(game.getInventory().getList().size() > 0){
                     for (Item o : game.getInventory().getList()) {
@@ -209,7 +209,7 @@ public class Utils {
         }
     }
 
-    private void checkLock(GameDescription game, Room room){
+    private void checkRoom(GameDescription game, Room room){
         if(room != null){
             if(!room.getLock()){
                 game.setCurrentRoom(room);

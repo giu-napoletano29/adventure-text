@@ -382,5 +382,9 @@ public class GothicGame extends GameDescription {
         return win;
     }
 
+    public void triggers(){
+
+    }
+
 
 }
