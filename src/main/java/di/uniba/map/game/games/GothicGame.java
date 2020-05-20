@@ -271,6 +271,7 @@ public class GothicGame extends GameDescription {
 
         answer = new Answer();
         answer.setAnswer("Fine");
+        answer.setTriggerReference(() -> {System.out.println("Prova delle lambda expression"); });
         talk1.getAns().add(answer);
 
         helper.setTalk(talk1); //Set di dialogo iniziale
@@ -381,10 +382,4 @@ public class GothicGame extends GameDescription {
         }
         return win;
     }
-
-    public void triggers(){
-
-    }
-
-
 }

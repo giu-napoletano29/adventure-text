@@ -43,7 +43,7 @@ public class Engine {
                 //u.printRoom(game); //Inserire enum per capire quale messaggio stampare in base a movimento o azione
             }
             game.isWin();
-            game.triggers();
+            //game.triggers();
 
         }
     }

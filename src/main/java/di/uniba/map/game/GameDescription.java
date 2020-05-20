@@ -22,7 +22,7 @@ public abstract class GameDescription {
 
     public abstract boolean isWin();
 
-    public abstract void triggers();
+    //public abstract void triggers();
 
     public List<Item> getItemList() {
         return itemList;

@@ -36,6 +36,9 @@ public class Npc extends Character{
             try{
                 answer = Integer.parseInt(scanner.nextLine());
                 System.out.println("Tu: " + temp.getAns().get(answer-1).getAnswer());
+                if(temp.getAns().get(answer-1).getTriggerReference() != null){
+                    temp.getAns().get(answer-1).getTriggerReference().trigger();
+                }
                 if(temp.getAns().get(answer-1).getWarp() == null){
                     System.out.println(name + ": " + "Allora è tutto.");
                     error = false;
