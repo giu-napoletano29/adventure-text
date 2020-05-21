@@ -274,59 +274,22 @@ public class GothicGame extends GameDescription {
         enemy.setWeaponEquip(spada);
         getNpcList().add(enemy);
 
-        Npc e_guard = new Npc(100, "guardia", "Un tipo.");
+        Npc e_guard = new Npc(100, "guardia", "Sono una guardia di Campo Vecchio.");
         e_guard.setEnemy(true);
         e_guard.setSpeakable(true);
         e_guard.setWeaponEquip(spada);
         //speaking
-        talk1 = new Talk();
-        e_guard.setTalk(talk1);
-        talk2 = new Talk();
-        answer = new Answer();
-        talk1.setSpeech("Salve!");
-        answer.setAnswer("Dove mi trovo?");
-        answer.setWarp(talk2);
-        talk1.getAns().add(answer);
-
-        answer = new Answer();
-        talk2.setSpeech("Ti trovi a Campo Vecchio! E' l'ultimo accampamento sopravvissuto qui.");
-        Talk talk3 = new Talk();
-        answer.setAnswer("Cosa è successo?");
-        answer.setWarp(talk3);
-        talk2.getAns().add(answer);
-
-        answer = new Answer();
-        talk3.setSpeech("E' passato ormai tanto tempo da quando siamo chiusi qui dentro. I mostri della zona hanno fatto il resto. Guardati sempre le spalle anche da quelli come te.");
-        answer.setAnswer("Mmm..");
-        answer.setWarp(talk2);
-        talk3.getAns().add(answer);
-
-        talk3 = new Talk();
-        answer = new Answer();
-        answer.setAnswer("Come esco da qui?");
-        answer.setWarp(talk3);
-        talk2.getAns().add(answer);
-
-        answer = new Answer();
-        talk3.setSpeech("Solo il Barone decide chi può uscire, e non credo la tua permanenza durerà così poco...");
-        answer.setAnswer("Mmm..");
-        answer.setWarp(talk2);
-        talk3.getAns().add(answer);
-
-        answer = new Answer();
-        answer.setAnswer("Ho capito.");
-        answer.setWarp(talk1);
-        talk2.getAns().add(answer);
-        commonDialog(talk1, e_guard);
-
-
+        e_guardDialog(e_guard);
         //end speaking
         getNpcList().add(e_guard);
 
         Npc gate_guard = new Npc(100, "thorus", "Un tipo.");
-        e_guard.setEnemy(true);
+        gate_guard.setEnemy(true);
         gate_guard.setArmor(70);
         gate_guard.setWeaponEquip(spada);
+        //speaking
+        gate_guardDialog(e_guard);
+        //end speaking
         getNpcList().add(gate_guard);
 
         Npc bully_1 = new Npc(100, "Bullo", "Un tipo.");
@@ -399,7 +362,7 @@ public class GothicGame extends GameDescription {
 
     }
 
-    private static void commonDialog(Talk talk1, Npc e_guard) {
+    private static void commonDialog(Talk talk1, Npc npc) {
         Talk talk2 = new Talk();
         Answer answer = new Answer();
         answer.setAnswer("Chi sei?");
@@ -407,7 +370,7 @@ public class GothicGame extends GameDescription {
         talk1.getAns().add(answer);
 
         answer = new Answer();
-        talk2.setSpeech(e_guard.getDescription());
+        talk2.setSpeech(npc.getDescription());
         answer.setAnswer("Ho capito!");
         answer.setWarp(talk1);
         talk2.getAns().add(answer);
@@ -416,6 +379,90 @@ public class GothicGame extends GameDescription {
         answer.setAnswer("Fine");
         answer.setTriggerReference(() -> {System.out.println("Prova delle lambda expression"); });
         talk1.getAns().add(answer);
+    }
+
+    private static void e_guardDialog(Npc e_guard) {
+        Talk talk1 = new Talk();
+        e_guard.setTalk(talk1);
+        Talk talk2 = new Talk();
+        Answer answer = new Answer();
+        talk1.setSpeech("Salve!");
+        answer.setAnswer("Dove mi trovo?");
+        answer.setWarp(talk2);
+        talk1.getAns().add(answer);
+
+        answer = new Answer();
+        talk2.setSpeech("Ti trovi a Campo Vecchio! E' l'ultimo accampamento sopravvissuto qui.");
+        Talk talk3 = new Talk();
+        answer.setAnswer("Cosa è successo?");
+        answer.setWarp(talk3);
+        talk2.getAns().add(answer);
+
+        answer = new Answer();
+        talk3.setSpeech("E' passato ormai tanto tempo da quando siamo chiusi qui dentro. I mostri della zona hanno fatto il resto. Guardati sempre le spalle anche da quelli come te.");
+        answer.setAnswer("Mmm..");
+        answer.setWarp(talk2);
+        talk3.getAns().add(answer);
+
+        talk3 = new Talk();
+        answer = new Answer();
+        answer.setAnswer("Come esco da qui?");
+        answer.setWarp(talk3);
+        talk2.getAns().add(answer);
+
+        answer = new Answer();
+        talk3.setSpeech("Solo il Barone decide chi può uscire, e non credo la tua permanenza durerà così poco...");
+        answer.setAnswer("Mmm..");
+        answer.setWarp(talk2);
+        talk3.getAns().add(answer);
+
+        answer = new Answer();
+        answer.setAnswer("Ho capito.");
+        answer.setWarp(talk1);
+        talk2.getAns().add(answer);
+        commonDialog(talk1, e_guard);
+    }
+
+    private static void gate_guardDialog(Npc e_guard) { //TODO: completare dialoghi Thorus
+        Talk talk1 = new Talk();
+        e_guard.setTalk(talk1);
+        Talk talk2 = new Talk();
+        Answer answer = new Answer();
+        talk1.setSpeech("Salve!");
+        answer.setAnswer("Dove mi trovo?");
+        answer.setWarp(talk2);
+        talk1.getAns().add(answer);
+
+        answer = new Answer();
+        talk2.setSpeech("Ti trovi a Campo Vecchio! E' l'ultimo accampamento sopravvissuto qui.");
+        Talk talk3 = new Talk();
+        answer.setAnswer("Cosa è successo?");
+        answer.setWarp(talk3);
+        talk2.getAns().add(answer);
+
+        answer = new Answer();
+        talk3.setSpeech("E' passato ormai tanto tempo da quando siamo chiusi qui dentro. I mostri della zona hanno fatto il resto. Guardati sempre le spalle anche da quelli come te.");
+        answer.setAnswer("Mmm..");
+        answer.setWarp(talk2);
+        talk3.getAns().add(answer);
+
+        talk3 = new Talk();
+        answer = new Answer();
+        answer.setAnswer("Come esco da qui?");
+        answer.setWarp(talk3);
+        talk2.getAns().add(answer);
+
+        answer = new Answer();
+        talk3.setSpeech("Solo il Barone decide chi può uscire, e non credo la tua permanenza durerà così poco...");
+        answer.setAnswer("Mmm..");
+        answer.setWarp(talk2);
+        talk3.getAns().add(answer);
+
+        answer = new Answer();
+        answer.setAnswer("Ho capito.");
+        answer.setWarp(talk1);
+        talk2.getAns().add(answer);
+        commonDialog(talk1, e_guard);
     }
 
     public boolean isWin(){
