@@ -15,6 +15,8 @@ public class Room {
 
     private boolean locked = false;
 
+    private boolean explored = false;
+
     private Room south = null;
 
     private Room north = null;
@@ -22,6 +24,8 @@ public class Room {
     private Room east = null;
 
     private Room west = null;
+
+    private Triggers.triggerInterface triggerReference = null;
 
     private final List<Item> items=new ArrayList<>();
 
@@ -87,4 +91,14 @@ public class Room {
     public boolean getLock(){return locked;}
 
     public void setLock(boolean lock){this.locked = lock;}
+
+    public boolean getExplored(){return this.explored;}
+
+    public void setExplored(boolean exp){this.explored = exp;}
+
+    public void setTriggerReference(Triggers.triggerInterface T){this.triggerReference = T;}
+
+    public Triggers.triggerInterface getTriggerReference(){
+        return this.triggerReference;
+    }
 }

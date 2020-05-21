@@ -1,7 +1,8 @@
 package di.uniba.map.game.type;
 
 public class Triggers {
-    public static void triggers(){
-
+    @FunctionalInterface
+    public interface triggerInterface{
+        void trigger();
     }
 }

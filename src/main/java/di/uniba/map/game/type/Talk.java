@@ -9,8 +9,6 @@ public class Talk {
 
     private List<Answer> ans = new ArrayList<>();
 
-    //TODO: aggiungere lista risposte di tipo BAD
-
     public String getSpeech() {
         return speech;
     }

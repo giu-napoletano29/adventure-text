@@ -158,6 +158,7 @@ public class Utils {
                     if(game.getPlayer().getWeaponEquip() != null && cmd.getNpc().getGod() == false){
                         cmd.getNpc().setHp((int) Math.round(cmd.getNpc().getHp() - (game.getPlayer().getWeaponEquip().getPower() - (game.getPlayer().getWeaponEquip().getPower() * (cmd.getNpc().getArmor()/200.000)))));
                         cmd.getNpc().setAttacking(true);
+                        cmd.getNpc().setSpeakable(false);
                         System.out.println(cmd.getNpc().getName() + " HP: " + cmd.getNpc().getHp());
                     }else if(cmd.getNpc().getGod() == true){
                         System.out.println(cmd.getNpc().getName() + ": Non perdere tempo con me. Sono invincibile.");
@@ -214,6 +215,10 @@ public class Utils {
             if(!room.getLock()){
                 game.setCurrentRoom(room);
                 printRoom(game);
+                if(room.getTriggerReference() != null){
+                    room.getTriggerReference().trigger();
+                }
+                room.setExplored(true);
             }else{
                 System.out.println("Non si può passare");
             }

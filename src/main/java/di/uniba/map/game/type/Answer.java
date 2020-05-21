@@ -5,7 +5,7 @@ public class Answer {
 
     private Talk warp = null;
 
-    private triggerInterface triggerReference = null;
+    private Triggers.triggerInterface triggerReference = null;
 
     //insert trigger to answer
 
@@ -17,14 +17,9 @@ public class Answer {
 
     public void setWarp(Talk warp){this.warp = warp;}
 
-    @FunctionalInterface
-    public static interface triggerInterface{
-        void trigger();
-    }
+    public void setTriggerReference(Triggers.triggerInterface T){this.triggerReference = T;}
 
-    public void setTriggerReference(triggerInterface T){this.triggerReference = T;}
-
-    public triggerInterface getTriggerReference(){
+    public Triggers.triggerInterface getTriggerReference(){
         return this.triggerReference;
     }
 }

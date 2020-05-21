@@ -3,7 +3,6 @@ package di.uniba.map.game.games;
 import di.uniba.map.game.type.*;
 import di.uniba.map.game.GameDescription;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -256,23 +255,7 @@ public class GothicGame extends GameDescription {
         answer.setAnswer("Ho capito!");
         answer.setWarp(talk1);
         talk2.getAns().add(answer);
-
-        talk2 = new Talk();
-        answer = new Answer();
-        answer.setAnswer("Chi sei?");
-        answer.setWarp(talk2);
-        talk1.getAns().add(answer);
-
-        answer = new Answer();
-        talk2.setSpeech(helper.getDescription());
-        answer.setAnswer("Ho capito!");
-        answer.setWarp(talk1);
-        talk2.getAns().add(answer);
-
-        answer = new Answer();
-        answer.setAnswer("Fine");
-        answer.setTriggerReference(() -> {System.out.println("Prova delle lambda expression"); });
-        talk1.getAns().add(answer);
+        commonDialog(talk1, helper);
 
         helper.setTalk(talk1); //Set di dialogo iniziale
         helper.setSpeakable(true);
@@ -293,7 +276,51 @@ public class GothicGame extends GameDescription {
 
         Npc e_guard = new Npc(100, "guardia", "Un tipo.");
         e_guard.setEnemy(true);
+        e_guard.setSpeakable(true);
         e_guard.setWeaponEquip(spada);
+        //speaking
+        talk1 = new Talk();
+        e_guard.setTalk(talk1);
+        talk2 = new Talk();
+        answer = new Answer();
+        talk1.setSpeech("Salve!");
+        answer.setAnswer("Dove mi trovo?");
+        answer.setWarp(talk2);
+        talk1.getAns().add(answer);
+
+        answer = new Answer();
+        talk2.setSpeech("Ti trovi a Campo Vecchio! E' l'ultimo accampamento sopravvissuto qui.");
+        Talk talk3 = new Talk();
+        answer.setAnswer("Cosa è successo?");
+        answer.setWarp(talk3);
+        talk2.getAns().add(answer);
+
+        answer = new Answer();
+        talk3.setSpeech("E' passato ormai tanto tempo da quando siamo chiusi qui dentro. I mostri della zona hanno fatto il resto. Guardati sempre le spalle anche da quelli come te.");
+        answer.setAnswer("Mmm..");
+        answer.setWarp(talk2);
+        talk3.getAns().add(answer);
+
+        talk3 = new Talk();
+        answer = new Answer();
+        answer.setAnswer("Come esco da qui?");
+        answer.setWarp(talk3);
+        talk2.getAns().add(answer);
+
+        answer = new Answer();
+        talk3.setSpeech("Solo il Barone decide chi può uscire, e non credo la tua permanenza durerà così poco...");
+        answer.setAnswer("Mmm..");
+        answer.setWarp(talk2);
+        talk3.getAns().add(answer);
+
+        answer = new Answer();
+        answer.setAnswer("Ho capito.");
+        answer.setWarp(talk1);
+        talk2.getAns().add(answer);
+        commonDialog(talk1, e_guard);
+
+
+        //end speaking
         getNpcList().add(e_guard);
 
         Npc gate_guard = new Npc(100, "thorus", "Un tipo.");
@@ -371,6 +398,26 @@ public class GothicGame extends GameDescription {
         setCurrentRoom(entrylevel);
 
     }
+
+    private static void commonDialog(Talk talk1, Npc e_guard) {
+        Talk talk2 = new Talk();
+        Answer answer = new Answer();
+        answer.setAnswer("Chi sei?");
+        answer.setWarp(talk2);
+        talk1.getAns().add(answer);
+
+        answer = new Answer();
+        talk2.setSpeech(e_guard.getDescription());
+        answer.setAnswer("Ho capito!");
+        answer.setWarp(talk1);
+        talk2.getAns().add(answer);
+
+        answer = new Answer();
+        answer.setAnswer("Fine");
+        answer.setTriggerReference(() -> {System.out.println("Prova delle lambda expression"); });
+        talk1.getAns().add(answer);
+    }
+
     public boolean isWin(){
         boolean win = false;
         List<Npc> boss = getNpcList().stream()
