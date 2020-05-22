@@ -12,7 +12,7 @@ public abstract class GameDescription {
 
     private final List<Command> commands = new ArrayList<>();
 
-    private final Player player = new Player(100, "Hero", "Brave Man"); //Instanza giocatore
+    private final static Player player = new Player(100, "Hero", "Brave Man"); //Instanza giocatore
 
     private final List<Item> itemList = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public abstract class GameDescription {
         return player.getInventory();
     }
 
-    public Player getPlayer(){ return this.player;}
+    public static Player getPlayer(){ return player;}
 
 
 }

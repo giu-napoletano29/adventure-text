@@ -106,6 +106,7 @@ public class GothicGame extends GameDescription {
 
         Room baron_room = new Room(14, "Stanza del Barone", "Stanza del Barone");
         baron_room.setLook("Sei nella stanza del barone");
+        baron_room.setLock(true);
 
         Room final_room = new Room(15, "Stanza del Boss", "Stanza del Boss");
         final_room.setLook("Sei nella stanza del Boss");
@@ -284,11 +285,12 @@ public class GothicGame extends GameDescription {
         getNpcList().add(e_guard);
 
         Npc gate_guard = new Npc(100, "thorus", "Un tipo.");
-        gate_guard.setEnemy(true);
+        gate_guard.setEnemy(false);
+        gate_guard.setSpeakable(true);
         gate_guard.setArmor(70);
         gate_guard.setWeaponEquip(spada);
         //speaking
-        gate_guardDialog(e_guard);
+        gate_guardDialog(gate_guard, letter, baron_room);
         //end speaking
         getNpcList().add(gate_guard);
 
@@ -340,6 +342,8 @@ public class GothicGame extends GameDescription {
         entry_woods.getItems().add(w_clothes);
         woods_1.getItems().add(light_armor);
         woods_4.getItems().add(potion);
+
+        old_camp_gate.getItems().add(letter);
 
         //NPC
         entrylevel.getNpcs().add(helper);
@@ -423,46 +427,69 @@ public class GothicGame extends GameDescription {
         commonDialog(talk1, e_guard);
     }
 
-    private static void gate_guardDialog(Npc e_guard) { //TODO: completare dialoghi Thorus
+    private static void gate_guardDialog(Npc gate_guard, Item letter, Room b_room) { //TODO: completare dialoghi Thorus
         Talk talk1 = new Talk();
-        e_guard.setTalk(talk1);
+        gate_guard.setTalk(talk1);
         Talk talk2 = new Talk();
         Answer answer = new Answer();
         talk1.setSpeech("Salve!");
-        answer.setAnswer("Dove mi trovo?");
+        answer.setAnswer("Posso entrare?");
         answer.setWarp(talk2);
         talk1.getAns().add(answer);
 
+            answer = new Answer();
+            talk2.setSpeech("Assolutamente no ragazzo. Solo le guarde sono autorizzate ad entrare.");
+            Talk talk3 = new Talk();
+            answer.setAnswer("Non c'è proprio niente che io possa fare?");
+            answer.setWarp(talk3);
+            talk2.getAns().add(answer);
+
+                answer = new Answer();
+                talk3.setSpeech("Bhe ci sarebbe una cosa che potresti fare. C'è una cassa da qualche parte nel bosco contenente una .. ehm.. lettera. \nLa cassa è chiusa ma qualcuno in zona saprà aiutarti. Recuperala per me e ti farò entrare senza fare domande.");
+                answer.setAnswer("Va bene, lo farò!");
+                Talk hidden_talk = new Talk();
+                Answer hidden_answer = new Answer();
+                answer.setTriggerReference(() -> {talk1.getAns().add(hidden_answer); });
+                answer.setWarp(talk1);
+                talk3.getAns().add(answer);
+
+                hidden_answer.setAnswer("Ho la tua lettera!");
+                hidden_answer.setTriggerReference(() -> {
+                    Answer h_answer = new Answer();
+                    if(getPlayer().getInventory().getList().contains(letter)){
+                        hidden_talk.setSpeech("Hai la lettera! Puoi passare e.. buona fortuna.");
+                        h_answer.setAnswer("Grazie!");
+                        gate_guard.setSpeakable(false);
+                        b_room.setLock(false);
+                    }else{
+                        hidden_talk.setSpeech("Non hai la lettera");
+                        h_answer.setAnswer("Grr..");
+                        h_answer.setWarp(talk1);
+                    }
+                    hidden_talk.getAns().clear();
+                    hidden_talk.getAns().add(h_answer);
+                });
+                hidden_answer.setWarp(hidden_talk);
+
+
+            answer = new Answer();
+            answer.setAnswer("Mmm..");
+            answer.setWarp(talk1);
+            talk2.getAns().add(answer);
+
+        talk2 = new Talk();
         answer = new Answer();
-        talk2.setSpeech("Ti trovi a Campo Vecchio! E' l'ultimo accampamento sopravvissuto qui.");
-        Talk talk3 = new Talk();
-        answer.setAnswer("Cosa è successo?");
+        answer.setAnswer("Chi è il Barone?");
         answer.setWarp(talk3);
-        talk2.getAns().add(answer);
+        talk1.getAns().add(answer);
 
-        answer = new Answer();
-        talk3.setSpeech("E' passato ormai tanto tempo da quando siamo chiusi qui dentro. I mostri della zona hanno fatto il resto. Guardati sempre le spalle anche da quelli come te.");
-        answer.setAnswer("Mmm..");
-        answer.setWarp(talk2);
-        talk3.getAns().add(answer);
+            answer = new Answer();
+            talk2.setSpeech("Non è un tipo facile. Non sta simpatico a molti ma è lui che decide le cose qui..");
+            answer.setAnswer("Chiaro.");
+            answer.setWarp(talk1);
+            talk2.getAns().add(answer);
 
-        talk3 = new Talk();
-        answer = new Answer();
-        answer.setAnswer("Come esco da qui?");
-        answer.setWarp(talk3);
-        talk2.getAns().add(answer);
-
-        answer = new Answer();
-        talk3.setSpeech("Solo il Barone decide chi può uscire, e non credo la tua permanenza durerà così poco...");
-        answer.setAnswer("Mmm..");
-        answer.setWarp(talk2);
-        talk3.getAns().add(answer);
-
-        answer = new Answer();
-        answer.setAnswer("Ho capito.");
-        answer.setWarp(talk1);
-        talk2.getAns().add(answer);
-        commonDialog(talk1, e_guard);
+        commonDialog(talk1, gate_guard);
     }
 
     public boolean isWin(){

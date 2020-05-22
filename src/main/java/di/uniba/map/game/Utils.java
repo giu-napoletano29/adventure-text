@@ -220,7 +220,7 @@ public class Utils {
                 }
                 room.setExplored(true);
             }else{
-                System.out.println("Non si può passare");
+                System.out.println("E' bloccato, non si può passare!");
             }
         }else{
             System.out.println("Ehi non c'è niente qui.");  //TODO: cambiare i print in base al gioco, impostabile da file
