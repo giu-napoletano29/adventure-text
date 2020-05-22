@@ -63,7 +63,10 @@ public class Utils {
                         }else{
                             System.out.println("E' vuoto!");
                         }
-                    }else{
+                    }else if(cmd.getItem().getIsContainer() && cmd.getContainerItem() != null){
+                        //TODO: aggiungere apertura con chiave
+                    }
+                    else{
                         System.out.println("Non riesco ad aprire " + cmd.getItem().getName());
                     }
                     attack = true;

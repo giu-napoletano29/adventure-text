@@ -309,7 +309,7 @@ public class GothicGame extends GameDescription {
         fabbro.setGod(true);
         fabbro.setSpeakable(true);
         //speaking
-        fabbroDialog(fabbro, old_camp_3, bully_2, bully_3);
+        fabbroDialog(fabbro, old_camp_3, bully_2, bully_3, key);
         //end speaking
         getNpcList().add(fabbro);
         old_camp_3.setTriggerReference(fabbro::talking);
@@ -342,6 +342,7 @@ public class GothicGame extends GameDescription {
         testRoom.getItems().add(spada);
         testRoom.getItems().add(cassa);
         testRoom.getItems().add(w_clothes);
+        testRoom.getItems().add(key);
         entry_woods.getItems().add(mela);
         entry_woods.getItems().add(broken_spada);
         entry_woods.getItems().add(w_clothes);
@@ -384,7 +385,7 @@ public class GothicGame extends GameDescription {
 
         answer = new Answer();
         answer.setAnswer("Fine");
-        answer.setTriggerReference(() -> System.out.println("Prova delle lambda expression"));
+        //answer.setTriggerReference(() -> System.out.println("Prova delle lambda expression"));
         talk1.getAns().add(answer);
     }
 
@@ -495,7 +496,7 @@ public class GothicGame extends GameDescription {
         commonDialog(talk1, gate_guard);
     }
 
-    private static void fabbroDialog(Npc fabbro, Room room, Npc b1, Npc b2) {
+    private static void fabbroDialog(Npc fabbro, Room room, Npc b1, Npc b2, Item key) {
         Talk talk1 = new Talk();
         fabbro.setTalk(talk1);
         Talk talk2 = new Talk();
@@ -538,6 +539,11 @@ public class GothicGame extends GameDescription {
         answer = new Answer();
         talk4.setSpeech("Ne ho proprio una che fa al caso tuo, dovrebbe andar bene!");
         answer.setAnswer("Ok, dammela!");
+        answer.setTriggerReference(() -> {
+            System.out.println(fabbro.getName() + " ti ha dato una chiave!");
+            getPlayer().getInventory().add(key);
+            fabbro.setSpeakable(false);
+        });
         talk4.getAns().add(answer);
     }
 
