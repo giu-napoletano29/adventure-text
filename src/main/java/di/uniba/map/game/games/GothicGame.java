@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class GothicGame extends GameDescription {
     @Override
-    public void init() throws Exception {
+    public void init() {
         //Commands
         Command nord = new Command(CommandType.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
@@ -264,11 +264,6 @@ public class GothicGame extends GameDescription {
         getNpcList().add(helper);
         //END NPC HELPER
 
-        Npc fabbro = new Npc(100, "fabbro", "Sono il fabbro del campo");
-        fabbro.setGod(true);
-        fabbro.setSpeakable(true);
-        getNpcList().add(fabbro);
-
         //NPC ENEMY
         Npc enemy = new Npc(100, "nemico", "Un tipo.");
         enemy.setEnemy(true);
@@ -286,6 +281,7 @@ public class GothicGame extends GameDescription {
 
         Npc gate_guard = new Npc(100, "thorus", "Un tipo.");
         gate_guard.setEnemy(false);
+        gate_guard.setGod(true);
         gate_guard.setSpeakable(true);
         gate_guard.setArmor(70);
         gate_guard.setWeaponEquip(spada);
@@ -308,6 +304,15 @@ public class GothicGame extends GameDescription {
         bully_3.setEnemy(true);
         bully_3.setWeaponEquip(club);
         getNpcList().add(bully_3);
+
+        Npc fabbro = new Npc(100, "fabbro", "Sono il fabbro del campo");
+        fabbro.setGod(true);
+        fabbro.setSpeakable(true);
+        //speaking
+        fabbroDialog(fabbro, old_camp_3, bully_2, bully_3);
+        //end speaking
+        getNpcList().add(fabbro);
+        old_camp_3.setTriggerReference(fabbro::talking);
 
         Npc wolf = new Npc(40, "lupo", "Un lupo, potrebbe essere aggressivo.");
         wolf.setEnemy(true);
@@ -342,8 +347,6 @@ public class GothicGame extends GameDescription {
         entry_woods.getItems().add(w_clothes);
         woods_1.getItems().add(light_armor);
         woods_4.getItems().add(potion);
-
-        old_camp_gate.getItems().add(letter);
 
         //NPC
         entrylevel.getNpcs().add(helper);
@@ -381,7 +384,7 @@ public class GothicGame extends GameDescription {
 
         answer = new Answer();
         answer.setAnswer("Fine");
-        answer.setTriggerReference(() -> {System.out.println("Prova delle lambda expression"); });
+        answer.setTriggerReference(() -> System.out.println("Prova delle lambda expression"));
         talk1.getAns().add(answer);
     }
 
@@ -427,7 +430,7 @@ public class GothicGame extends GameDescription {
         commonDialog(talk1, e_guard);
     }
 
-    private static void gate_guardDialog(Npc gate_guard, Item letter, Room b_room) { //TODO: completare dialoghi Thorus
+    private static void gate_guardDialog(Npc gate_guard, Item letter, Room b_room) {
         Talk talk1 = new Talk();
         gate_guard.setTalk(talk1);
         Talk talk2 = new Talk();
@@ -449,7 +452,7 @@ public class GothicGame extends GameDescription {
                 answer.setAnswer("Va bene, lo farò!");
                 Talk hidden_talk = new Talk();
                 Answer hidden_answer = new Answer();
-                answer.setTriggerReference(() -> {talk1.getAns().add(hidden_answer); });
+                answer.setTriggerReference(() -> talk1.getAns().add(hidden_answer));
                 answer.setWarp(talk1);
                 talk3.getAns().add(answer);
 
@@ -490,6 +493,52 @@ public class GothicGame extends GameDescription {
             talk2.getAns().add(answer);
 
         commonDialog(talk1, gate_guard);
+    }
+
+    private static void fabbroDialog(Npc fabbro, Room room, Npc b1, Npc b2) {
+        Talk talk1 = new Talk();
+        fabbro.setTalk(talk1);
+        Talk talk2 = new Talk();
+        Answer answer = new Answer();
+        talk1.setSpeech("Ehi tu vieni qua!");
+        answer.setAnswer("Cosa c'è?");
+        answer.setWarp(talk2);
+        talk1.getAns().add(answer);
+
+        answer = new Answer();
+        talk2.setSpeech("Potresti darmi una mano con questi due qui?");
+        Talk talk3 = new Talk();
+        answer.setAnswer("Perché dovrei?");
+        answer.setWarp(talk3);
+        talk2.getAns().add(answer);
+
+        answer = new Answer();
+        talk3.setSpeech("Aiutami e ti aiuterò qualsiasi cosa tu abbia bisogno!");
+        answer.setAnswer("Mhm..ok");
+        Talk talk4 = new Talk();
+        answer.setTriggerReference(() -> {
+            Answer a = new Answer();
+            talk1.getAns().clear();
+            if(room.getNpcs().contains(b1) || room.getNpcs().contains(b2)){
+                talk1.setSpeech("Ehi ci sono ancora questi due a darmi fastidio!");
+                a.setAnswer("Provvederò!");
+            }else{
+                talk1.setSpeech("Ti ringrazio per l'aiuto. Chiedimi quello che vuoi.");
+                a.setAnswer("Ho bisogno di una chiave per aprire una cassa");
+                a.setWarp(talk4);
+                talk1.getAns().add(a);
+                a = new Answer();
+                a.setAnswer("No grazie.");
+            }
+            talk1.getAns().add(a);
+
+        });
+        talk3.getAns().add(answer);
+
+        answer = new Answer();
+        talk4.setSpeech("Ne ho proprio una che fa al caso tuo, dovrebbe andar bene!");
+        answer.setAnswer("Ok, dammela!");
+        talk4.getAns().add(answer);
     }
 
     public boolean isWin(){

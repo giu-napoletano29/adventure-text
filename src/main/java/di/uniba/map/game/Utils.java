@@ -215,7 +215,7 @@ public class Utils {
             if(!room.getLock()){
                 game.setCurrentRoom(room);
                 printRoom(game);
-                if(room.getTriggerReference() != null){
+                if(room.getTriggerReference() != null && room.getExplored() == false){
                     room.getTriggerReference().trigger();
                 }
                 room.setExplored(true);
