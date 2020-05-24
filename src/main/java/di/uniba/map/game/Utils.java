@@ -64,7 +64,16 @@ public class Utils {
                             System.out.println("E' vuoto!");
                         }
                     }else if(cmd.getItem().getIsContainer() && cmd.getContainerItem() != null){
-                        //TODO: aggiungere apertura con chiave
+                        if(game.getPlayer().getInventory().getList().contains(cmd.getContainerItem())){
+                            if(cmd.getItem().getOpenWith() == cmd.getContainerItem()){
+                                cmd.getItem().setOpenable(true);
+                                System.out.println(cmd.getItem().getName() + " è stato aperto!");
+                            }else{
+                                System.out.println("Non si può aprire " + cmd.getItem().getName() + " con " + cmd.getContainerItem().getName());
+                            }
+                        }else{
+                            System.out.println(cmd.getContainerItem().getName() + " non è in inventario!");
+                        }
                     }
                     else{
                         System.out.println("Non riesco ad aprire " + cmd.getItem().getName());

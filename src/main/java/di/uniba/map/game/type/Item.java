@@ -18,6 +18,8 @@ public class Item {
 
     private boolean openable = false;
 
+    private Item openWith = null;
+
     private boolean pickupable = true;
 
     private boolean weapon = false;
@@ -152,4 +154,8 @@ public class Item {
     public void setHeal(int heal){this.heal = heal;}
 
     public int getHeal(){return this.heal;}
+
+    public void setOpenWith(Item item){this.openWith = item;}
+
+    public Item getOpenWith(){return this.openWith;}
 }

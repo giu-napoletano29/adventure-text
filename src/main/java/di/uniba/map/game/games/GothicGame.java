@@ -222,7 +222,8 @@ public class GothicGame extends GameDescription {
 
         Item cassa = new Item (2, "cassa", "Potrà contenere sicuramente qualcosa..");
         cassa.setPickupable(false);
-        cassa.setOpenable(true);
+        cassa.setOpenable(false);
+        cassa.setOpenWith(key);
         cassa.setIsContainer(true);
         cassa.getItemList().add(letter);
         cassa.getItemList().add(heavy_armor);
