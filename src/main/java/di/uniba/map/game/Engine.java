@@ -6,6 +6,7 @@ import di.uniba.map.game.parser.Parser;
 import di.uniba.map.game.parser.ParserOutput;
 import di.uniba.map.game.type.CommandType;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Engine {
@@ -30,7 +31,7 @@ public class Engine {
         System.out.println("-------------------------------------------");
     }
 
-    public void run() {
+    public void run() throws IOException {
         u.printRoom(game);
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine()){
@@ -48,7 +49,7 @@ public class Engine {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Engine engine = new Engine(new GothicGame());
         engine.begin();
         engine.run();

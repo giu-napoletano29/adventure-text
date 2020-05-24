@@ -291,17 +291,17 @@ public class GothicGame extends GameDescription {
         //end speaking
         getNpcList().add(gate_guard);
 
-        Npc bully_1 = new Npc(100, "Bullo", "Un tipo.");
+        Npc bully_1 = new Npc(100, "bullo", "Un tipo.");
         bully_1.setEnemy(true);
         bully_1.setWeaponEquip(club);
         getNpcList().add(bully_1);
 
-        Npc bully_2 = new Npc(100, "Bullo_2", "Un tipo.");
+        Npc bully_2 = new Npc(100, "bullo_2", "Un tipo.");
         bully_2.setEnemy(true);
         bully_2.setWeaponEquip(club);
         getNpcList().add(bully_2);
 
-        Npc bully_3 = new Npc(100, "Bullo_3", "Un tipo.");
+        Npc bully_3 = new Npc(100, "bullo_3", "Un tipo.");
         bully_3.setEnemy(true);
         bully_3.setWeaponEquip(club);
         getNpcList().add(bully_3);
@@ -348,6 +348,7 @@ public class GothicGame extends GameDescription {
         entry_woods.getItems().add(broken_spada);
         entry_woods.getItems().add(w_clothes);
         woods_1.getItems().add(light_armor);
+        woods_2.getItems().add(cassa);
         woods_4.getItems().add(potion);
 
         //NPC
@@ -436,13 +437,13 @@ public class GothicGame extends GameDescription {
         Talk talk1 = new Talk();
         gate_guard.setTalk(talk1);
         Talk talk2 = new Talk();
-        Answer answer = new Answer();
+        Answer answerP = new Answer();
         talk1.setSpeech("Salve!");
-        answer.setAnswer("Posso entrare?");
-        answer.setWarp(talk2);
-        talk1.getAns().add(answer);
+        answerP.setAnswer("Posso entrare?");
+        answerP.setWarp(talk2);
+        talk1.getAns().add(answerP);
 
-            answer = new Answer();
+            Answer answer = new Answer();
             talk2.setSpeech("Assolutamente no ragazzo. Solo le guarde sono autorizzate ad entrare.");
             Talk talk3 = new Talk();
             answer.setAnswer("Non c'è proprio niente che io possa fare?");
@@ -454,7 +455,9 @@ public class GothicGame extends GameDescription {
                 answer.setAnswer("Va bene, lo farò!");
                 Talk hidden_talk = new Talk();
                 Answer hidden_answer = new Answer();
-                answer.setTriggerReference(() -> talk1.getAns().add(hidden_answer));
+                answer.setTriggerReference(() -> {
+                    talk1.getAns().remove(answerP);
+                    talk1.getAns().add(hidden_answer);});
                 answer.setWarp(talk1);
                 talk3.getAns().add(answer);
 
@@ -485,7 +488,7 @@ public class GothicGame extends GameDescription {
         talk2 = new Talk();
         answer = new Answer();
         answer.setAnswer("Chi è il Barone?");
-        answer.setWarp(talk3);
+        answer.setWarp(talk2);
         talk1.getAns().add(answer);
 
             answer = new Answer();
