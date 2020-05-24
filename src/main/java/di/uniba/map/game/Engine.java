@@ -43,8 +43,14 @@ public class Engine {
                 u.move(command, game);
                 //u.printRoom(game); //Inserire enum per capire quale messaggio stampare in base a movimento o azione
             }
-            game.isWin();
-            //game.triggers();
+            if(game.isWin()){
+                System.out.println("Hai vinto!");
+                break;
+            }
+            if(game.isLose()){
+                System.out.println("Sei morto!");
+                break;
+            }
 
         }
     }

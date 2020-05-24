@@ -230,9 +230,9 @@ public class Utils {
                 game.setCurrentRoom(room);
                 printRoom(game);
                 if(room.getTriggerReference() != null && room.getExplored() == false){
+                    room.setExplored(true);
                     room.getTriggerReference().trigger();
                 }
-                room.setExplored(true);
             }else{
                 System.out.println("E' bloccato, non si può passare!");
             }

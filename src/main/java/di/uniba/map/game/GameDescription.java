@@ -22,6 +22,8 @@ public abstract class GameDescription {
 
     public abstract boolean isWin();
 
+    public abstract boolean isLose();
+
     public List<Item> getItemList() {
         return itemList;
     }
