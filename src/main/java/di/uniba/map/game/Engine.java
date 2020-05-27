@@ -47,7 +47,7 @@ public class Engine {
                 System.out.println("Hai vinto!");
                 break;
             }
-            if(game.isLose()){
+            else if(game.isLose()){
                 System.out.println("Sei morto!");
                 break;
             }

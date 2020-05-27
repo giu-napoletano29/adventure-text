@@ -54,7 +54,7 @@ public class Parser {
         }
         for(int i = 0; i<game.getNpcList().size(); i++){
             try{
-                if(key[1].contains(game.getNpcList().get(i).getName())) {
+                if(key[1].equals(game.getNpcList().get(i).getName())) {
                     npc = game.getNpcList().get(i);
                     break;
                 }

@@ -53,6 +53,16 @@ public class Utils {
                     System.out.println("L'oggetto che cerchi non c'è!");
                 }
             }
+            else if(cmd.getCommand().getType() == CommandType.THROW){
+                if(cmd.getItem() != null && game.getInventory().getList().contains(cmd.getItem())){
+                    game.getInventory().getList().remove(cmd.getItem());
+                    game.getCurrentRoom().getItems().add(cmd.getItem());
+                    System.out.println(cmd.getItem().getName() + " è stato lasciato!");
+                }else{
+                    System.out.println("L'oggetto non è in inventario!");
+                }
+
+            }
             else if(cmd.getCommand().getType() == CommandType.OPEN){
                 if(cmd.getItem() != null && game.getCurrentRoom().getItems().contains(cmd.getItem())){
                     if(cmd.getItem().isOpenable()){
@@ -136,8 +146,15 @@ public class Utils {
             else if(cmd.getCommand().getType() == CommandType.EAT){
                 if(cmd.getItem() != null && game.getPlayer().getInventory().getList().contains(cmd.getItem())){
                     if(cmd.getItem().getHealer()){
-                        game.getPlayer().setHp(game.getPlayer().getHp() + cmd.getItem().getHeal());
-                        game.getPlayer().getInventory().getList().remove(cmd.getItem());
+                        if(game.getPlayer().getHp() < 100){
+                            game.getPlayer().setHp(game.getPlayer().getHp() + cmd.getItem().getHeal());
+                            if(game.getPlayer().getHp() > 100){
+                                game.getPlayer().setHp(100);
+                            }
+                            game.getPlayer().getInventory().getList().remove(cmd.getItem());
+                        }else{
+                            System.out.println("la vita è già al massimo!");
+                        }
                         attack = true;
                     }else{
                         System.out.println("Non si può mangiare questo!");
@@ -201,10 +218,13 @@ public class Utils {
     private void npcResponse(Npc cmd, GameDescription game) {
         if(cmd.getHp() <= 0){
             System.out.println(cmd.getName() + ": Ouch..");
+            if(cmd.getWeaponEquip() != null){
+                game.getCurrentRoom().getItems().add(cmd.getWeaponEquip());
+            }
             game.getCurrentRoom().getNpcs().remove(cmd);
         }else{
             if(cmd.getEnemy()){
-                System.out.println(cmd.getName() + ": E no eh");
+                System.out.println(cmd.getName() + ": E no eh"); //TODO: cambiare frase in base al personaggio
                 game.getPlayer().setHp((int) Math.round(game.getPlayer().getHp() - (cmd.getWeaponEquip().getPower() - (cmd.getWeaponEquip().getPower() * (game.getPlayer().getArmor()/200.000)))));
             }
         }

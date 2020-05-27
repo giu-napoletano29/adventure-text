@@ -62,6 +62,9 @@ public class GothicGame extends GameDescription {
         Command use = new Command(CommandType.USE, "usa");
         use.setAlias(new String[]{"indossa", "vesti", "use"});
         getCommands().add(use);
+        Command throww = new Command(CommandType.THROW, "butta");
+        throww.setAlias(new String[]{"getta", "cestina", "elimina", "rimuovi"});
+        getCommands().add(throww);
 
         //Rooms
         Room entrylevel = new Room(0, "Ingresso", "Sei appena arrivato in questo nuovo mondo."
@@ -90,19 +93,19 @@ public class GothicGame extends GameDescription {
         Room entry_old_camp = new Room(8, "Campo Vecchio", "Ingresso di Campo Vecchio");
         entry_old_camp.setLook("Sei nel Ingresso Campo Vecchio");
 
-        Room old_camp_1 = new Room(9, "Campo Vecchio", "Campo Vecchio 1");
+        Room old_camp_1 = new Room(9, "Campo Vecchio", "Campo Vecchio Zona 1");
         old_camp_1.setLook("Sono in Campo Vecchio_1");
 
-        Room old_camp_2 = new Room(10, "Campo Vecchio", "Campo Vecchio 2");
+        Room old_camp_2 = new Room(10, "Campo Vecchio", "Campo Vecchio Zona 2");
         old_camp_2.setLook("Sono in Campo Vecchio_2");
 
         Room old_camp_gate = new Room(11, "Campo Vecchio", "Cancello di campo Vecchio");
         old_camp_gate.setLook("C'è una guardia a proteggere questo cancello, ci dev'essere qualcosa di importante lì...");
 
-        Room old_camp_3 = new Room(12, "Campo Vecchio", "Campo Vecchio 3");
+        Room old_camp_3 = new Room(12, "Campo Vecchio", "Campo Vecchio Zona 3");
         old_camp_3.setLook("Da queste parti ci sono persone con cui parlare");
 
-        Room old_camp_4 = new Room(13, "Campo Vecchio", "Campo Vecchio 4");
+        Room old_camp_4 = new Room(13, "Campo Vecchio", "Campo Vecchio Zona 4");
         old_camp_4.setLook("Sei nel Campo Vecchio_4");
 
         Room baron_room = new Room(14, "Stanza del Barone", "Ingresso stanza del Barone");
@@ -187,7 +190,7 @@ public class GothicGame extends GameDescription {
 
         Item potion = new Item(6, "pozione", "Restituisce 50 hp.");
         potion.setHealer(true);
-        potion.setHeal(20);
+        potion.setHeal(50);
         getItemList().add(potion);
 
         Item spada = new Item(3, "spada", "Sembra abbastanza affilata..");
@@ -196,7 +199,7 @@ public class GothicGame extends GameDescription {
         getItemList().add(spada);
 
         Item zanne = new Item(5, "zanne", "Zanne di lupo");
-        zanne.setWeapon(true);
+        zanne.setWeapon(false);
         zanne.setPower(15);
         getItemList().add(zanne);
 
@@ -205,7 +208,7 @@ public class GothicGame extends GameDescription {
         broken_spada.setPower(20);
         getItemList().add(broken_spada);
 
-        Item club = new Item(8, "Mazza", "Una mazza, efficace contro le persone");
+        Item club = new Item(8, "mazza", "Una mazza, efficace contro le persone");
         club.setWeapon(true);
         club.setPower(25);
         getItemList().add(club);
@@ -215,7 +218,7 @@ public class GothicGame extends GameDescription {
         super_spada.setPower(55);
         getItemList().add(super_spada);
 
-        Item key = new Item(10, "chiave", "Utile per aprire qualche forziere..");
+        Item key = new Item(10, "chiave", "Utile per aprire qualche cassa..");
         getItemList().add(key);
 
         Item w_clothes = new Item(11, "vestiti", "Vestiti pesanti da lavoratore. Fornisce 15 punti di armatura.");
@@ -228,7 +231,7 @@ public class GothicGame extends GameDescription {
         light_armor.setProtection(35);
         getItemList().add(light_armor);
 
-        Item heavy_armor = new Item(13, "armatura_leggera", "Armatura leggera consumata. Fornisce 35 punti di armatura.");
+        Item heavy_armor = new Item(13, "armatura", "Armatura molto resistente. Fornisce 70 punti di armatura.");
         heavy_armor.setArmor(true);
         heavy_armor.setProtection(70);
         getItemList().add(heavy_armor);
@@ -239,8 +242,19 @@ public class GothicGame extends GameDescription {
         cassa.setOpenWith(key);
         cassa.setIsContainer(true);
         cassa.getItemList().add(letter);
-        cassa.getItemList().add(heavy_armor);
         getItemList().add(cassa);
+
+        Item key_b = new Item(14, "chiavello", "Utile per aprire qualche lucchetto..");
+        getItemList().add(key_b);
+
+        Item armadio = new Item (15, "armadio", "Potrà contenere sicuramente qualcosa..");
+        armadio.setPickupable(false);
+        armadio.setOpenable(false);
+        armadio.setOpenWith(key_b);
+        armadio.setIsContainer(true);
+        armadio.getItemList().add(heavy_armor);
+        armadio.getItemList().add(super_spada);
+        getItemList().add(armadio);
 
 
         //NPC HELPER
@@ -289,7 +303,7 @@ public class GothicGame extends GameDescription {
         e_guard.setSpeakable(true);
         e_guard.setWeaponEquip(spada);
         //speaking
-        e_guardDialog(e_guard);
+        e_guardDialog(e_guard, key_b);
         //end speaking
         getNpcList().add(e_guard);
 
@@ -304,7 +318,7 @@ public class GothicGame extends GameDescription {
         //end speaking
         getNpcList().add(gate_guard);
 
-        Npc bully_1 = new Npc(100, "bullo", "Un tipo.");
+        Npc bully_1 = new Npc(100, "bullo", "Non ti interessa.");
         bully_1.setEnemy(true);
         bully_1.setWeaponEquip(club);
         bully_1.setSpeakable(true);
@@ -313,12 +327,12 @@ public class GothicGame extends GameDescription {
         //end speaking
         getNpcList().add(bully_1);
 
-        Npc bully_2 = new Npc(100, "bullo_2", "Un tipo.");
+        Npc bully_2 = new Npc(100, "bullo2", "Non ti interessa.");
         bully_2.setEnemy(true);
         bully_2.setWeaponEquip(club);
         getNpcList().add(bully_2);
 
-        Npc bully_3 = new Npc(100, "bullo_3", "Un tipo.");
+        Npc bully_3 = new Npc(100, "bullo3", "Non ti interessa.");
         bully_3.setEnemy(true);
         bully_3.setWeaponEquip(club);
         getNpcList().add(bully_3);
@@ -367,15 +381,16 @@ public class GothicGame extends GameDescription {
         testRoom.getItems().add(w_clothes);
         testRoom.getItems().add(key);
         testRoom.getItems().add(mela);
+        testRoom.getItems().add(super_spada);
         entry_woods.getItems().add(mela);
         entry_woods.getItems().add(broken_spada);
-        entry_woods.getItems().add(w_clothes);
-        //woods_1.getItems().add(light_armor);
         woods_end.getItems().add(light_armor);
         woods_2.getItems().add(cassa);
         woods_3.getItems().add(mela);
+        woods_3.getItems().add(w_clothes);
         woods_4.getItems().add(potion);
         baron_room.getItems().add(potion);
+        baron_room.getItems().add(armadio);
 
         //NPC
         entrylevel.getNpcs().add(helper);
@@ -417,7 +432,7 @@ public class GothicGame extends GameDescription {
         talk1.getAns().add(answer);
     }
 
-    private static void e_guardDialog(Npc e_guard) {
+    private static void e_guardDialog(Npc e_guard, Item key_b) {
         Talk talk1 = new Talk();
         e_guard.setTalk(talk1);
         Talk talk2 = new Talk();
@@ -448,9 +463,21 @@ public class GothicGame extends GameDescription {
 
         answer = new Answer();
         talk3.setSpeech("Solo il Barone decide chi può uscire, e non credo la tua permanenza durerà così poco...");
-        answer.setAnswer("Mmm..");
-        answer.setWarp(talk2);
+        answer.setAnswer("Va bene");
+        Talk talk4 = new Talk();
+        answer.setWarp(talk4);
         talk3.getAns().add(answer);
+
+        Answer a = new Answer();
+        talk4.setSpeech("In ogni caso prendi questa, l'ho trovata da queste parti e potrebbe tornarti utile");
+        a.setAnswer("Ok, grazie!");
+        Answer finalAnswer = answer;
+        a.setTriggerReference(() -> {
+            System.out.println(e_guard.getName() + " ti ha dato un " + key_b.getName() + "!");
+            getPlayer().getInventory().add(key_b);
+            finalAnswer.setWarp(talk2);
+        });
+        talk4.getAns().add(a);
 
         answer = new Answer();
         answer.setAnswer("Ho capito.");
@@ -547,6 +574,15 @@ public class GothicGame extends GameDescription {
         talk3.setSpeech("Aiutami e ti aiuterò qualsiasi cosa tu abbia bisogno!");
         answer.setAnswer("Mhm..ok");
         Talk talk4 = new Talk();
+        Talk talk5 = new Talk();
+        answer.setTriggerReference(() -> {
+            fabbro.setTalk(talk5);
+        });
+        talk3.getAns().add(answer);
+
+        answer = new Answer();
+        talk5.setSpeech("...");
+        answer.setAnswer("A proposito di quella questione...");
         answer.setTriggerReference(() -> {
             Answer a = new Answer();
             talk1.getAns().clear();
@@ -562,9 +598,9 @@ public class GothicGame extends GameDescription {
                 a.setAnswer("No grazie.");
             }
             talk1.getAns().add(a);
-
         });
-        talk3.getAns().add(answer);
+        answer.setWarp(talk1);
+        talk5.getAns().add(answer);
 
         answer = new Answer();
         talk4.setSpeech("Ne ho proprio una che fa al caso tuo, dovrebbe andar bene!");
