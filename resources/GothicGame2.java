@@ -1,15 +1,27 @@
 package di.uniba.map.game.games;
 
-import di.uniba.map.game.type.*;
+//import di.uniba.map.game.type.*;
+import di.uniba.map.game.type.Answer;
+import di.uniba.map.game.type.Character;
+import di.uniba.map.game.type.Command;
+import di.uniba.map.game.type.CommandType;
+import di.uniba.map.game.type.Inventory;
+import di.uniba.map.game.type.Item;
+import di.uniba.map.game.type.Npc;
+import di.uniba.map.game.type.Player;
+import di.uniba.map.game.type.Room2;
+import di.uniba.map.game.type.Talk;
+import di.uniba.map.game.type.Triggers;
 import di.uniba.map.game.GameDescription;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class GothicGame extends GameDescription{
+public class GothicGame2 extends GameDescription implements di.uniba.map.game.resources.Compiler.DoStuff {
     @Override
     public void init() {
+        System.out.println("Prova entrato nel file");
         //Commands
         Command nord = new Command(CommandType.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});

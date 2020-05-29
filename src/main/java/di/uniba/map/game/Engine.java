@@ -4,6 +4,7 @@ import di.uniba.map.game.GameDescription;
 import di.uniba.map.game.games.GothicGame;
 import di.uniba.map.game.parser.Parser;
 import di.uniba.map.game.parser.ParserOutput;
+import di.uniba.map.game.resources.Compiler;
 import di.uniba.map.game.type.CommandType;
 
 import java.io.IOException;
@@ -56,6 +57,8 @@ public class Engine {
     }
 
     public static void main(String[] args) throws IOException {
+        Compiler.compiler();
+        System.getProperty("java.classpath");
         Engine engine = new Engine(new GothicGame());
         engine.begin();
         engine.run();

@@ -1,9 +1,7 @@
 package di.uniba.map.game.resources;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -18,19 +16,22 @@ import javax.tools.ToolProvider;
 
 public class Compiler {
 
-    public static void main(String[] args) {
+    public static void compiler() {
+        /*
         StringBuilder sb = new StringBuilder(64);
         sb.append("package resources;\n");
         sb.append("public class HelloWorld implements di.uniba.map.game.resources.Compiler.DoStuff {\n");
         sb.append("    public void doStuff() {\n");
         sb.append("        System.out.println(\"Hello world\");\n");
         sb.append("    }\n");
-        sb.append("}\n");
+        sb.append("}\n");*/
 
-        File helloWorldJava = new File("resources/HelloWorld.java");
+        //File helloWorldJava = new File("resources/HelloWorld.java");
+        File helloWorldJava = new File("resources/GothicGame2.java");
         if (helloWorldJava.getParentFile().exists() || helloWorldJava.getParentFile().mkdirs()) {
 
             try {
+                /*
                 Writer writer = null;
                 try {
                     writer = new FileWriter(helloWorldJava);
@@ -41,7 +42,7 @@ public class Compiler {
                         writer.close();
                     } catch (Exception e) {
                     }
-                }
+                }*/
 
                 /** Compilation Requirements *********************************************************************************************/
                 DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
@@ -71,7 +72,7 @@ public class Compiler {
                     // classes, this should point to the top of the package structure!
                     URLClassLoader classLoader = new URLClassLoader(new URL[]{new File("./").toURI().toURL()});
                     // Load the class from the classloader by name....
-                    Class<?> loadedClass = classLoader.loadClass("testcompile.HelloWorld");
+                    Class<?> loadedClass = classLoader.loadClass("resources.GothicGame2");
                     // Create a new instance...
                     Object obj = loadedClass.newInstance();
                     // Santity check
@@ -79,7 +80,7 @@ public class Compiler {
                         // Cast to the DoStuff interface
                         DoStuff stuffToDo = (DoStuff)obj;
                         // Run it baby
-                        stuffToDo.doStuff();
+                        stuffToDo.init();
                     }
                     /************************************************************************************************* Load and execute **/
                 } else {
@@ -98,7 +99,7 @@ public class Compiler {
 
     public static interface DoStuff {
 
-        public void doStuff();
+        public void init();
     }
 
 }
