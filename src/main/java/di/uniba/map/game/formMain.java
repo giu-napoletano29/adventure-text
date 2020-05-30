@@ -46,6 +46,7 @@ public class formMain extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Prova Game");
         jLabel1.setToolTipText("");
@@ -126,25 +127,27 @@ public class formMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         final JFileChooser fc = new JFileChooser();
         int returnVal = fc.showOpenDialog(this);
-        File f = fc.getSelectedFile();
-        FileInputStream in;
-        FileOutputStream out = null;
-        try{
-            in = new FileInputStream(f);
-            out = new FileOutputStream("src/main/java/di/uniba/map/game/games/Game.java");
-            int c;
-            while ((c = in.read()) != -1) {
-                out.write(c);
+        if(returnVal == JFileChooser.APPROVE_OPTION){
+            File f = fc.getSelectedFile();
+            FileInputStream in;
+            FileOutputStream out = null;
+            try{
+                in = new FileInputStream(f);
+                out = new FileOutputStream("src/main/java/di/uniba/map/game/games/Game.java");
+                int c;
+                while ((c = in.read()) != -1) {
+                    out.write(c);
+                }
+            } finally {
+                if (out != null) {
+                    out.close();
+                }
             }
-        } finally {
-            if (out != null) {
-                out.close();
-            }
+            Class gameClass = Compiler.compiler();
+            Object obj = gameClass.newInstance();
+            Engine engine = new Engine(obj);
+            Engine.engine(engine);
         }
-        Class gameClass = Compiler.compiler();
-        Object obj = gameClass.newInstance();
-        Engine engine = new Engine(obj);
-        Engine.engine(engine);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

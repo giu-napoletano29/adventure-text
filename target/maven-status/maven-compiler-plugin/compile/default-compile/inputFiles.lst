@@ -4,8 +4,8 @@ C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\ty
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\parser\Parser.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\type\Room2.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\type\Talk.java
+C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\games\Game.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\Engine.java
-C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\games\GothicGame2.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\type\Answer.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\formMain.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\type\CommandType.java
@@ -14,7 +14,6 @@ C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\pa
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\games\GothicGame.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\resources\Compiler.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\type\Item.java
-C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\games\GeneralGame.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\ResGet.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\type\Character.java
 C:\Users\Giuseppe\IdeaProjects\adventure-text\src\main\java\di\uniba\map\game\type\Inventory.java

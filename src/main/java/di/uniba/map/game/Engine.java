@@ -36,7 +36,7 @@ public class Engine {
 
     protected void begin(){
         System.out.println("-------------------------------------------");
-        System.out.println("NOME DEL GIOCO QUI - by Giuseppe Napoletano");
+        System.out.println("    Game Engine - by Giuseppe Napoletano   ");
         System.out.println("-------------------------------------------");
     }
 
