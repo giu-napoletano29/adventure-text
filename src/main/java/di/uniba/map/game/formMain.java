@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 
 /**
  *
@@ -41,15 +41,12 @@ public class formMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
-        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Game Engine - Giuseppe Napoletano");
         setResizable(false);
-
-        jLabel1.setText("Prova Game");
-        jLabel1.setToolTipText("");
 
         jButton1.setText("Play Gothicgame");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -81,12 +78,8 @@ public class formMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(172, 172, 172)
-                .addComponent(jLabel1)
-                .addContainerGap(170, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(125, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
@@ -95,13 +88,11 @@ public class formMain extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(52, 52, 52)
-                .addComponent(jButton1)
-                .addGap(35, 35, 35)
-                .addComponent(jButton2)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,9 +100,10 @@ public class formMain extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
+            this.setVisible(false);
             Engine engine = new Engine(new GothicGame());
             Engine.engine(engine);
+            this.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(formMain.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchMethodException e) {
@@ -129,27 +121,46 @@ public class formMain extends javax.swing.JFrame {
         int returnVal = fc.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION){
             File f = fc.getSelectedFile();
-            FileInputStream in;
-            FileOutputStream out = null;
-            try{
-                in = new FileInputStream(f);
-                out = new FileOutputStream("src/main/java/di/uniba/map/game/games/Game.java");
-                int c;
-                while ((c = in.read()) != -1) {
-                    out.write(c);
+            if(textFileCheck(f)){
+                FileInputStream in;
+                FileOutputStream out = null;
+                try{
+                    in = new FileInputStream(f);
+                    out = new FileOutputStream("src/main/java/di/uniba/map/game/games/Game.java");
+                    int c;
+                    while ((c = in.read()) != -1) {
+                        out.write(c);
+                    }
+                } finally {
+                    if (out != null) {
+                        out.close();
+                    }
                 }
-            } finally {
-                if (out != null) {
-                    out.close();
-                }
+                Class gameClass = Compiler.compiler();
+                Object obj = gameClass.newInstance();
+                this.setVisible(false);
+                Engine engine = new Engine(obj);
+                Engine.engine(engine);
+                this.setVisible(true);
             }
-            Class gameClass = Compiler.compiler();
-            Object obj = gameClass.newInstance();
-            Engine engine = new Engine(obj);
-            Engine.engine(engine);
+            else{
+                JOptionPane.showMessageDialog(null, "Il file selezionato non è supportato!", "Errore", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private boolean textFileCheck(File file){
+        boolean res = false;
+        if (file.isDirectory()) {
+            return true;
+        }
+        String name = file.getName().toLowerCase();
+        if(name.endsWith("txt") || name.endsWith("java")){
+            res = true;
+        }
+        return res;
+    }
 
     /**
      * @param args the command line arguments
@@ -190,6 +201,5 @@ public class formMain extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
