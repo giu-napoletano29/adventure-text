@@ -1,15 +1,11 @@
 package di.uniba.map.game;
 
-import di.uniba.map.game.GameDescription;
-import di.uniba.map.game.games.GeneralGame;
-import di.uniba.map.game.games.GothicGame;
-import di.uniba.map.game.games.GothicGame2;
 import di.uniba.map.game.parser.Parser;
 import di.uniba.map.game.parser.ParserOutput;
-import di.uniba.map.game.resources.Compiler;
 import di.uniba.map.game.type.CommandType;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 public class Engine {
@@ -28,13 +24,23 @@ public class Engine {
         cmd = new Parser();
     }
 
+    public Engine(Object obj) {
+        this.game = (GameDescription) obj;
+        try {
+            this.game.init();
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
+        cmd = new Parser();
+    }
+
     protected void begin(){
         System.out.println("-------------------------------------------");
         System.out.println("NOME DEL GIOCO QUI - by Giuseppe Napoletano");
         System.out.println("-------------------------------------------");
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         u.printRoom(game);
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine()){
@@ -58,10 +64,9 @@ public class Engine {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        Compiler.compiler();
+    public static void engine(Engine engine) throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         //Engine engine = new Engine(new GothicGame());
-        Engine engine = new Engine(new GothicGame2());
+        //Engine engine = new Engine(new GothicGame2());
         engine.begin();
         engine.run();
     }

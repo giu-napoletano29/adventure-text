@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class GothicGame2 extends GameDescription {
+public class Game extends GameDescription {
     @Override
     public void init() {
         System.out.println("Prova entrato nel file");

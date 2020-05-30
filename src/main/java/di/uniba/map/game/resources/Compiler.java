@@ -1,5 +1,7 @@
 package di.uniba.map.game.resources;
 
+import di.uniba.map.game.Engine;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -16,7 +18,7 @@ import javax.tools.ToolProvider;
 
 public class Compiler {
 
-    public static void compiler() {
+    public static Class<?> compiler() {
         /*
         StringBuilder sb = new StringBuilder(64);
         sb.append("package resources;\n");
@@ -27,8 +29,9 @@ public class Compiler {
         sb.append("}\n");*/
 
         //File helloWorldJava = new File("resources/HelloWorld.java");
-        File helloWorldJava = new File("src/main/java/di/uniba/map/game/games/GothicGame2.java");
-        if (helloWorldJava.getParentFile().exists() || helloWorldJava.getParentFile().mkdirs()) {
+        File gameFile = new File("src/main/java/di/uniba/map/game/games/Game.java");
+        Class<?> loadedClass = null;
+        if (gameFile.getParentFile().exists() || gameFile.getParentFile().mkdirs()) {
 
             try {
                 /*
@@ -56,7 +59,7 @@ public class Compiler {
                 optionList.add(System.getProperty("java.class.path") + File.pathSeparator + "dist/InlineCompiler.jar");
 
                 Iterable<? extends JavaFileObject> compilationUnit
-                        = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(helloWorldJava));
+                        = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(gameFile));
                 JavaCompiler.CompilationTask task = compiler.getTask(
                         null,
                         fileManager,
@@ -72,33 +75,26 @@ public class Compiler {
                     // classes, this should point to the top of the package structure!
                     URLClassLoader classLoader = new URLClassLoader(new URL[]{new File("./").toURI().toURL()});
                     // Load the class from the classloader by name....
-                    Class<?> loadedClass = classLoader.loadClass("di.uniba.map.game.games.GothicGame2");
+                    loadedClass = classLoader.loadClass("di.uniba.map.game.games.Game");
                     // Create a new instance...
                     Object obj = loadedClass.newInstance();
-                    // Santity check
-                    if (obj instanceof DoStuff) {
-                        // Cast to the DoStuff interface
-                        DoStuff stuffToDo = (DoStuff)obj;
-                        // Run it baby
-                        stuffToDo.init();
-                    }
+
                     /************************************************************************************************* Load and execute **/
                 } else {
                     for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics.getDiagnostics()) {
                         System.out.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource().toUri());
-                        System.out.println("Error: " + diagnostic.getCode() + " " + diagnostic.toString());
+                        System.out.println("Error: " + diagnostic.getCode() + " \nDiagnostic: \n" + diagnostic.toString());
                     }
                 }
                 fileManager.close();
+
             } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException exp) {
                 exp.printStackTrace();
+
             }
+
         }
-    }
-
-    public static interface DoStuff {
-
-        public void init();
+        return loadedClass;
     }
 
 }

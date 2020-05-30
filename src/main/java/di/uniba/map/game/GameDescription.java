@@ -2,6 +2,7 @@ package di.uniba.map.game;
 
 import di.uniba.map.game.type.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public abstract class GameDescription {
 
     public abstract void init() throws Exception;
 
-    public abstract boolean isWin();
+    public abstract boolean isWin() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 
-    public abstract boolean isLose();
+    public abstract boolean isLose() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException;
 
     public List<Item> getItemList() {
         return itemList;
