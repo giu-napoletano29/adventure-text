@@ -1,4 +1,5 @@
 package di.uniba.map.game.games;
+//package di.uniba.map.game.resources;
 
 //import di.uniba.map.game.type.*;
 import di.uniba.map.game.type.Answer;
@@ -9,16 +10,17 @@ import di.uniba.map.game.type.Inventory;
 import di.uniba.map.game.type.Item;
 import di.uniba.map.game.type.Npc;
 import di.uniba.map.game.type.Player;
-import di.uniba.map.game.type.Room2;
+import di.uniba.map.game.type.Room;
 import di.uniba.map.game.type.Talk;
 import di.uniba.map.game.type.Triggers;
 import di.uniba.map.game.GameDescription;
+import di.uniba.map.game.games.GeneralGame;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class GothicGame2 extends GameDescription implements di.uniba.map.game.resources.Compiler.DoStuff {
+public class GothicGame2 extends GeneralGame {
     @Override
     public void init() {
         System.out.println("Prova entrato nel file");

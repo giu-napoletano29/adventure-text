@@ -27,7 +27,7 @@ public class Compiler {
         sb.append("}\n");*/
 
         //File helloWorldJava = new File("resources/HelloWorld.java");
-        File helloWorldJava = new File("resources/GothicGame2.java");
+        File helloWorldJava = new File("src/main/java/di/uniba/map/game/games/GothicGame2.java");
         if (helloWorldJava.getParentFile().exists() || helloWorldJava.getParentFile().mkdirs()) {
 
             try {
@@ -72,7 +72,7 @@ public class Compiler {
                     // classes, this should point to the top of the package structure!
                     URLClassLoader classLoader = new URLClassLoader(new URL[]{new File("./").toURI().toURL()});
                     // Load the class from the classloader by name....
-                    Class<?> loadedClass = classLoader.loadClass("resources.GothicGame2");
+                    Class<?> loadedClass = classLoader.loadClass("di.uniba.map.game.games.GothicGame2");
                     // Create a new instance...
                     Object obj = loadedClass.newInstance();
                     // Santity check
@@ -85,9 +85,8 @@ public class Compiler {
                     /************************************************************************************************* Load and execute **/
                 } else {
                     for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics.getDiagnostics()) {
-                        System.out.format("Error on line %d in %s%n",
-                                diagnostic.getLineNumber(),
-                                diagnostic.getSource().toUri());
+                        System.out.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource().toUri());
+                        System.out.println("Error: " + diagnostic.getCode() + " " + diagnostic.toString());
                     }
                 }
                 fileManager.close();

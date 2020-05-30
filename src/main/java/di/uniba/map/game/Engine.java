@@ -1,7 +1,9 @@
 package di.uniba.map.game;
 
 import di.uniba.map.game.GameDescription;
+import di.uniba.map.game.games.GeneralGame;
 import di.uniba.map.game.games.GothicGame;
+import di.uniba.map.game.games.GothicGame2;
 import di.uniba.map.game.parser.Parser;
 import di.uniba.map.game.parser.ParserOutput;
 import di.uniba.map.game.resources.Compiler;
@@ -58,8 +60,8 @@ public class Engine {
 
     public static void main(String[] args) throws IOException {
         Compiler.compiler();
-        System.getProperty("java.classpath");
-        Engine engine = new Engine(new GothicGame());
+        //Engine engine = new Engine(new GothicGame());
+        Engine engine = new Engine(new GothicGame2());
         engine.begin();
         engine.run();
     }
