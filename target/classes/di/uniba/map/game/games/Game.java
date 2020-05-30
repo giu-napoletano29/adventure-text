@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Game extends GameDescription {
     @Override
     public void init() {
-        System.out.println("Prova entrato nel file");
+        System.out.println("Atlantide");
         //Commands
         Command nord = new Command(CommandType.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});

@@ -1,4 +1,4 @@
-package di.uniba.map.game.resources;
+package di.uniba.map.game;
 
 import di.uniba.map.game.Engine;
 
@@ -22,14 +22,15 @@ public class Compiler {
         /*
         StringBuilder sb = new StringBuilder(64);
         sb.append("package resources;\n");
-        sb.append("public class HelloWorld implements di.uniba.map.game.resources.Compiler.DoStuff {\n");
+        sb.append("public class HelloWorld implements di.uniba.map.game.Compiler.DoStuff {\n");
         sb.append("    public void doStuff() {\n");
         sb.append("        System.out.println(\"Hello world\");\n");
         sb.append("    }\n");
         sb.append("}\n");*/
 
-        //File helloWorldJava = new File("resources/HelloWorld.java");
-        File gameFile = new File("src/main/java/di/uniba/map/game/games/Game.java");
+        //File gameFile = new File("resources/HelloWorld.java");
+        //File gameFile = new File("src/main/java/di/uniba/map/game/games/Game.java");
+        File gameFile = new File("target/classes/di/uniba/map/game/games/Game.java");
         Class<?> loadedClass = null;
         if (gameFile.getParentFile().exists() || gameFile.getParentFile().mkdirs()) {
 
@@ -56,24 +57,26 @@ public class Compiler {
                 // I've added the .jar file that contains the DoStuff interface within in it...
                 List<String> optionList = new ArrayList<String>();
                 optionList.add("-classpath");
-                optionList.add(System.getProperty("java.class.path") + File.pathSeparator + "dist/InlineCompiler.jar");
+                optionList.add(System.getProperty("java.class.path"));
 
-                Iterable<? extends JavaFileObject> compilationUnit
-                        = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(gameFile));
-                JavaCompiler.CompilationTask task = compiler.getTask(
-                        null,
-                        fileManager,
-                        diagnostics,
-                        optionList,
-                        null,
-                        compilationUnit);
+                System.out.println("Test PATH: " + System.getProperty("java.class.path"));
+
+                Iterable<? extends JavaFileObject> compilationUnit = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(gameFile));
+                JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnostics, optionList, null, compilationUnit);
                 /********************************************************************************************* Compilation Requirements **/
                 if (task.call()) {
                     /** Load and execute *************************************************************************************************/
-                    System.out.println("Yipe");
+                    //System.out.println("Yipe");
                     // Create a new custom class loader, pointing to the directory that contains the compiled
                     // classes, this should point to the top of the package structure!
+
                     URLClassLoader classLoader = new URLClassLoader(new URL[]{new File("./").toURI().toURL()});
+
+                    URL[] urlss = (classLoader.getURLs());
+
+                    for(URL urla: urlss){
+                        System.out.println("test: " + urla.getFile());
+                    }
                     // Load the class from the classloader by name....
                     loadedClass = classLoader.loadClass("di.uniba.map.game.games.Game");
                     // Create a new instance...

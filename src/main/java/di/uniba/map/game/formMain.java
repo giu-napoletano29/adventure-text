@@ -6,7 +6,6 @@
 package di.uniba.map.game;
 
 import di.uniba.map.game.games.GothicGame;
-import di.uniba.map.game.resources.Compiler;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -126,7 +125,8 @@ public class formMain extends javax.swing.JFrame {
                 FileOutputStream out = null;
                 try{
                     in = new FileInputStream(f);
-                    out = new FileOutputStream("src/main/java/di/uniba/map/game/games/Game.java");
+                    //out = new FileOutputStream("src/main/java/di/uniba/map/game/games/Game.java");
+                    out = new FileOutputStream("target/classes/di/uniba/map/game/games/Game.java");
                     int c;
                     while ((c = in.read()) != -1) {
                         out.write(c);
@@ -137,11 +137,16 @@ public class formMain extends javax.swing.JFrame {
                     }
                 }
                 Class gameClass = Compiler.compiler();
-                Object obj = gameClass.newInstance();
-                this.setVisible(false);
-                Engine engine = new Engine(obj);
-                Engine.engine(engine);
-                this.setVisible(true);
+                if(gameClass != null){
+                    Object obj = gameClass.newInstance();
+                    this.setVisible(false);
+                    Engine engine = new Engine(obj);
+                    Engine.engine(engine);
+                    this.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Errore nell'interpretazione del file!\nControllare la console per ulteriori informazioni.", "Errore", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
             else{
                 JOptionPane.showMessageDialog(null, "Il file selezionato non è supportato!", "Errore", JOptionPane.ERROR_MESSAGE);
