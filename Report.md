@@ -15,3 +15,11 @@ Il sistema deve fornire dei requisiti minimi per poter essere considerato valido
 * Definire i vari elementi di un'avventura e poterla eseguire.
 * Interpretare correttamente i comandi impartiti da tastiera.
 * Poter eseguire diverse avventure grafiche senza dover necessariamente modificare il codice del motore.
+
+## 3. Caratteristiche tecniche
+
+## 4. System Design
+
+## 5. OO Design
+
+## 6. Manuale dell'utente
