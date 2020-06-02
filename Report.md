@@ -18,6 +18,9 @@ Il sistema deve fornire dei requisiti minimi per poter essere considerato valido
 
 ## 3. Caratteristiche tecniche
 
+(Descrizione strutture dati)
+(Strumenti utilizzati)
+
 ## 4. System Design
 
 ## 5. OO Design
