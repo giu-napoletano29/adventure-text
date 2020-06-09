@@ -24,5 +24,7 @@ Il sistema deve fornire dei requisiti minimi per poter essere considerato valido
 ## 4. System Design
 
 ## 5. OO Design
+Diagramma delle classi:
+![Class Diagram](doc/diagram.jpg)
 
 ## 6. Manuale dell'utente
