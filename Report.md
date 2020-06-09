@@ -80,3 +80,4 @@ All'interno devono essere definiti i tre metodi fondamentali per il corretto fun
 + public boolean ***isWin()***: metodo che serve a definire le condizioni di vittoria. Se **TRUE** si vince la partita
 + public boolean ***isLose()***: metodo che serve a definire le condizioni di sconfitta. Se **TRUE** si perde la partita.
 
+Fare riferimento al paragrafo 3 per le strutture dati e metodi utilizzabili.
