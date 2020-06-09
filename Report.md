@@ -28,3 +28,28 @@ Diagramma delle classi:
 ![Class Diagram](doc/diagram.jpg)
 
 ## 6. Manuale dell'utente
+All'avvio dell'applicazione verrà mostrato all'utente un menù da cui sarà possibile scegliere l'avventura da eseguire.
+
+![menu](doc/menu.png)
+
+Saranno presenti, per questa versione del motore, due opzioni: *'Play GothicGame'* e *'Load from file'*.
+Selezionando la prima opzione verrà eseguita l'avventura di default pre-caricata nell'engine.
+Immagine di gioco:
+
+![game](doc/Immagine.jpg)
+
+Altrimenti con la seconda opzione è possibile caricare un'avventura testuale personalizzata.
+E' possibile riscontrare degli errori durante il caricamento da file. Il motore accetta in input file di testo *.txt* o file classe *.java* e nel caso venga fornito un formato non riconosciuto, verrà restituito un errore.
+
+![game](doc/errore_formato.png)
+
+Una volta selezionato un file nel formato corretto, verrà effettuato un controllo sul codice. In caso vengano rilevate inesattezze, un messaggio di errore sarà mostrato e nella console di gioco verranno forniti ulteriori dettagli come il tipo di errore e la parte di codice affetta.
+
+![game](doc/errore_comp.png)
+
+*(Messaggio di errore)*
+
+![game](doc/compilatore_err.png)
+*(Dettagli errore)*
+
+### 6.1 Creare file avventura ###
