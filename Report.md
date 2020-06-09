@@ -76,7 +76,7 @@ Tutte le definizioni del gioco devo essere incluse dentro una classe che deve av
 + **``public class Game extends GameDescription { }``**
 
 All'interno devono essere definiti i tre metodi fondamentali per il corretto funzionamento del gioco ovvero: 
-+ public void ***init()***: metodo che definisce tutte le istanze del gioco quali stanze, oggetti, eccetera. Questo dev'essere definito ***@Override***
++ public void ***init()***: metodo che definisce tutte le istanze del gioco quali stanze, oggetti, eccetera.
 + public boolean ***isWin()***: metodo che serve a definire le condizioni di vittoria. Se **TRUE** si vince la partita
 + public boolean ***isLose()***: metodo che serve a definire le condizioni di sconfitta. Se **TRUE** si perde la partita.
 
