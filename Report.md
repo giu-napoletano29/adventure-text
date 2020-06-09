@@ -29,6 +29,14 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 + ***Room***: Definisce le caratteristiche delle stanze 
 + ***Talk***: Definisce i dialoghi possibili con i personaggi interagibili
 
+### Answer ###
+
+| var              | Tipo             | Valore Default | Significato                                 |
+|------------------|------------------|----------------|---------------------------------------------|
+| answer           | String           | null           | Testo della risposta possibile da scegliere |
+| warp             | Talk             | null           | Dialogo concatenato alla risposta           |
+| triggerReference | triggerInterface | null           | Evento causato dalla risposta               |
+
 (Strumenti utilizzati)
 
 ## 4. System Design
