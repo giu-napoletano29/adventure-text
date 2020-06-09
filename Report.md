@@ -53,3 +53,19 @@ Una volta selezionato un file nel formato corretto, verrà effettuato un control
 *(Dettagli errore)*
 
 ### 6.1 Creare file avventura ###
+Per creare una nuova avventura testuale importabile nell'engine di gioco è possibile utilizzare una classe java (*.java*) o un file di testo con codice java (*.txt*).
+
+Le regole per programmare la propria avventuara sono identiche per entrambi i metodi.
+Nel file è importante definire il package a cui fare riferimento che sarà:
++ **``package di.uniba.map.game.games;``**
+
+Per utilizzare appieno tutte le funzionalità è importante importare le seguenti classi:
+
+**N.B. Queste sono fondamentali per la corretta compilazione del gioco** 
++ **``import di.uniba.map.game.GameDescription;``**
++ **``import di.uniba.map.game.type.*;``**
+
+E' comunque possibile importare ulteriori classi per aggiungere nuove funzionalità. Queste sono, ad esempio, le classi aggiuntive utilizzate per realizzare il file gioco di esempio:
++ ``import java.util.List;``
++ ``import java.util.Scanner;``
++ ``import java.util.stream.Collectors;``
