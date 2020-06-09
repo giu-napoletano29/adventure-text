@@ -17,8 +17,18 @@ Il sistema deve fornire dei requisiti minimi per poter essere considerato valido
 * Poter eseguire diverse avventure grafiche senza dover necessariamente modificare il codice del motore.
 
 ## 3. Caratteristiche tecniche
-
 (Descrizione strutture dati)
+Per implementare le diverse funzionalità del motore, sono state definite le seguenti strutture dati:
++ ***Answer***: Definisce la composizione delle risposte di un dialogo
++ ***Character***: Definisce i personaggi di un'avventura
++ ***Npc***: Sotto-classe di *Character*. Definisce i personaggi interagibili dall'utente
++ ***Player***: Sotto-classe di *Character*. Definisce le caratteristiche del protagonista dell'avventura
++ ***Command***: Definisce i comandi di gioco
++ ***Inventory***: Definisce la composizione dell'inventario del personaggio principale
++ ***Item***: Definisce la composizione degli oggetti di gioco
++ ***Room***: Definisce le caratteristiche delle stanze 
++ ***Talk***: Definisce i dialoghi possibili con i personaggi interagibili
+
 (Strumenti utilizzati)
 
 ## 4. System Design
@@ -53,7 +63,7 @@ Una volta selezionato un file nel formato corretto, verrà effettuato un control
 *(Dettagli errore)*
 
 ---
-### 6.1 Creare file avventura ###
+### 6.1. Creare file avventura ###
 
 Per creare una nuova avventura testuale importabile nell'engine di gioco è possibile utilizzare una classe java (*.java*) o un file di testo con codice java (*.txt*).
 
