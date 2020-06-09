@@ -52,7 +52,9 @@ Una volta selezionato un file nel formato corretto, verrà effettuato un control
 ![game](doc/compilatore_err.png)
 *(Dettagli errore)*
 
+---
 ### 6.1 Creare file avventura ###
+
 Per creare una nuova avventura testuale importabile nell'engine di gioco è possibile utilizzare una classe java (*.java*) o un file di testo con codice java (*.txt*).
 
 Le regole per programmare la propria avventuara sono identiche per entrambi i metodi.
@@ -69,3 +71,12 @@ E' comunque possibile importare ulteriori classi per aggiungere nuove funzionali
 + ``import java.util.List;``
 + ``import java.util.Scanner;``
 + ``import java.util.stream.Collectors;``
+
+Tutte le definizioni del gioco devo essere incluse dentro una classe che deve avere questa precisa definizione:
++ **``public class Game extends GameDescription { }``**
+
+All'interno devono essere definiti i tre metodi fondamentali per il corretto funzionamento del gioco ovvero: 
++ public void ***init()***: metodo che definisce tutte le istanze del gioco quali stanze, oggetti, eccetera. Questo dev'essere definito ***@Override***
++ public boolean ***isWin()***: metodo che serve a definire le condizioni di vittoria. Se **TRUE** si vince la partita
++ public boolean ***isLose()***: metodo che serve a definire le condizioni di sconfitta. Se **TRUE** si perde la partita.
+
