@@ -82,6 +82,7 @@ public class Compiler {
                     // Create a new instance...
                     Object obj = loadedClass.newInstance();
 
+                    //TODO: Eliminare Game.java e Game.class dopo il caricamento
                     /************************************************************************************************* Load and execute **/
                 } else {
                     for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics.getDiagnostics()) {

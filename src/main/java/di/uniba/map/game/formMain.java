@@ -105,11 +105,7 @@ public class formMain extends javax.swing.JFrame {
             this.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(formMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -142,7 +138,8 @@ public class formMain extends javax.swing.JFrame {
                     this.setVisible(false);
                     Engine engine = new Engine(obj);
                     Engine.engine(engine);
-                    this.setVisible(true);
+                    //this.setVisible(true);
+                    this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(null, "Errore nell'interpretazione del file!\nControllare la console per ulteriori informazioni.", "Errore", JOptionPane.ERROR_MESSAGE);
                 }

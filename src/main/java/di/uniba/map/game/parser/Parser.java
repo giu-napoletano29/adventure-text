@@ -8,10 +8,6 @@ import di.uniba.map.game.type.Npc;
 import java.util.Scanner;
 
 public class Parser {
-    public void commandEnter(){
-        //Scanner scanner = new Scanner(System.in);
-    }
-
     public ParserOutput parseCmd(String command, GameDescription game){
         ParserOutput cmd;
         Command token = new Command(null, null);

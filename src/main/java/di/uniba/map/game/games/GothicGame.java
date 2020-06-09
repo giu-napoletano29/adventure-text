@@ -154,8 +154,6 @@ public class GothicGame extends GameDescription{
         entry_woods.setWest(woods_end);
         entry_woods.setNorth(woods_2);
         entry_woods.setEast(woods_3);
-        //woods_1.setEast(entry_woods);
-        //woods_1.setWest(woods_end);
         woods_2.setSouth(entry_woods);
         woods_3.setWest(entry_woods);
         woods_3.setSouth(woods_4);
@@ -166,14 +164,10 @@ public class GothicGame extends GameDescription{
         entry_old_camp.setNorth(old_camp_1);
         old_camp_1.setSouth(entry_old_camp);
         old_camp_1.setEast(old_camp_gate);
-        //old_camp_2.setWest(old_camp_1);
-        //old_camp_2.setEast(old_camp_gate);
         old_camp_gate.setWest(old_camp_1);
         old_camp_gate.setEast(old_camp_3);
         old_camp_gate.setNorth(baron_room);
         old_camp_3.setWest(old_camp_gate);
-        //old_camp_3.setEast(old_camp_4);
-        //old_camp_4.setWest(old_camp_3);
         baron_room.setSouth(old_camp_gate);
         baron_room.setNorth(final_room);
         final_room.setSouth(baron_room);
