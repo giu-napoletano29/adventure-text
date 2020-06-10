@@ -141,6 +141,13 @@ L'architettura del sistema è stata pensata in modo da rispettare tre importanti
 
 **Portabilità**: Utilizzando Java come linguaggio di programmazione è possibile l'utilizzo del software su diversi sistemi senza dover intervenire su alcun componente. 
 
+![system](doc/system_design.jpg)
+
+Dal diagramma del sistema è possibile notare la suddivisione dei componenti in tre aree identificate come:
+- *Interfaccia utente*
+- *Motore di gioco*
+- *Avventura testuale*
+
 ## 5. OO Design
 Diagramma delle classi:
 ![Class Diagram](doc/diagram.jpg)
