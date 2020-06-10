@@ -131,9 +131,15 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 ## 4. System Design
 
 L'architettura del sistema è stata pensata in modo da rispettare tre importanti specifiche:
-- ***riuso***
-- ***modificabilità***
-- ***portabilità***
+- ***Riuso***
+- ***Modificabilità***
+- ***Portabilità***
+
+**Riuso**: Il sistema è stato progettato per poter supportare più di una singola avventura testuale pre-programmata, consentendo di aggiungerne di nuove tramite caricamento da file. Per fare ciò le varie componenti del sistema sono state divise, permettendo un'indipendenza tra le parti che si occupano delle meccaniche di gioco e l'avventura stessa.
+
+**Modificabilità**: E' possibile in questo modo permettere modifiche alle componenti interessate in caso di cambiamento dei requisiti, rendendone più facile l'aggiornamento e la predisposizione all'essere adattato per sviluppare altre soluzioni. Una modifica ad un componente non deve affliggere indirettamente l'intero sistema.
+
+**Portabilità**: Utilizzando Java come linguaggio di programmazione è possibile l'utilizzo del software su diversi sistemi senza dover intervenire su alcun componente. 
 
 ## 5. OO Design
 Diagramma delle classi:
