@@ -1,11 +1,9 @@
 package di.uniba.map.game.parser;
 
-import di.uniba.map.game.GameDescription;
+import di.uniba.map.game.engine.GameDescription;
 import di.uniba.map.game.type.Command;
 import di.uniba.map.game.type.Item;
 import di.uniba.map.game.type.Npc;
-
-import java.util.Scanner;
 
 public class Parser {
     public ParserOutput parseCmd(String command, GameDescription game){

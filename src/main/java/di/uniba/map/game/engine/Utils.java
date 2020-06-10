@@ -1,15 +1,14 @@
-package di.uniba.map.game;
+package di.uniba.map.game.engine;
 
+import di.uniba.map.game.engine.GameDescription;
 import di.uniba.map.game.type.Item;
 import di.uniba.map.game.parser.ParserOutput;
 import di.uniba.map.game.type.CommandType;
 import di.uniba.map.game.type.Npc;
 import di.uniba.map.game.type.Room;
 
-import java.io.IOException;
-
 public class Utils {
-    public void move(ParserOutput cmd, GameDescription game) throws IOException {
+    public void move(ParserOutput cmd, GameDescription game) {
         boolean attack = false;
         if(cmd.getCommand().getType() != null){
             if(cmd.getCommand().getType() == CommandType.NORD){

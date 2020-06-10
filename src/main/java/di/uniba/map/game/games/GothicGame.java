@@ -1,7 +1,7 @@
 package di.uniba.map.game.games;
 
 import di.uniba.map.game.type.*;
-import di.uniba.map.game.GameDescription;
+import di.uniba.map.game.engine.GameDescription;
 
 import java.util.List;
 import java.util.Scanner;

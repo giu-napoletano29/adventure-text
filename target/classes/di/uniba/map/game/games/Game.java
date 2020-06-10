@@ -1,6 +1,6 @@
 package di.uniba.map.game.games;
 
-import di.uniba.map.game.GameDescription;
+import di.uniba.map.game.engine.GameDescription;
 import di.uniba.map.game.type.*;
 
 import java.util.List;

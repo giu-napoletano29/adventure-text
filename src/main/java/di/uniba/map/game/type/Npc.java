@@ -1,7 +1,5 @@
 package di.uniba.map.game.type;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Npc extends Character{
@@ -14,8 +12,6 @@ public class Npc extends Character{
 
     private boolean isSpeakable = false;
 
-    //private List<Talk> talk;
-
     private Talk talk;
 
     public Npc(int hp, String name, String description) {
@@ -23,6 +19,7 @@ public class Npc extends Character{
     }
 
     public void talking(){
+        //TODO: controllo se talk = null
         Scanner scanner = new Scanner(System.in);
         Talk temp = talk;
         int answer;
@@ -72,7 +69,6 @@ public class Npc extends Character{
 
     public boolean getEnemy(){return this.isEnemy;}
 
-    //public void setTalk(List<Talk> talk){
     public void setTalk(Talk talk){
         this.talk = talk;
     }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Talk {
 
-    private String speech = new String();  //Lista di frasi che il personaggio può dire
+    private String speech = new String();
 
     private List<Answer> ans = new ArrayList<>();
 
