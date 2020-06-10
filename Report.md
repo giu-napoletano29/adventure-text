@@ -17,7 +17,7 @@ Il sistema deve fornire dei requisiti minimi per poter essere considerato valido
 * Poter eseguire diverse avventure grafiche senza dover necessariamente modificare il codice del motore.
 
 ## 3. Caratteristiche tecniche
-(Descrizione strutture dati)
+
 Per implementare le diverse funzionalità del motore, sono state definite le seguenti strutture dati:
 + ***Answer***: Definisce la composizione delle risposte di un dialogo
 + ***Character***: Definisce i personaggi di un'avventura
@@ -129,6 +129,11 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 (Strumenti utilizzati)
 
 ## 4. System Design
+
+L'architettura del sistema è stata pensata in modo da rispettare tre importanti specifiche:
+- ***riuso***
+- ***modificabilità***
+- ***portabilità***
 
 ## 5. OO Design
 Diagramma delle classi:
