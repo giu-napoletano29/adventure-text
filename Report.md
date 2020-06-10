@@ -126,7 +126,11 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | ans    | List<Answer> | new            | Lista di risposte possibili alla frase |
 
 
+(Specifica algebrica)
+
 (Strumenti utilizzati)
+
+Swing - Reflection - Lambda Exp - Compiler Runtime - File
 
 ## 4. System Design
 
