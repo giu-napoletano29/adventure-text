@@ -176,7 +176,7 @@ Nel file è importante definire il package a cui fare riferimento che sarà:
 Per utilizzare appieno tutte le funzionalità è importante importare le seguenti classi:
 
 **N.B. Queste sono fondamentali per la corretta compilazione del gioco** 
-+ **``import di.uniba.map.game.GameDescription;``**
++ **``import di.uniba.map.game.engine.GameDescription;``**
 + **``import di.uniba.map.game.type.*;``**
 
 E' comunque possibile importare ulteriori classi per aggiungere nuove funzionalità. Queste sono, ad esempio, le classi aggiuntive utilizzate per realizzare il file gioco di esempio:

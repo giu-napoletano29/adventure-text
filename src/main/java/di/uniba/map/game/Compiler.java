@@ -1,7 +1,5 @@
 package di.uniba.map.game;
 
-import di.uniba.map.game.Engine;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -53,34 +51,29 @@ public class Compiler {
                 JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
                 StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnostics, null, null);
 
-                // This sets up the class path that the compiler will use.
-                // I've added the .jar file that contains the DoStuff interface within in it...
+                // Class path usata dal compilatore.
                 List<String> optionList = new ArrayList<String>();
                 optionList.add("-classpath");
                 optionList.add(System.getProperty("java.class.path"));
 
-                System.out.println("Test PATH: " + System.getProperty("java.class.path"));
+                //System.out.println("Test PATH: " + System.getProperty("java.class.path"));
 
                 Iterable<? extends JavaFileObject> compilationUnit = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(gameFile));
                 JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnostics, optionList, null, compilationUnit);
                 /********************************************************************************************* Compilation Requirements **/
                 if (task.call()) {
                     /** Load and execute *************************************************************************************************/
-                    //System.out.println("Yipe");
-                    // Create a new custom class loader, pointing to the directory that contains the compiled
-                    // classes, this should point to the top of the package structure!
+                    // Class loader che punta alla classe compilata
 
                     URLClassLoader classLoader = new URLClassLoader(new URL[]{new File("./").toURI().toURL()});
 
+                    /*
                     URL[] urlss = (classLoader.getURLs());
-
                     for(URL urla: urlss){
                         System.out.println("test: " + urla.getFile());
-                    }
-                    // Load the class from the classloader by name....
+                    }*/
+                    // Caricamento classe dal nome
                     loadedClass = classLoader.loadClass("di.uniba.map.game.games.Game");
-                    // Create a new instance...
-                    Object obj = loadedClass.newInstance();
 
                     //TODO: Eliminare Game.java e Game.class dopo il caricamento
                     /************************************************************************************************* Load and execute **/
@@ -92,7 +85,7 @@ public class Compiler {
                 }
                 fileManager.close();
 
-            } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException exp) {
+            } catch (IOException | ClassNotFoundException exp) {
                 exp.printStackTrace();
 
             }

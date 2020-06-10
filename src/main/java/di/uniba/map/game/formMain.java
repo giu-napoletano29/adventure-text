@@ -5,6 +5,7 @@
  */
 package di.uniba.map.game;
 
+import di.uniba.map.game.engine.Engine;
 import di.uniba.map.game.games.GothicGame;
 
 import java.awt.event.ActionEvent;

@@ -1,4 +1,4 @@
-package di.uniba.map.game;
+package di.uniba.map.game.engine;
 
 import di.uniba.map.game.type.*;
 
