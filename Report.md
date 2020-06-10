@@ -37,6 +37,95 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | warp             | Talk             | null           | Dialogo concatenato alla risposta           |
 | triggerReference | triggerInterface | null           | Evento causato dalla risposta               |
 
+### Character ###
+
+| var         | Tipo   | Valore Default | Significato                                |
+|-------------|--------|----------------|--------------------------------------------|
+| hp          | int    |                | Valore numerico punti vita del personaggio |
+| armor       | int    | 0              | Valore numerico punti armatura             |
+| name        | String |                | Nome del personaggio                       |
+| description | String |                | Descrizione del personaggio                |
+| weaponEquip | Item   | null           | Oggetto equipaggiato                       |
+
+### Npc (estende Character) ###
+
+| var         | Tipo    | Valore Default | Significato                                                                 |
+|-------------|---------|----------------|-----------------------------------------------------------------------------|
+| isEnemy     | boolean | false          | Determina se il personaggio è un nemico (I nemici rispondono agli attacchi) |
+| isGod       | boolean | false          | Determina se il personaggio è in God Mode (Invulnerabile)                   |
+| isAttacking | boolean | false          | Se TRUE il personaggio continuerà ad attaccare il giocatore                 |
+| isSpeakable | boolean | false          | Determina se con il personaggio è possibile parlare                         |
+| talk        | Talk    | null           | Set di dialogo del personaggio                                              |
+
+### Player (estende Character) ###
+
+| var          | Tipo      | Valore Default | Significato                                         |
+|--------------|-----------|----------------|-----------------------------------------------------|
+| inventory    | Inventory | new            | Instanza di inventario associata la giocatore       |
+| clothesEquip | Item      | null           | Oggetto di tipo armatura equipaggiato dal giocatore |
+
+### Command ###
+
+| var   | Tipo        | Valore Default | Significato                                                                        |
+|-------|-------------|----------------|------------------------------------------------------------------------------------|
+| type  | CommandType |                | Definisce il tipo di comando                                                       |
+| name  | String      |                | Definisce il nome del comando                                                      |
+| alias | Set<String> |                | Definisce un set di nome alternativi da poter utilizzare per richiamare il comando |
+  
+### Inventory ###
+
+| var  | Tipo       | Valore Default | Significato                             |
+|------|------------|----------------|-----------------------------------------|
+| list | List<Item> | new            | Lista di oggetti presenti in inventario |
+  
+### Item ###
+
+| var         | Tipo       | Valore Default | Significato                                                                 |
+|-------------|------------|----------------|-----------------------------------------------------------------------------|
+| id          | int        |                | Identificatore univoco dell'oggetto                                         |
+| name        | String     |                | Nome dell'oggetto                                                           |
+| description | String     |                | Descrizione testuale dell'oggetto                                           |
+| list        | List<Item> | new            | Lista di altri oggetti contenuti all'interno (se container)                 |
+| openable    | boolean    | false          | Determina se l'oggetto è apribile                                           |
+| openWith    | Item       | null           | Determina un'altro oggetto con cui è possibile aprire un container bloccato |
+| pickupable  | boolean    | true           | Determina se è possibile raccogliere l'oggetto e aggiungerlo in inventario  |
+| weapon      | boolean    | false          | Imposta l'oggetto come arma                                                 |
+| power       | int        | 0              | Valore numerico del danno che può infliggere (se arma)                      |
+| healer      | boolean    | false          | Indica se l'oggetto può essere assunto per modificare il parametro 'hp'     |
+| heal        | int        | 0              | Valore numerico da sommare al parametro 'hp'                                |
+| armor       | boolean    | false          | Determina se l'oggetto è un'armatura                                        |
+| protection  | int        | 0              | Valore di protezione che l'armatura fornisce                                |
+| pushable    | boolean    | pushable       | Indica se l'oggetto si può spingere                                         |
+| container   | boolean    | container      | Determina se l'oggetto è un contenitore                                     |
+| open        | boolean    | open           | Indica se il container è aperto                                             |
+| push        | boolean    | push           | Indica se l'oggetto è stato spinto                                          |
+  
+### Room ###
+
+| var              | Tipo             | Valore Default | Significato                                            |
+|------------------|------------------|----------------|--------------------------------------------------------|
+| id               | int              |                | identificatore univoco della stanza                    |
+| name             | String           |                | Nome della stanza                                      |
+| description      | String           |                | Descrizione testuale della stanza                      |
+| look             | String           | "Vuoto"        | Descrizione estesa della stanza vista dal giocatore    |
+| locked           | boolean          | false          | Indica se la stanza è bloccata, quindi inaccessibile   |
+| explored         | boolean          | false          | Indica se una stanza con trigger è stata già esplorata |
+| south            | Room             | null           | Associa un'altra stanza a Sud                          |
+| north            | Room             | null           | Associa un'altra stanza a Nord                         |
+| east             | Room             | null           | Associa un'altra stanza ad Est                         |
+| west             | Room             | null           | Associa un'altra stanza ad Ovest                       |
+| triggerReference | triggerInterface | null           | Associa un trigger che si attiva al visitare la stanza |
+| items            | List<item>       | new            | Lista di oggetti presenti nella stanza                 |
+| npc              | List<npc>        | new            | Lista di personaggi presenti nella stanza              |
+  
+### Talk ###
+
+| var    | Tipo         | Valore Default | Significato                            |
+|--------|--------------|----------------|----------------------------------------|
+| speech | String       | new            | Frase del dialogo pronunciata da Npc   |
+| ans    | List<Answer> | new            | Lista di risposte possibili alla frase |
+
+
 (Strumenti utilizzati)
 
 ## 4. System Design
