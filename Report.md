@@ -138,6 +138,13 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 |                      | aggiungiOggetto(Inventario, Oggetto) -> Inventario |
 |                      | rimuoviOggetto(Inventario, Oggetto) -> Inventario  |
 
+| Specifica semantica  |                              |
+|----------------------|------------------------------|
+| Dichiarazione:       | i:Inventario, obj:Oggetto    |
+|                      | creaInventario() -> i        |
+|                      | aggiungiOggetto(i, obj) -> i |
+|                      | rimuoviOggetto(i, obj) -> i  |
+
 (Specifica algebrica)
 
 (Strumenti utilizzati)
