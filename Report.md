@@ -16,7 +16,7 @@ Il sistema deve fornire dei requisiti minimi per poter essere considerato valido
 * Interpretare correttamente i comandi impartiti da tastiera.
 * Poter eseguire diverse avventure grafiche senza dover necessariamente modificare il codice del motore.
 
-## 3. Caratteristiche tecniche
+## 3. Strutture dati (Caratteristiche tecniche)
 
 Per implementare le diverse funzionalità del motore, sono state definite le seguenti strutture dati:
 + ***Answer***: Definisce la composizione delle risposte di un dialogo
@@ -78,6 +78,7 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 |------|------------|----------------|-----------------------------------------|
 | list | List<Item> | new            | Lista di oggetti presenti in inventario |
   
+  
 ### Item ###
 
 | var         | Tipo       | Valore Default | Significato                                                                 |
@@ -125,12 +126,25 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | speech | String       | new            | Frase del dialogo pronunciata da Npc   |
 | ans    | List<Answer> | new            | Lista di risposte possibili alla frase |
 
+---
+### 3.1 Specifiche algebriche ###
+
+### Inventory ###
+
+| Specifica sintattica |                                                    |
+|----------------------|----------------------------------------------------|
+| Tipi:                | Inventario, Oggetto                                |
+| Operatori:           | creaInventario()-> Inventario                      |
+|                      | aggiungiOggetto(Inventario, Oggetto) -> Inventario |
+|                      | rimuoviOggetto(Inventario, Oggetto) -> Inventario  |
 
 (Specifica algebrica)
 
 (Strumenti utilizzati)
 
 Swing - Reflection - Lambda Exp - Compiler Runtime - File
+
+
 
 ## 4. System Design
 
