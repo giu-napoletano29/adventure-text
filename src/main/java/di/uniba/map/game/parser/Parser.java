@@ -61,7 +61,7 @@ public class Parser {
             cmd = new ParserOutput(token, npc);
         }else{
             if(containerItem != null){
-                cmd = new ParserOutput(token, item, containerItem);
+                cmd = new ParserOutput(token, item, containerItem); //TODO: Eventualmente generalizzare
             }else{
                 cmd = new ParserOutput(token, item);
             }

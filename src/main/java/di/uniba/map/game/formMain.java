@@ -135,7 +135,7 @@ public class formMain extends javax.swing.JFrame {
                 }
                 Class gameClass = Compiler.compiler();
                 if(gameClass != null){
-                    Object obj = gameClass.newInstance();
+                    Object obj = gameClass.getDeclaredConstructor().newInstance();  //TODO: rivedere casting obj to gameDescription new Engine ((GameDescription) obj))
                     this.setVisible(false);
                     Engine engine = new Engine(obj);
                     Engine.engine(engine);
