@@ -1,4 +1,4 @@
-# Relazione tecnica
+
 
 # Adventure-text Engine
 
@@ -71,14 +71,14 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | type  | CommandType |                | Definisce il tipo di comando                                                       |
 | name  | String      |                | Definisce il nome del comando                                                      |
 | alias | Set<String> |                | Definisce un set di nome alternativi da poter utilizzare per richiamare il comando |
-  
+
 ### Inventory ###
 
 | var  | Tipo       | Valore Default | Significato                             |
 |------|------------|----------------|-----------------------------------------|
 | list | List<Item> | new            | Lista di oggetti presenti in inventario |
-  
-  
+
+
 ### Item ###
 
 | var         | Tipo       | Valore Default | Significato                                                                 |
@@ -100,7 +100,7 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | container   | boolean    | container      | Determina se l'oggetto è un contenitore                                     |
 | open        | boolean    | open           | Indica se il container è aperto                                             |
 | push        | boolean    | push           | Indica se l'oggetto è stato spinto                                          |
-  
+
 ### Room ###
 
 | var              | Tipo             | Valore Default | Significato                                            |
@@ -118,7 +118,7 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | triggerReference | triggerInterface | null           | Associa un trigger che si attiva al visitare la stanza |
 | items            | List<item>       | new            | Lista di oggetti presenti nella stanza                 |
 | npc              | List<npc>        | new            | Lista di personaggi presenti nella stanza              |
-  
+
 ### Talk ###
 
 | var    | Tipo         | Valore Default | Significato                            |
@@ -126,26 +126,97 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | speech | String       | new            | Frase del dialogo pronunciata da Npc   |
 | ans    | List<Answer> | new            | Lista di risposte possibili alla frase |
 
----
+
+
 ### 3.1 Specifiche algebriche ###
+
+
 
 ### Inventory ###
 
 | Specifica sintattica |                                                    |
-|----------------------|----------------------------------------------------|
+| -------------------- | -------------------------------------------------- |
 | Tipi:                | Inventario, Oggetto                                |
 | Operatori:           | creaInventario()-> Inventario                      |
 |                      | aggiungiOggetto(Inventario, Oggetto) -> Inventario |
 |                      | rimuoviOggetto(Inventario, Oggetto) -> Inventario  |
 
-| Specifica semantica  |                              |
-|----------------------|------------------------------|
-| Dichiarazione:       | i:Inventario, obj:Oggetto    |
-|                      | creaInventario() -> i        |
-|                      | aggiungiOggetto(i, obj) -> i |
-|                      | rimuoviOggetto(i, obj) -> i  |
+| Osservazioni             | Costruttori di Inventory | Costruttori di Inventory                                     |
+| ------------------------ | ------------------------ | ------------------------------------------------------------ |
+|                          | creaInventario()         | aggiungiOggetto(i, obj)                                      |
+| rimuoviOggetto(i', obj') | Error                    | if i == ^ then creaInventario() else   aggiungiOggetto(rimuoviOggetto(i ,obj)) |
 
-(Specifica algebrica)
+| Specifica semantica                     |                                                              |
+| --------------------------------------- | ------------------------------------------------------------ |
+| declare i:Inventario, obj:Oggetto       |                                                              |
+| rimuoviOggetto(aggiungiOggetto(i, obj)) | if i == ^ then creaInventario() else aggiungiOggetto(rimuoviOggetto(i ,obj)) |
+
+| Specifica di restrizioni         |       |
+| -------------------------------- | ----- |
+| Restriction                      |       |
+| rimuoviOggetto(creaInventario()) | Error |
+
+
+
+### Player ###
+
+| Specifica sintattica |                                      |
+| -------------------- | ------------------------------------ |
+| Tipi:                | Inventory, Item, int, String         |
+| Operatori:           | Player(Int, String, String)-> Player |
+|                      | getInventory() -> Inventory          |
+|                      | getClothesEquip() -> Item            |
+|                      | setClothesEquip(Item) -> Player      |
+
+| Osservazioni      | Costruttori di Inventory    | Costruttori di Inventory           |
+| ----------------- | --------------------------- | ---------------------------------- |
+|                   | Player(Int, String, String) | setClothesEquip(clothesEquip)      |
+| getInventory()    | Error                       | Error                              |
+| getClothesEquip() | Error                       | setClothesEquip(getClothesEquip()) |
+
+| Specifica semantica                                          |                                    |
+| ------------------------------------------------------------ | ---------------------------------- |
+| Declare hp:Int, name:String, description:String, inventory:Inventory, clothesEquip:Item |                                    |
+| getClothesEquip(setClothesEquip(clotheEquip))                | setClothesEquip(getClothesEquip()) |
+
+| Specifica di restrizioni                       |       |
+| ---------------------------------------------- | ----- |
+| Restriction                                    |       |
+| getInventory(Player(hp, name, description))    | Error |
+| getInventory(setClothesEquip(clothesEquip))    | Error |
+| getClothesEquip(Player(hp, name, description)) | Error |
+
+
+
+### Character
+
+| Specifica sintattica |                                             |
+| -------------------- | ------------------------------------------- |
+| Tipi:                | Character, Int, String, Item                |
+| Operatori:           | Character(Int, String, String) -> Character |
+|                      | getName() -> String                         |
+|                      | getHp() -> Int                              |
+|                      | setHp(Int) -> Character                     |
+|                      | getArmor() -> Int                           |
+|                      | setArmor(Int) -> Character                  |
+|                      | getWeaponEquip() -> Item                    |
+|                      | setWeaponEquip(Item) -> Character           |
+|                      | getDescription() -> String                  |
+
+| Specifica semantica                                          | Pre e Post condizioni                                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| hero:Character, hp:Int, armor:Int, name:String, description:String, weaponEquip:Item |                                                              |
+| Character(hp, name, description) -> hero                     | PRE : /                                                                                                              POST: hero = {hp, name, description, armor, weaponEquip} |
+| getName() -> name                                            | PRE : / POST : name                                          |
+| getHp() -> hp                                                | PRE : / POST : hp                                            |
+| setHp(hp) -> hero                                            | PRE : 0 < hp <= 100                                                                                          POST : hp' = hp, hero = {hp', name, description, armor, weaponEquip} |
+| getArmor() -> armor                                          | PRE : / POST : armor                                         |
+| setArmor(armor) -> hero                                      | PRE : armor == "armatura leggera" \|\| armor == "armatura" \|\| armor == "vestiti".                                              POST : armor' = armor, hero ={hp, name, description, armor', weaponEquip} |
+| getWeaponEquip() -> weaponEquip                              | PRE : /  POST : weaponEquip                                  |
+| setWeaponEquip(weaponEquip) -> hero                          | PRE : weaponEquip == "spada" \|\| weaponEquip == "spada_rotta" \|\| weaponEquip == "mazza" \|\| weaponEquip == "super_spada"                         POST : weaponEquip' = weaponEquip, hero = {hp, name, description, armor, weaponEquip'} |
+| getDescription() -> description                              | PRE : / POST : description                                   |
+
+
 
 (Strumenti utilizzati)
 
