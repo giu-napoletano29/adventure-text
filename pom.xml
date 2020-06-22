@@ -11,4 +11,11 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
     <name>adventure</name>
+    <distributionManagement>
+        <repository>
+            <id>adventure</id>
+            <name>Adventure-text Package</name>
+            <url>https://maven.pkg.github.com/giu-napoletano29/adventure-text</url>
+        </repository>
+    </distributionManagement>
 </project>
