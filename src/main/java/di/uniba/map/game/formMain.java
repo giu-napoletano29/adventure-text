@@ -7,6 +7,7 @@ package di.uniba.map.game;
 
 import di.uniba.map.game.engine.Engine;
 import di.uniba.map.game.games.GothicGame;
+import di.uniba.map.game.LoadGameThread;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
