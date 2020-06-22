@@ -1,4 +1,4 @@
-# Relazione tecnica
+
 
 # Adventure-text Engine
 
@@ -71,14 +71,14 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | type  | CommandType |                | Definisce il tipo di comando                                                       |
 | name  | String      |                | Definisce il nome del comando                                                      |
 | alias | Set<String> |                | Definisce un set di nome alternativi da poter utilizzare per richiamare il comando |
-  
+
 ### Inventory ###
 
 | var  | Tipo       | Valore Default | Significato                             |
 |------|------------|----------------|-----------------------------------------|
 | list | List<Item> | new            | Lista di oggetti presenti in inventario |
-  
-  
+
+
 ### Item ###
 
 | var         | Tipo       | Valore Default | Significato                                                                 |
@@ -100,7 +100,7 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | container   | boolean    | container      | Determina se l'oggetto è un contenitore                                     |
 | open        | boolean    | open           | Indica se il container è aperto                                             |
 | push        | boolean    | push           | Indica se l'oggetto è stato spinto                                          |
-  
+
 ### Room ###
 
 | var              | Tipo             | Valore Default | Significato                                            |
@@ -118,7 +118,7 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | triggerReference | triggerInterface | null           | Associa un trigger che si attiva al visitare la stanza |
 | items            | List<item>       | new            | Lista di oggetti presenti nella stanza                 |
 | npc              | List<npc>        | new            | Lista di personaggi presenti nella stanza              |
-  
+
 ### Talk ###
 
 | var    | Tipo         | Valore Default | Significato                            |
@@ -126,30 +126,143 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | speech | String       | new            | Frase del dialogo pronunciata da Npc   |
 | ans    | List<Answer> | new            | Lista di risposte possibili alla frase |
 
----
+
+
 ### 3.1 Specifiche algebriche ###
+
+
 
 ### Inventory ###
 
 | Specifica sintattica |                                                    |
-|----------------------|----------------------------------------------------|
+| -------------------- | -------------------------------------------------- |
 | Tipi:                | Inventario, Oggetto                                |
 | Operatori:           | creaInventario()-> Inventario                      |
 |                      | aggiungiOggetto(Inventario, Oggetto) -> Inventario |
 |                      | rimuoviOggetto(Inventario, Oggetto) -> Inventario  |
 
-| Specifica semantica  |                              |
-|----------------------|------------------------------|
-| Dichiarazione:       | i:Inventario, obj:Oggetto    |
-|                      | creaInventario() -> i        |
-|                      | aggiungiOggetto(i, obj) -> i |
-|                      | rimuoviOggetto(i, obj) -> i  |
+| Osservazioni             | Costruttori di Inventory | Costruttori di Inventory                                     |
+| ------------------------ | ------------------------ | ------------------------------------------------------------ |
+|                          | creaInventario()         | aggiungiOggetto(i, obj)                                      |
+| rimuoviOggetto(i', obj') | Error                    | if i == ^ then creaInventario() else   aggiungiOggetto(rimuoviOggetto(i ,obj)) |
 
-(Specifica algebrica)
+| Specifica semantica                     |                                                              |
+| --------------------------------------- | ------------------------------------------------------------ |
+| declare i:Inventario, obj:Oggetto       |                                                              |
+| rimuoviOggetto(aggiungiOggetto(i, obj)) | if i == ^ then creaInventario() else aggiungiOggetto(rimuoviOggetto(i ,obj)) |
+
+| Specifica di restrizioni         |       |
+| -------------------------------- | ----- |
+| Restriction                      |       |
+| rimuoviOggetto(creaInventario()) | Error |
+
+
+
+### Player ###
+
+| Specifica sintattica |                                      |
+| -------------------- | ------------------------------------ |
+| Tipi:                | Inventory, Item, int, String         |
+| Operatori:           | Player(Int, String, String)-> Player |
+|                      | getInventory() -> Inventory          |
+|                      | getClothesEquip() -> Item            |
+|                      | setClothesEquip(Item) -> Player      |
+
+| Osservazioni      | Costruttori di Inventory    | Costruttori di Inventory           |
+| ----------------- | --------------------------- | ---------------------------------- |
+|                   | Player(Int, String, String) | setClothesEquip(clothesEquip)      |
+| getInventory()    | Error                       | Error                              |
+| getClothesEquip() | Error                       | setClothesEquip(getClothesEquip()) |
+
+| Specifica semantica                                          |                                    |
+| ------------------------------------------------------------ | ---------------------------------- |
+| Declare hp:Int, name:String, description:String, inventory:Inventory, clothesEquip:Item |                                    |
+| getClothesEquip(setClothesEquip(clotheEquip))                | setClothesEquip(getClothesEquip()) |
+
+| Specifica di restrizioni                       |       |
+| ---------------------------------------------- | ----- |
+| Restriction                                    |       |
+| getInventory(Player(hp, name, description))    | Error |
+| getInventory(setClothesEquip(clothesEquip))    | Error |
+| getClothesEquip(Player(hp, name, description)) | Error |
+
+
+
+### Character
+
+| Specifica sintattica |                                             |
+| -------------------- | ------------------------------------------- |
+| Tipi:                | Character, Int, String, Item                |
+| Operatori:           | Character(Int, String, String) -> Character |
+|                      | getName() -> String                         |
+|                      | getHp() -> Int                              |
+|                      | setHp(Int) -> Character                     |
+|                      | getArmor() -> Int                           |
+|                      | setArmor(Int) -> Character                  |
+|                      | getWeaponEquip() -> Item                    |
+|                      | setWeaponEquip(Item) -> Character           |
+|                      | getDescription() -> String                  |
+
+| Specifica semantica                                          | Pre e Post condizioni                                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| hero:Character, hp:Int, armor:Int, name:String, description:String, weaponEquip:Item |                                                              |
+| Character(hp, name, description) -> hero                     | PRE : /                                                                                                              POST: hero = {hp, name, description, armor, weaponEquip} |
+| getName() -> name                                            | PRE : / POST : name                                          |
+| getHp() -> hp                                                | PRE : / POST : hp                                            |
+| setHp(hp) -> hero                                            | PRE : 0 < hp <= 100                                                                                          POST : hp' = hp, hero = {hp', name, description, armor, weaponEquip} |
+| getArmor() -> armor                                          | PRE : / POST : armor                                         |
+| setArmor(armor) -> hero                                      | PRE : armor == "armatura leggera" \|\| armor == "armatura" \|\| armor == "vestiti".                                              POST : armor' = armor, hero ={hp, name, description, armor', weaponEquip} |
+| getWeaponEquip() -> weaponEquip                              | PRE : /  POST : weaponEquip                                  |
+| setWeaponEquip(weaponEquip) -> hero                          | PRE : weaponEquip == "spada" \|\| weaponEquip == "spada_rotta" \|\| weaponEquip == "mazza" \|\| weaponEquip == "super_spada"                         POST : weaponEquip' = weaponEquip, hero = {hp, name, description, armor, weaponEquip'} |
+| getDescription() -> description                              | PRE : / POST : description                                   |
+
+
 
 (Strumenti utilizzati)
 
 Swing - Reflection - Lambda Exp - Compiler Runtime - File
+
+### 3.2 Strumenti utilizzati
+
+
+
+### Swing
+
+E' il framework di Java che permette la realizzazione di interfacce grafiche (GUI). Nel progetto le Swing sono state implementate all'avvio del gioco, tramite un JPanel con due bottoni (JButton), uno per avviare il gioco Gothic Game dall'inizio mentre l'altro per caricare una partita.
+
+![menu](doc/menu.png)
+
+Se per il caricamento del file di gioco non va' a buon fine, verranno mostrati due messaggi di errore, uno nel caso in cui il file caricato non è del tipo .txt o .java, un'altro nel caso nel codice del file caricato ci sono delle inesattezze.
+
+![game](doc/errore_formato.png)
+
+![game](doc/errore_comp.png)
+
+
+
+### File
+
+I File sono sorgenti di input o output, ovvero sono una sequenza di dati. Nel progetto i File sono stati implementati mediante il caricamento di una partita già cominciata. L'utente deve selezionare il file da caricare, e se corretto, il programma legge tutto il file e lo riscrive in Game.java. Una volta riscritto, il file Game.java viene sostituito al file GothicGame.java che sarebbe la classe che inizializza tutti gli elementi del gioco, in modo tale da avere gli elementi inizializzati ma secondo il file Game.java, non secondo l'inizializzazione statica del gioco.
+
+
+
+### Reflection
+
+Le reflection sono delle strutture che permettono di ispezionare un oggetto a runtime, al fine di scoprire la classe di appartenenza, la sua composizione, e lavorare su di essi  in modo simile a quanto si può fare usando gli appositi operatori del linguaggio durante la stesura di un programma.
+
+
+
+### Lambda Expressions
+
+Le lambda expressions sono particolarmente utili nei casi in cui serve definire una breve funzione che ha poche linee di codice e che verrà utilizzata una sola volta. In questi casi si risparmia la fatica di scrivere un metodo a parte con modificatore, nome, ecc. In generale le lambda ci permettono di scivere codice più chiaro e meno verboso. Le lambda expressions forniscono un modo per creare funzioni anonime, un metodo senza dichiarazione e che consente di scrivere un metodo nello stesso posto in cui ti serve. 
+
+Nel progetto le lambda expressions sono state implementate nel file GothicGame.java per settare attributi di personaggi, delle risposte che corrispondo ad un evento nel gioco o semplicemente delle cause a degli eventi.
+
+
+
+### Compiler Runtime
+
+Il compiler runtime è molto utile per compilare una classe a runtime. Possiamo per esempio caricare delle risorse dal database, compilarle al momento ed eseguire il suo codice come se fosse parte del programma.                                          Nel progetto il compiler runtime è stato implementato nel file Compiler.java tramite l'utilizzo della classe Class<?> compiler.
 
 
 
