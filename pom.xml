@@ -11,6 +11,21 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
     <name>adventure</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>di.uniba.map.game.formMain</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <distributionManagement>
         <repository>
             <id>github</id>
