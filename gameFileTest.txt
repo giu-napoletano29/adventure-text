@@ -1,15 +1,16 @@
 package di.uniba.map.game.games;
 
-import di.uniba.map.game.type.*;
 import di.uniba.map.game.engine.GameDescription;
+import di.uniba.map.game.type.*;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class GothicGame extends GameDescription{
+public class Game extends GameDescription {
     @Override
     public void init() {
+        System.out.println("Eletto");
         //Commands
         Command nord = new Command(CommandType.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
@@ -115,7 +116,7 @@ public class GothicGame extends GameDescription{
         Room final_room = new Room(15, "Stanza del Barone", "Stanza del Boss");
         final_room.setLook("Qui c'è il Barone!");
 
-        Room testRoom = new Room(2, "Test Room", "Stanza Test");
+        Room testRoom = new Room(2, "Test Room", "Stanza Test"); //TODO: da rendere stanza reward con password per accedere e bonus
         testRoom.setLook("Che bella stanza di test! Sembra ci sia da provare un foglio, una cassa e Alessandra con cui parlare!");
         testRoom.setTriggerReference(() -> {
             System.out.println("Per poter entrare in questa stanza è necessaria una password: ");
@@ -154,6 +155,8 @@ public class GothicGame extends GameDescription{
         entry_woods.setWest(woods_end);
         entry_woods.setNorth(woods_2);
         entry_woods.setEast(woods_3);
+        //woods_1.setEast(entry_woods);
+        //woods_1.setWest(woods_end);
         woods_2.setSouth(entry_woods);
         woods_3.setWest(entry_woods);
         woods_3.setSouth(woods_4);
@@ -164,10 +167,14 @@ public class GothicGame extends GameDescription{
         entry_old_camp.setNorth(old_camp_1);
         old_camp_1.setSouth(entry_old_camp);
         old_camp_1.setEast(old_camp_gate);
+        //old_camp_2.setWest(old_camp_1);
+        //old_camp_2.setEast(old_camp_gate);
         old_camp_gate.setWest(old_camp_1);
         old_camp_gate.setEast(old_camp_3);
         old_camp_gate.setNorth(baron_room);
         old_camp_3.setWest(old_camp_gate);
+        //old_camp_3.setEast(old_camp_4);
+        //old_camp_4.setWest(old_camp_3);
         baron_room.setSouth(old_camp_gate);
         baron_room.setNorth(final_room);
         final_room.setSouth(baron_room);

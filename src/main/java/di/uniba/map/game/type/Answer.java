@@ -1,5 +1,4 @@
 package di.uniba.map.game.type;
-//TODO: Look for possible conversion with HashMap
 public class Answer {
     private String answer = new String();
 

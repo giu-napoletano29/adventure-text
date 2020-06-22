@@ -19,34 +19,34 @@ public class Npc extends Character{
     }
 
     public void talking(){
-        //TODO: controllo se talk = null
-        Scanner scanner = new Scanner(System.in);
-        Talk temp = talk;
-        int answer;
-        boolean error = true;
+        if(talk != null) {
+            Scanner scanner = new Scanner(System.in);
+            Talk temp = talk;
+            int answer;
+            boolean error = true;
 
-        while(error){
-            System.out.println(name + ": " + temp.getSpeech());
-            for(int j = 0; j<temp.getAns().size(); j++){
-                System.out.println(j+1 + ": " + temp.getAns().get(j).getAnswer());
-            }
-            try{
-                answer = Integer.parseInt(scanner.nextLine());
-                System.out.println("Tu: " + temp.getAns().get(answer-1).getAnswer());
-                if(temp.getAns().get(answer-1).getTriggerReference() != null){
-                    temp.getAns().get(answer-1).getTriggerReference().trigger();
+            while (error) {
+                System.out.println(name + ": " + temp.getSpeech());
+                for (int j = 0; j < temp.getAns().size(); j++) {
+                    System.out.println(j + 1 + ": " + temp.getAns().get(j).getAnswer());
                 }
-                if(temp.getAns().get(answer-1).getWarp() == null){
-                    System.out.println(name + ": " + "Allora è tutto.");
-                    error = false;
-                }else{
-                    temp = temp.getAns().get(answer-1).getWarp();
+                try {
+                    answer = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Tu: " + temp.getAns().get(answer - 1).getAnswer());
+                    if (temp.getAns().get(answer - 1).getTriggerReference() != null) {
+                        temp.getAns().get(answer - 1).getTriggerReference().trigger();
+                    }
+                    if (temp.getAns().get(answer - 1).getWarp() == null) {
+                        System.out.println(name + ": " + "Allora è tutto.");
+                        error = false;
+                    } else {
+                        temp = temp.getAns().get(answer - 1).getWarp();
+                    }
+                } catch (Exception e) {
+                    System.out.println(name + ": " + "Dammi una risposta sensata.");
                 }
-            }catch (Exception e){
-            System.out.println(name + ": " + "Dammi una risposta sensata.");
             }
         }
-
     }
 
     public boolean getAttacking(){return this.isAttacking;};

@@ -108,7 +108,6 @@ public class formMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(ActionEvent evt) throws IOException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         final JFileChooser fc = new JFileChooser();
         int returnVal = fc.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION){

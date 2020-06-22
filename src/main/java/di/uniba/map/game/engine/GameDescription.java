@@ -13,7 +13,7 @@ public abstract class GameDescription {
 
     private final List<Command> commands = new ArrayList<>();
 
-    private final static Player player = new Player(100, "Hero", "Brave Man"); //Instanza giocatore
+    private final static Player player = new Player(100, "", "");
 
     private final List<Item> itemList = new ArrayList<>();
 

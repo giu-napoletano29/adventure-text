@@ -27,9 +27,9 @@ public class Room {
 
     private Triggers.triggerInterface triggerReference = null;
 
-    private final List<Item> items=new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
 
-    private final List<Npc> npc=new ArrayList<>();
+    private final List<Npc> npc = new ArrayList<>();
 
     public Room(int id, String name, String description) {
         this.id = id;

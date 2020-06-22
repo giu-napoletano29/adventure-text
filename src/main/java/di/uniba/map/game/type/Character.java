@@ -22,6 +22,10 @@ public abstract class Character {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getHp(){ return this.hp;}
 
     public void setHp(int hp){
@@ -41,4 +45,6 @@ public abstract class Character {
     }
 
     public String getDescription() {return description;}
+
+    public void setDescription(String description) {this.description = description;}
 }

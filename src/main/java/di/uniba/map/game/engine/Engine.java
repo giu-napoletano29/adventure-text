@@ -24,11 +24,9 @@ public class Engine {
     }
 
     protected void begin(){
-
-        BeginThread beginThread = new BeginThread(); //TODO: remove thread
-
-        beginThread.start();
-
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("    Game Engine - by Giuseppe Napoletano & Domenico Sarcina   ");
+        System.out.println("--------------------------------------------------------------");
     }
 
     public void run() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
