@@ -13,7 +13,7 @@
     <name>adventure</name>
     <distributionManagement>
         <repository>
-            <id>adventure</id>
+            <id>github</id>
             <name>Adventure-text Package</name>
             <url>https://maven.pkg.github.com/giu-napoletano29/adventure-text</url>
         </repository>
