@@ -3,6 +3,7 @@ package di.uniba.map.game.engine;
 import di.uniba.map.game.parser.Parser;
 import di.uniba.map.game.parser.ParserOutput;
 import di.uniba.map.game.type.CommandType;
+import di.uniba.map.game.engine.BeginThread;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -35,9 +36,11 @@ public class Engine {
     }
 
     protected void begin(){
-        System.out.println("-------------------------------------------");
-        System.out.println("    Game Engine - by Giuseppe Napoletano   ");  //TODO: Cambiare messaggio
-        System.out.println("-------------------------------------------");
+
+        BeginThread beginThread = new BeginThread();
+
+        beginThread.start();
+
     }
 
     public void run() throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -70,4 +73,5 @@ public class Engine {
         engine.begin();
         engine.run();
     }
+
 }
