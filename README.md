@@ -1,4 +1,4 @@
-# Adventure-text Engine ![Java CI with Maven](https://github.com/giu-napoletano29/adventure-text/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
+# Adventure-text Engine ![Java CI with Maven](https://github.com/giu-napoletano29/adventure-text/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master) ![Maven Package](https://github.com/giu-napoletano29/adventure-text/workflows/Maven%20Package/badge.svg?branch=v0.8.1.1-alpha)
 
 **Exam**: "Metodi Avanzati di Programmazione"
 
