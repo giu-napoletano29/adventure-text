@@ -3,9 +3,7 @@ package di.uniba.map.game.engine;
 import di.uniba.map.game.parser.Parser;
 import di.uniba.map.game.parser.ParserOutput;
 import di.uniba.map.game.type.CommandType;
-import di.uniba.map.game.engine.BeginThread;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
@@ -14,16 +12,6 @@ public class Engine {
     private final GameDescription game;
     private final Parser cmd;
     private final Utils u = new Utils();
-
-    public Engine(GameDescription game) {
-        this.game = game;
-        try {
-            this.game.init();
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
-        cmd = new Parser();
-    }
 
     public Engine(Object obj) {
         this.game = (GameDescription) obj;
@@ -37,13 +25,13 @@ public class Engine {
 
     protected void begin(){
 
-        BeginThread beginThread = new BeginThread();
+        BeginThread beginThread = new BeginThread(); //TODO: remove thread
 
         beginThread.start();
 
     }
 
-    public void run() throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public void run() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         u.printRoom(game);
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine()){
@@ -67,9 +55,7 @@ public class Engine {
         }
     }
 
-    public static void engine(Engine engine) throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        //Engine engine = new Engine(new GothicGame());
-        //Engine engine = new Engine(new GothicGame2());
+    public static void engine(Engine engine) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         engine.begin();
         engine.run();
     }

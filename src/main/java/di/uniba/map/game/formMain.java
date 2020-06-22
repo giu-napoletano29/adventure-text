@@ -7,7 +7,6 @@ package di.uniba.map.game;
 
 import di.uniba.map.game.engine.Engine;
 import di.uniba.map.game.games.GothicGame;
-import di.uniba.map.game.LoadGameThread;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -15,8 +14,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -105,8 +102,6 @@ public class formMain extends javax.swing.JFrame {
             Engine engine = new Engine(new GothicGame());
             Engine.engine(engine);
             this.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(formMain.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -136,7 +131,7 @@ public class formMain extends javax.swing.JFrame {
                 }
                 Class gameClass = Compiler.compiler();
                 if(gameClass != null){
-                    Object obj = gameClass.getDeclaredConstructor().newInstance();  //TODO: rivedere casting obj to gameDescription new Engine ((GameDescription) obj))
+                    Object obj = gameClass.getDeclaredConstructor().newInstance();
                     this.setVisible(false);
                     Engine engine = new Engine(obj);
                     Engine.engine(engine);
