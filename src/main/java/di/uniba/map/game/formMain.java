@@ -112,11 +112,9 @@ public class formMain extends javax.swing.JFrame {
             if(textFileCheck(f)){
                 FileInputStream in;
                 FileOutputStream out = null;
-                //String fname = f.getParent() + "/Game.java";
                 try{
                     in = new FileInputStream(f);
-                    //System.out.println("Percorso:" + f.getParent());
-                    out = new FileOutputStream(f.getParent() + "/Game.java"); // + "/di/uniba/map/game/games/Game.java");
+                    out = new FileOutputStream(f.getParent() + "/Game.java");
                     int c;
                     while ((c = in.read()) != -1) {
                         out.write(c);
@@ -135,12 +133,10 @@ public class formMain extends javax.swing.JFrame {
                     this.setVisible(false);
                     Engine engine = new Engine(obj);
                     Engine.engine(engine);
-                    //this.setVisible(true);
-                    this.dispose();
+                    this.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(null, "Errore nell'interpretazione del file!\nControllare la console per ulteriori informazioni.", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
-
             }
             else{
                 JOptionPane.showMessageDialog(null, "Il file selezionato non è supportato!", "Errore", JOptionPane.ERROR_MESSAGE);
