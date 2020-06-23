@@ -32,7 +32,8 @@ public class Compiler {
 
         public void run() {
 
-            File gameFile = new File("target/classes/di/uniba/map/game/games/Game.java");
+            //File gameFile = new File("target/classes/di/uniba/map/game/games/Game.java");
+            File gameFile = new File(System.getProperty("java.class.path") + "/di/uniba/map/game/games/Game.java");
             if (gameFile.getParentFile().exists() || gameFile.getParentFile().mkdirs()) {
 
                 try {
