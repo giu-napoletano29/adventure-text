@@ -112,11 +112,11 @@ public class formMain extends javax.swing.JFrame {
             if(textFileCheck(f)){
                 FileInputStream in;
                 FileOutputStream out = null;
-                String fname = f.getParent() + "/Game.java";
+                //String fname = f.getParent() + "/Game.java";
                 try{
                     in = new FileInputStream(f);
                     //System.out.println("Percorso:" + f.getParent());
-                    out = new FileOutputStream(fname); // + "/di/uniba/map/game/games/Game.java");
+                    out = new FileOutputStream(f.getParent() + "/Game.java"); // + "/di/uniba/map/game/games/Game.java");
                     int c;
                     while ((c = in.read()) != -1) {
                         out.write(c);
@@ -129,7 +129,7 @@ public class formMain extends javax.swing.JFrame {
                         out.close();
                     }
                 }
-                Class gameClass = Compiler.compiler(fname);
+                Class gameClass = Compiler.compiler(f.getParent());
                 if(gameClass != null){
                     Object obj = gameClass.getDeclaredConstructor().newInstance();
                     this.setVisible(false);

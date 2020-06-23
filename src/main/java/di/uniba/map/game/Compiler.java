@@ -38,7 +38,7 @@ public class Compiler {
         public void run() {
             //File gameFile = new File("target/classes/di/uniba/map/game/games/Game.java");
             //File gameFile = new File(System.getProperty("user.dir") + "/Game.java");
-            File gameFile = new File(fname);
+            File gameFile = new File(fname + "/Game.java");
             if (gameFile.getParentFile().exists() || gameFile.getParentFile().mkdirs()) {
 
                 try {
@@ -62,9 +62,9 @@ public class Compiler {
                         /** Load and execute *************************************************************************************************/
                         // Class loader che punta alla classe compilata
 
-                        URLClassLoader classLoader = new URLClassLoader(new URL[]{new File("").toURI().toURL()});
+                        URLClassLoader classLoader = new URLClassLoader(new URL[]{new File(fname).toURI().toURL()});
 
-                        //System.out.println("classloader PATH: " + classLoader.getURLs()[0].toString());
+                        System.out.println("classloader PATH: " + classLoader.getURLs()[0].toString());
 
                         // Caricamento classe dal nome
                         //loadedClass = classLoader.loadClass("di.uniba.map.game.games.Game");
