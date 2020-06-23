@@ -9,10 +9,7 @@ import di.uniba.map.game.engine.Engine;
 import di.uniba.map.game.games.GothicGame;
 
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.*;
 
@@ -115,20 +112,24 @@ public class formMain extends javax.swing.JFrame {
             if(textFileCheck(f)){
                 FileInputStream in;
                 FileOutputStream out = null;
+                String fname = f.getParent() + "/Game.java";
                 try{
                     in = new FileInputStream(f);
-                    //out = new FileOutputStream("src/main/java/di/uniba/map/game/games/Game.java");
-                    out = new FileOutputStream(System.getProperty("user.dir") + "/Game.java"); // + "/di/uniba/map/game/games/Game.java");
+                    //System.out.println("Percorso:" + f.getParent());
+                    out = new FileOutputStream(fname); // + "/di/uniba/map/game/games/Game.java");
                     int c;
                     while ((c = in.read()) != -1) {
                         out.write(c);
                     }
-                } finally {
+                }catch (FileNotFoundException ex){
+                    JOptionPane.showMessageDialog(null, "File non trovato!\n E' possibile che non si abbiano i permessi per eseguire in questa cartella.", "Attenzione!", JOptionPane.WARNING_MESSAGE);
+                }
+                finally {
                     if (out != null) {
                         out.close();
                     }
                 }
-                Class gameClass = Compiler.compiler();
+                Class gameClass = Compiler.compiler(fname);
                 if(gameClass != null){
                     Object obj = gameClass.getDeclaredConstructor().newInstance();
                     this.setVisible(false);

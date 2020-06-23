@@ -11,9 +11,9 @@ import java.util.List;
 
 public class Compiler {
 
-    public static Class<?> compiler() {
+    public static Class<?> compiler(String fname) {
 
-        LoadGameThread loadGameThread = new LoadGameThread();
+        LoadGameThread loadGameThread = new LoadGameThread(fname);
 
         loadGameThread.start();
 
@@ -28,12 +28,17 @@ public class Compiler {
 
     static class LoadGameThread extends Thread {
 
+        private String fname;
         private Class<?> loadedClass;
 
-        public void run() {
+        public LoadGameThread(String fname){
+            this.fname = fname;
+        }
 
+        public void run() {
             //File gameFile = new File("target/classes/di/uniba/map/game/games/Game.java");
-            File gameFile = new File(System.getProperty("user.dir") + "/Game.java");
+            //File gameFile = new File(System.getProperty("user.dir") + "/Game.java");
+            File gameFile = new File(fname);
             if (gameFile.getParentFile().exists() || gameFile.getParentFile().mkdirs()) {
 
                 try {
@@ -78,6 +83,8 @@ public class Compiler {
                 } catch (IOException | ClassNotFoundException exp) {
                     exp.printStackTrace();
 
+                } catch (NullPointerException ex){
+                    System.out.println("Errore: Stai eseguendo il compilatore in ambiente JRE");
                 }
 
             }
