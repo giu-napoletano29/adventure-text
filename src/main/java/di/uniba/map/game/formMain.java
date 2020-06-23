@@ -118,9 +118,7 @@ public class formMain extends javax.swing.JFrame {
                 try{
                     in = new FileInputStream(f);
                     //out = new FileOutputStream("src/main/java/di/uniba/map/game/games/Game.java");
-                    //out = new FileOutputStream("target/classes/di/uniba/map/game/games/Game.java");
-                    System.out.println("Test PATH DEBUG: " + System.getProperty("java.class.path"));
-                    out = new FileOutputStream(System.getProperty("java.class.path") + "/di/uniba/map/game/games/Game.java");
+                    out = new FileOutputStream(System.getProperty("user.dir") + "/Game.java"); // + "/di/uniba/map/game/games/Game.java");
                     int c;
                     while ((c = in.read()) != -1) {
                         out.write(c);

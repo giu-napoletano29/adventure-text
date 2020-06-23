@@ -33,7 +33,7 @@ public class Compiler {
         public void run() {
 
             //File gameFile = new File("target/classes/di/uniba/map/game/games/Game.java");
-            File gameFile = new File(System.getProperty("java.class.path") + "/di/uniba/map/game/games/Game.java");
+            File gameFile = new File(System.getProperty("user.dir") + "/Game.java");
             if (gameFile.getParentFile().exists() || gameFile.getParentFile().mkdirs()) {
 
                 try {
@@ -48,7 +48,7 @@ public class Compiler {
                     optionList.add("-classpath");
                     optionList.add(System.getProperty("java.class.path"));
 
-                    //System.out.println("Test PATH: " + System.getProperty("java.class.path"));
+                    System.out.println("Test PATH: " + System.getProperty("java.class.path"));
 
                     Iterable<? extends JavaFileObject> compilationUnit = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(gameFile));
                     JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnostics, optionList, null, compilationUnit);
@@ -57,10 +57,13 @@ public class Compiler {
                         /** Load and execute *************************************************************************************************/
                         // Class loader che punta alla classe compilata
 
-                        URLClassLoader classLoader = new URLClassLoader(new URL[]{new File("./").toURI().toURL()});
+                        URLClassLoader classLoader = new URLClassLoader(new URL[]{new File("").toURI().toURL()});
+
+                        //System.out.println("classloader PATH: " + classLoader.getURLs()[0].toString());
 
                         // Caricamento classe dal nome
-                        loadedClass = classLoader.loadClass("di.uniba.map.game.games.Game");
+                        //loadedClass = classLoader.loadClass("di.uniba.map.game.games.Game");
+                        loadedClass = classLoader.loadClass("Game");
 
                         //TODO: Eliminare Game.java e Game.class dopo il caricamento
                         /************************************************************************************************* Load and execute **/
