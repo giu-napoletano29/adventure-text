@@ -319,8 +319,7 @@ Una volta selezionato un file nel formato corretto, verrà effettuato un control
 Per creare una nuova avventura testuale importabile nell'engine di gioco è possibile utilizzare una classe java (*.java*) o un file di testo con codice java (*.txt*).
 
 Le regole per programmare la propria avventuara sono identiche per entrambi i metodi.
-Nel file è importante definire il package a cui fare riferimento che sarà:
-+ **``package di.uniba.map.game.games;``**
+Nel file è importante non definire un package a cui fare riferimento.
 
 Per utilizzare appieno tutte le funzionalità è importante importare le seguenti classi:
 
