@@ -7,11 +7,13 @@ package di.uniba.map.game;
 
 import di.uniba.map.game.engine.Engine;
 import di.uniba.map.game.games.GothicGame;
+import di.uniba.map.game.language.LanguageSelector;
 
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.*;
+import java.util.Scanner;
 
 /**
  *
@@ -95,10 +97,30 @@ public class formMain extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            this.setVisible(false);
-            Engine engine = new Engine(new GothicGame());
-            Engine.engine(engine);
-            this.setVisible(true);
+
+            Scanner input = new Scanner ( System.in, "UTF-8");
+            String command;
+            System.out.println("Select language [it/en]");
+            command = input.nextLine().toLowerCase();
+            while(!command.equals("it") && !command.equals("en")){
+                System.out.println("Errore! Digita 'it' per salvare la partita, 'en' se vuoi continuare la partita");
+                command = input.nextLine().toLowerCase();
+            }
+            if(command.equals("it")){
+                LanguageSelector language = new LanguageSelector("it");
+                this.setVisible(false);
+                Engine engine = new Engine(new GothicGame(), language);
+                Engine.engine(engine, language);
+                this.setVisible(true);
+            }else {
+                if (command.equals("en")) {
+                    LanguageSelector language = new LanguageSelector("en");
+                    this.setVisible(false);
+                    Engine engine = new Engine(new GothicGame(), language);
+                    Engine.engine(engine, language);
+                    this.setVisible(true);
+                }
+            }
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -131,8 +153,8 @@ public class formMain extends javax.swing.JFrame {
                 if(gameClass != null){
                     Object obj = gameClass.getDeclaredConstructor().newInstance();
                     this.setVisible(false);
-                    Engine engine = new Engine(obj);
-                    Engine.engine(engine);
+                   //Engine engine = new Engine(obj);
+                    //Engine.engine(engine);
                     this.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(null, "Errore nell'interpretazione del file!\nControllare la console per ulteriori informazioni.", "Errore", JOptionPane.ERROR_MESSAGE);

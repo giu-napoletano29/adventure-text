@@ -2,6 +2,7 @@ package di.uniba.map.game.games;
 
 import di.uniba.map.game.type.*;
 import di.uniba.map.game.engine.GameDescription;
+import di.uniba.map.game.language.LanguageSelector;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class GothicGame extends GameDescription{
     @Override
-    public void init() {
+    public void init(LanguageSelector language) {
         //Commands
         Command nord = new Command(CommandType.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});

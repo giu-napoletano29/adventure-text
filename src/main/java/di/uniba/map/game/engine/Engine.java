@@ -3,6 +3,7 @@ package di.uniba.map.game.engine;
 import di.uniba.map.game.parser.Parser;
 import di.uniba.map.game.parser.ParserOutput;
 import di.uniba.map.game.type.CommandType;
+import di.uniba.map.game.language.LanguageSelector;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
@@ -13,10 +14,10 @@ public class Engine {
     private final Parser cmd;
     private final Utils u = new Utils();
 
-    public Engine(Object obj) {
+    public Engine(Object obj, LanguageSelector language) {
         this.game = (GameDescription) obj;
         try {
-            this.game.init();
+            this.game.init(language);
         } catch (Exception ex) {
             System.err.println(ex);
         }
@@ -29,33 +30,33 @@ public class Engine {
         System.out.println("--------------------------------------------------------------");
     }
 
-    public void run() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public void run(LanguageSelector language) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         u.printRoom(game);
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine()){
             ParserOutput command = cmd.parseCmd(scanner.nextLine(), game);
             if(command.getCommand() != null && command.getCommand().getType() == CommandType.END){
-                System.out.println("Forse una decisione poco saggia, ma è pur sempre una decisione!");
+                System.out.println(language.getDocument().getElementsByTagName("not_good_decision").item(0).getTextContent());
                 break;
             }else{
                 u.move(command, game);
                 //u.printRoom(game); //Inserire enum per capire quale messaggio stampare in base a movimento o azione
             }
             if(game.isWin()){
-                System.out.println("Hai vinto!");
+                System.out.println(language.getDocument().getElementsByTagName("win").item(0).getTextContent());
                 break;
             }
             else if(game.isLose()){
-                System.out.println("Sei morto!");
+                System.out.println(language.getDocument().getElementsByTagName("lose").item(0).getTextContent());
                 break;
             }
 
         }
     }
 
-    public static void engine(Engine engine) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public static void engine(Engine engine, LanguageSelector language) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         engine.begin();
-        engine.run();
+        engine.run(language);
     }
 
 }

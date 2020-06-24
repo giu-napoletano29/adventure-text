@@ -1,6 +1,7 @@
 package di.uniba.map.game.engine;
 
 import di.uniba.map.game.type.*;
+import di.uniba.map.game.language.LanguageSelector;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public abstract class GameDescription {
 
     private final List<Npc> npcList = new ArrayList<>();
 
-    public abstract void init() throws Exception;
+    public abstract void init(LanguageSelector language) throws Exception;
 
     public abstract boolean isWin() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 

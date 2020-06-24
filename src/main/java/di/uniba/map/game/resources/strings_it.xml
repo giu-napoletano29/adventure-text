@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phrases>
+    <empty_inv>Non ci sono oggetti nell'inventario!</empty_inv>
+    <not_good_decision>Forse una decisione poco saggia, ma pur sempre una decisione.</not_good_decision>
+    <win>Hai vinto!</win>
+    <lose>Hai perso.</lose>
+</phrases>
