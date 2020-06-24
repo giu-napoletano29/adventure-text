@@ -1,5 +1,7 @@
 package di.uniba.map.game.type;
 
+import di.uniba.map.game.language.LanguageSelector;
+
 import java.util.Scanner;
 
 public class Npc extends Character{
@@ -32,7 +34,7 @@ public class Npc extends Character{
                 }
                 try {
                     answer = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Tu: " + temp.getAns().get(answer - 1).getAnswer());
+                    System.out.println("Tu : " + temp.getAns().get(answer - 1).getAnswer());
                     if (temp.getAns().get(answer - 1).getTriggerReference() != null) {
                         temp.getAns().get(answer - 1).getTriggerReference().trigger();
                     }

@@ -39,7 +39,7 @@ public class Engine {
                 System.out.println(language.getDocument().getElementsByTagName("not_good_decision").item(0).getTextContent());
                 break;
             }else{
-                u.move(command, game);
+                u.move(command, game, language);
                 //u.printRoom(game); //Inserire enum per capire quale messaggio stampare in base a movimento o azione
             }
             if(game.isWin()){

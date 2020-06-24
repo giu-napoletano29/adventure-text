@@ -6,26 +6,27 @@ import di.uniba.map.game.parser.ParserOutput;
 import di.uniba.map.game.type.CommandType;
 import di.uniba.map.game.type.Npc;
 import di.uniba.map.game.type.Room;
+import di.uniba.map.game.language.LanguageSelector;
 
 public class Utils {
-    public void move(ParserOutput cmd, GameDescription game) {
+    public void move(ParserOutput cmd, GameDescription game, LanguageSelector language) {
         boolean attack = false;
         if(cmd.getCommand().getType() != null){
             if(cmd.getCommand().getType() == CommandType.NORD){
-                checkRoom(game, game.getCurrentRoom().getNorth());
+                checkRoom(game, game.getCurrentRoom().getNorth(), language);
             } else if(cmd.getCommand().getType() == CommandType.SOUTH){
-                checkRoom(game, game.getCurrentRoom().getSouth());
+                checkRoom(game, game.getCurrentRoom().getSouth(), language);
             }else if(cmd.getCommand().getType() == CommandType.EAST){
-                checkRoom(game, game.getCurrentRoom().getEast());
+                checkRoom(game, game.getCurrentRoom().getEast(), language);
             }else if(cmd.getCommand().getType() == CommandType.WEST) {
-                checkRoom(game, game.getCurrentRoom().getWest());
+                checkRoom(game, game.getCurrentRoom().getWest(), language);
             }else if(cmd.getCommand().getType() == CommandType.INVENTORY){
                 if(game.getInventory().getList().size() > 0){
                     for (Item o : game.getInventory().getList()) {
                         System.out.println(o.getName() + ": " + o.getDescription());
                     }
                 }else{
-                    System.out.println("Non ci sono oggetti nel tuo inventario!");
+                    System.out.println(language.getDocument().getElementsByTagName("empty_inv").item(0).getTextContent());
                 }
             }
             else if(cmd.getCommand().getType() == CommandType.PICK_UP){
@@ -35,7 +36,7 @@ public class Utils {
                             game.getInventory().add(cmd.getContainerItem());
                             cmd.getItem().getItemList().remove(cmd.getContainerItem());
                         }else{
-                            System.out.println("Non puoi prendere qualcosa se " + cmd.getItem().getName() + " è chiuso!");
+                            System.out.println(language.getDocument().getElementsByTagName("cant_pick").item(0).getTextContent() + cmd.getItem().getName() + language.getDocument().getElementsByTagName("is_closed").item(0).getTextContent());
                         }
                     }
                     else{
@@ -43,55 +44,55 @@ public class Utils {
                             game.getInventory().add(cmd.getItem());
                             game.getCurrentRoom().getItems().remove(cmd.getItem());
                         }else{
-                            System.out.println("Ehi non puoi mica raccogliere " + cmd.getItem().getName());
+                            System.out.println(language.getDocument().getElementsByTagName("cant_pick2").item(0).getTextContent() + cmd.getItem().getName());
                         }
                     }
                     attack = true;
                 }
                 else{
-                    System.out.println("L'oggetto che cerchi non c'è!");
+                    System.out.println(language.getDocument().getElementsByTagName("no_item").item(0).getTextContent());
                 }
             }
             else if(cmd.getCommand().getType() == CommandType.THROW){
                 if(cmd.getItem() != null && game.getInventory().getList().contains(cmd.getItem())){
                     game.getInventory().getList().remove(cmd.getItem());
                     game.getCurrentRoom().getItems().add(cmd.getItem());
-                    System.out.println(cmd.getItem().getName() + " è stato lasciato!");
+                    System.out.println(cmd.getItem().getName() + language.getDocument().getElementsByTagName("is_throw").item(0).getTextContent());
                 }else{
-                    System.out.println("L'oggetto non è in inventario!");
+                    System.out.println(language.getDocument().getElementsByTagName("no_item_inv").item(0).getTextContent());
                 }
 
             }
             else if(cmd.getCommand().getType() == CommandType.OPEN){
                 if(cmd.getItem() != null && game.getCurrentRoom().getItems().contains(cmd.getItem())){
                     if(cmd.getItem().isOpenable()){
-                        System.out.println("Guardando dentro..");
+                        System.out.println(language.getDocument().getElementsByTagName("look_in").item(0).getTextContent());
                         if(cmd.getItem().getItemList().size() > 0){
                             for (Item o : cmd.getItem().getItemList()) {
                                 System.out.println(o.getName() + ": " + o.getDescription());
                             }
                             cmd.getItem().setOpen(true);
                         }else{
-                            System.out.println("E' vuoto!");
+                            System.out.println(language.getDocument().getElementsByTagName("is_empty").item(0).getTextContent());
                         }
                     }else if(cmd.getItem().getIsContainer() && cmd.getContainerItem() != null){
                         if(game.getPlayer().getInventory().getList().contains(cmd.getContainerItem())){
                             if(cmd.getItem().getOpenWith() == cmd.getContainerItem()){
                                 cmd.getItem().setOpenable(true);
-                                System.out.println(cmd.getItem().getName() + " è stato aperto!");
+                                System.out.println(cmd.getItem().getName() + language.getDocument().getElementsByTagName("is_opened").item(0).getTextContent());
                             }else{
-                                System.out.println("Non si può aprire " + cmd.getItem().getName() + " con " + cmd.getContainerItem().getName());
+                                System.out.println(language.getDocument().getElementsByTagName("cant_open").item(0).getTextContent() + cmd.getItem().getName() + language.getDocument().getElementsByTagName("with").item(0).getTextContent() + cmd.getContainerItem().getName());
                             }
                         }else{
-                            System.out.println(cmd.getContainerItem().getName() + " non è in inventario!");
+                            System.out.println(cmd.getContainerItem().getName() + language.getDocument().getElementsByTagName("not_in_inv").item(0).getTextContent());
                         }
                     }
                     else{
-                        System.out.println("Non riesco ad aprire " + cmd.getItem().getName());
+                        System.out.println(language.getDocument().getElementsByTagName("cant_opening").item(0).getTextContent() + cmd.getItem().getName());
                     }
                     attack = true;
                 }else{
-                    System.out.println("L'oggetto che cerchi non c'è!");
+                    System.out.println(language.getDocument().getElementsByTagName("no_item_searched").item(0).getTextContent());
                 }
             }
             else if(cmd.getCommand().getType() == CommandType.LOOK_AT){
@@ -102,29 +103,29 @@ public class Utils {
                     if(cmd.getNpc().getSpeakable()){
                         cmd.getNpc().talking();
                     }else{
-                        System.out.println(cmd.getNpc().getName() + ": Non mi disturbare.");
+                        System.out.println(cmd.getNpc().getName() + language.getDocument().getElementsByTagName("dont_annoy").item(0).getTextContent());
                     }
                     attack = true;
                 }else{
-                    System.out.println("Quel tizio non c'è!");
+                    System.out.println(language.getDocument().getElementsByTagName("no_npc_here").item(0).getTextContent());
                 }
             }
             else if(cmd.getCommand().getType() == CommandType.SEARCH){
-                System.out.print("Cerchiamo un po'...");
+                System.out.print(language.getDocument().getElementsByTagName("looking_for").item(0).getTextContent());
                 if(game.getCurrentRoom().getItems().size() != 0 || game.getCurrentRoom().getNpcs().size() != 0){
-                    System.out.println("Trovato qualcosa!");
+                    System.out.println(language.getDocument().getElementsByTagName("found_something").item(0).getTextContent());
                     for(int i = 0; i<game.getCurrentRoom().getItems().size(); i++){
                         System.out.print(game.getCurrentRoom().getItems().get(i).getName() + ", ");
                     }
                     for(int i = 0; i<game.getCurrentRoom().getNpcs().size(); i++){
                         if(i == 0){
-                            System.out.println("\nC'è qualcuno..");
+                            System.out.println("\n" + language.getDocument().getElementsByTagName("is_there_anybody").item(0).getTextContent());
                         }
                         System.out.print(game.getCurrentRoom().getNpcs().get(i).getName() + ", ");
                     }
-                    System.out.println("tutto qui!");
+                    System.out.println(language.getDocument().getElementsByTagName("justit").item(0).getTextContent());
                 }else{
-                    System.out.println("Non ho trovato nulla di interessante!");
+                    System.out.println(language.getDocument().getElementsByTagName("found_nothing_interesting").item(0).getTextContent());
                 }
 
             }
@@ -134,11 +135,11 @@ public class Utils {
                         game.getPlayer().setWeaponEquip(cmd.getItem());
                         attack = true;
                     }else{
-                        System.out.println("Non si può equipaggiare questo oggetto!");
+                        System.out.println(language.getDocument().getElementsByTagName("cant_equip").item(0).getTextContent());
                     }
                 }
                 else{
-                    System.out.println("Questo oggetto non è in inventario!");
+                    System.out.println(language.getDocument().getElementsByTagName("no_item_in_inv").item(0).getTextContent());
                 }
 
             }
@@ -152,15 +153,15 @@ public class Utils {
                             }
                             game.getPlayer().getInventory().getList().remove(cmd.getItem());
                         }else{
-                            System.out.println("la vita è già al massimo!");
+                            System.out.println(language.getDocument().getElementsByTagName("max_hp").item(0).getTextContent());
                         }
                         attack = true;
                     }else{
-                        System.out.println("Non si può mangiare questo!");
+                        System.out.println(language.getDocument().getElementsByTagName("cant_eat").item(0).getTextContent());
                     }
                 }
                 else{
-                    System.out.println("Questo oggetto non è in inventario!");
+                    System.out.println(language.getDocument().getElementsByTagName("no_item_in_inv").item(0).getTextContent());
                 }
 
             }
@@ -172,11 +173,11 @@ public class Utils {
 
                         attack = true;
                     }else{
-                        System.out.println("Non si può indossare questo!");
+                        System.out.println(language.getDocument().getElementsByTagName("cant_fit").item(0).getTextContent());
                     }
                 }
                 else{
-                    System.out.println("Questo oggetto non è in inventario!");
+                    System.out.println(language.getDocument().getElementsByTagName("no_item_in_inv").item(0).getTextContent());
                 }
 
             }
@@ -191,14 +192,14 @@ public class Utils {
                         cmd.getNpc().setSpeakable(false);
                         System.out.println(cmd.getNpc().getName() + " HP: " + cmd.getNpc().getHp());
                     }else if(cmd.getNpc().getGod() == true){
-                        System.out.println(cmd.getNpc().getName() + ": Non perdere tempo con me. Sono invincibile.");
+                        System.out.println(cmd.getNpc().getName() + language.getDocument().getElementsByTagName("junior_dragon_ball").item(0).getTextContent());
                     }
                     else{
-                        System.out.println("Non conviene attaccare qualcuno senza armi..");
+                        System.out.println(language.getDocument().getElementsByTagName("dont_attack_without_weapon").item(0).getTextContent());
                     }
                     attack = true;
                 }else{
-                    System.out.println("Non si può attaccare qualcuno che non c'è..");
+                    System.out.println(language.getDocument().getElementsByTagName("cant_attack_someone_not_here").item(0).getTextContent());
                 }
             }
             if(attack){
@@ -210,7 +211,7 @@ public class Utils {
                 }
             }
         }else{
-            System.out.println("Ehm... non ho capito il comando");
+            System.out.println(language.getDocument().getElementsByTagName("cant_understand").item(0).getTextContent());
         }
     }
 
@@ -243,7 +244,7 @@ public class Utils {
         }
     }
 
-    private void checkRoom(GameDescription game, Room room){
+    private void checkRoom(GameDescription game, Room room, LanguageSelector language){
         if(room != null){
             if(!room.getLock()){
                 game.setCurrentRoom(room);
@@ -253,10 +254,10 @@ public class Utils {
                     room.getTriggerReference().trigger();
                 }
             }else{
-                System.out.println("E' bloccato, non si può passare!");
+                System.out.println(language.getDocument().getElementsByTagName("is_blocked").item(0).getTextContent());
             }
         }else{
-            System.out.println("Ehi non c'è niente qui.");  //TODO: cambiare i print in base al gioco, impostabile da file
+            System.out.println(language.getDocument().getElementsByTagName("nothing_here").item(0).getTextContent());  //TODO: cambiare i print in base al gioco, impostabile da file
         }
     }
 }

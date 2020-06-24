@@ -9,15 +9,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import di.uniba.map.game.language.LanguageSelector;
+
 public class Compiler {
 
-    public static Class<?> compiler(String fname) {
+    public static Class<?> compiler(String fname, LanguageSelector language) {
         LoadGameThread loadGameThread = new LoadGameThread(fname);
         loadGameThread.start();
         try{
             loadGameThread.join();
         } catch (InterruptedException e){
-            System.out.println("Errore nel caricamento della classe");
+            System.out.println(language.getDocument().getElementsByTagName("class_error").item(0).getTextContent());
         }
 
         return loadGameThread.loadedClass;

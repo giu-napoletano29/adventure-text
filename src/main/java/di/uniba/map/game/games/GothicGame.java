@@ -16,7 +16,7 @@ public class GothicGame extends GameDescription{
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
         getCommands().add(nord);
         Command inventory = new Command(CommandType.INVENTORY, "inventario");
-        inventory.setAlias(new String[]{"inv", "i", "I"});
+        inventory.setAlias(new String[]{"inv", "i", "I", "inventory"});
         getCommands().add(inventory);
         Command sud = new Command(CommandType.SOUTH, "sud");
         sud.setAlias(new String[]{"s", "S", "Sud", "SUD"});
@@ -31,22 +31,22 @@ public class GothicGame extends GameDescription{
         end.setAlias(new String[]{"end", "fine", "esci","exit"});
         getCommands().add(end);
         Command look = new Command(CommandType.LOOK_AT, "osserva");
-        look.setAlias(new String[]{"guarda", "vedi", "descrivi"});
+        look.setAlias(new String[]{"guarda", "vedi", "descrivi", "look"});
         getCommands().add(look);
         Command search = new Command(CommandType.SEARCH, "cerca");
-        search.setAlias(new String[]{"trova", "controlla"});
+        search.setAlias(new String[]{"trova", "controlla", "search"});
         getCommands().add(search);
         Command pickup = new Command(CommandType.PICK_UP, "raccogli");
-        pickup.setAlias(new String[]{"prendi", "pick", "prendere"});
+        pickup.setAlias(new String[]{"prendi", "pick", "prendere", "pick up"});
         getCommands().add(pickup);
         Command open = new Command(CommandType.OPEN, "apri");
-        open.setAlias(new String[]{});
+        open.setAlias(new String[]{"open"});
         getCommands().add(open);
         Command push = new Command(CommandType.PUSH, "premi");
         push.setAlias(new String[]{"spingi","attiva"});
         getCommands().add(push);
         Command talk = new Command(CommandType.TALK, "parla");
-        talk.setAlias(new String[]{"Parla","PARLA"});
+        talk.setAlias(new String[]{"Parla","PARLA", "talk"});
         getCommands().add(talk);
         Command equip = new Command(CommandType.EQUIP, "equipaggia");
         equip.setAlias(new String[]{"equip"});
@@ -64,16 +64,14 @@ public class GothicGame extends GameDescription{
         use.setAlias(new String[]{"indossa", "vesti", "use"});
         getCommands().add(use);
         Command throww = new Command(CommandType.THROW, "butta");
-        throww.setAlias(new String[]{"getta", "cestina", "elimina", "rimuovi"});
+        throww.setAlias(new String[]{"getta", "cestina", "elimina", "rimuovi", "throw"});
         getCommands().add(throww);
 
         //Rooms
-        Room entrylevel = new Room(0, "Ingresso", "Sei appena arrivato in questo nuovo mondo."
-                + " Trova il modo di uscirne vivo.."
-                + "\nQui troverai qualcuno in grado di aiutarti ad ambientarti. (Inserisci 'parla helper')");
+        Room entrylevel = new Room(0, "Ingresso", "Sei appena arrivato in questo nuovo mondo. Trova il modo di uscirne vivo...Qui troverai qualcuno in grado di aiutarti ad ambientarti. (Inserisci 'parla helper')");
         entrylevel.setLook("Circondato dal nulla, si può solo andare avanti.");
 
-        Room entry_woods = new Room(1, "Bosco", "Ingresso del bosco ");
+        Room entry_woods = new Room(1, "Bosco", "Ingresso del bosco");
         entry_woods.setLook("Meglio trovare qualcosa qua intorno, potrebbe essere pericoloso d'ora in poi..");
 
         Room woods_1 = new Room(3, "Bosco", "Sentiero del bosco");

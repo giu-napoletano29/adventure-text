@@ -4,4 +4,42 @@
     <not_good_decision>Forse una decisione poco saggia, ma pur sempre una decisione.</not_good_decision>
     <win>Hai vinto!</win>
     <lose>Hai perso.</lose>
+    <cant_pick>Non puoi prendere qualcosa se </cant_pick>
+    <is_closed> è chiuso!</is_closed>
+    <cant_pick2>Ehi non puoi mica raccogliere </cant_pick2>
+    <no_item>L'oggetto che cerchi non c'è!</no_item>
+    <is_throw> è stato lasciato!</is_throw>
+    <no_item_inv>L'oggetto non è in inventario!</no_item_inv>
+    <look_in>Guardando dentro...</look_in>
+    <is_empty>E' vuoto!</is_empty>
+    <is_opened> è stato aperto!</is_opened>
+    <cant_open>Non si può aprire </cant_open>
+    <with> con </with>
+    <not_in_inv> non è in inventario!</not_in_inv>
+    <cant_opening>Non riesco ad aprire </cant_opening>
+    <no_item_searched>L'oggetto che cerchi non c'è!</no_item_searched>
+    <dont_annoy>: Non mi disturbare.</dont_annoy>
+    <no_npc_here>Quel tizio non c'è!</no_npc_here>
+    <looking_for>Cerchiamo un po'...</looking_for>
+    <found_something>Trovato qualcosa!</found_something>
+    <is_there_anybody>C'è qualcuno..</is_there_anybody>
+    <justit>tutto qui!</justit>
+    <found_nothing_interesting>Non ho trovato nulla di interessante!</found_nothing_interesting>
+    <cant_equip>Non si può equipaggiare questo oggetto!</cant_equip>
+    <no_item_in_inv>Questo oggetto non è in inventario!</no_item_in_inv>
+    <max_hp>la vita è già al massimo!</max_hp>
+    <cant_eat>Non si può mangiare questo!</cant_eat>
+    <cant_fit>Non si può indossare questo!</cant_fit>
+    <junior_dragon_ball>: Non perdere tempo con me. Sono invincibile.</junior_dragon_ball>
+    <dont_attack_without_weapon>Non conviene attaccare qualcuno senza armi..</dont_attack_without_weapon>
+    <cant_attack_someone_not_here>Non si può attaccare qualcuno che non c'è..</cant_attack_someone_not_here>
+    <cant_understand>Ehm... non ho capito il comando</cant_understand>
+    <is_blocked>E' bloccato, non si può passare!</is_blocked>
+    <nothing_here>Ehi non c'è niente qui.</nothing_here>
+    <file_not_found>File non trovato! E' possibile che non si abbiano i permessi per eseguire in questa cartella.</file_not_found>
+    <attention>Attenzione!</attention>
+    <interpretation_error>Errore nell'interpretazione del file! Controllare la console per ulteriori informazioni.</interpretation_error>
+    <file_not_supported>Il file selezionato non è supportato!</file_not_supported>
+    <error>Errore</error>
+    <class_error>Errore nel caricamento della classe</class_error>
 </phrases>

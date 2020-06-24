@@ -99,27 +99,27 @@ public class formMain extends javax.swing.JFrame {
         try {
 
             Scanner input = new Scanner ( System.in, "UTF-8");
-            String command;
-            System.out.println("Select language [it/en]");
-            command = input.nextLine().toLowerCase();
-            while(!command.equals("it") && !command.equals("en")){
-                System.out.println("Errore! Digita 'it' per salvare la partita, 'en' se vuoi continuare la partita");
+                String command;
+                System.out.println("Select language [it/en]");
                 command = input.nextLine().toLowerCase();
-            }
-            if(command.equals("it")){
-                LanguageSelector language = new LanguageSelector("it");
-                this.setVisible(false);
-                Engine engine = new Engine(new GothicGame(), language);
-                Engine.engine(engine, language);
-                this.setVisible(true);
-            }else {
-                if (command.equals("en")) {
-                    LanguageSelector language = new LanguageSelector("en");
+                while(!command.equals("it") && !command.equals("en")){
+                    System.out.println("Errore! Digita 'it' per salvare la partita, 'en' se vuoi continuare la partita");
+                    command = input.nextLine().toLowerCase();
+                }
+                if(command.equals("it")){
+                    LanguageSelector language = new LanguageSelector("it");
                     this.setVisible(false);
                     Engine engine = new Engine(new GothicGame(), language);
                     Engine.engine(engine, language);
                     this.setVisible(true);
-                }
+                }else {
+                    if (command.equals("en")) {
+                        LanguageSelector language = new LanguageSelector("en");
+                        this.setVisible(false);
+                        Engine engine = new Engine(new GothicGame(), language);
+                        Engine.engine(engine, language);
+                        this.setVisible(true);
+                    }
             }
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
@@ -129,41 +129,98 @@ public class formMain extends javax.swing.JFrame {
     private void jButton2ActionPerformed(ActionEvent evt) throws IOException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {//GEN-FIRST:event_jButton2ActionPerformed
         final JFileChooser fc = new JFileChooser();
         int returnVal = fc.showOpenDialog(this);
-        if(returnVal == JFileChooser.APPROVE_OPTION){
-            File f = fc.getSelectedFile();
-            if(textFileCheck(f)){
-                FileInputStream in;
-                FileOutputStream out = null;
-                try{
-                    in = new FileInputStream(f);
-                    out = new FileOutputStream(f.getParent() + "/Game.java");
-                    int c;
-                    while ((c = in.read()) != -1) {
-                        out.write(c);
+
+        Scanner input = new Scanner ( System.in, "UTF-8");
+        String command;
+        System.out.println("Select language [it/en]");
+
+        command = input.nextLine().toLowerCase();
+        while(!command.equals("it") && !command.equals("en")){
+            System.out.println("Errore! Digita 'it' per salvare la partita, 'en' se vuoi continuare la partita");
+            command = input.nextLine().toLowerCase();
+        }
+        if(command.equals("it")){
+            LanguageSelector language = new LanguageSelector("it");
+
+            if(returnVal == JFileChooser.APPROVE_OPTION){
+                File f = fc.getSelectedFile();
+                if(textFileCheck(f)){
+                    FileInputStream in;
+                    FileOutputStream out = null;
+                    try{
+                        in = new FileInputStream(f);
+                        out = new FileOutputStream(f.getParent() + "/Game.java");
+                        int c;
+                        while ((c = in.read()) != -1) {
+                            out.write(c);
+                        }
+                    }catch (FileNotFoundException ex){
+                        JOptionPane.showMessageDialog(null, language.getDocument().getElementsByTagName("file_not_found").item(0).getTextContent(), language.getDocument().getElementsByTagName("attention").item(0).getTextContent(), JOptionPane.WARNING_MESSAGE);
                     }
-                }catch (FileNotFoundException ex){
-                    JOptionPane.showMessageDialog(null, "File non trovato!\n E' possibile che non si abbiano i permessi per eseguire in questa cartella.", "Attenzione!", JOptionPane.WARNING_MESSAGE);
-                }
-                finally {
-                    if (out != null) {
-                        out.close();
+                    finally {
+                        if (out != null) {
+                            out.close();
+                        }
+                    }
+                    Class gameClass = Compiler.compiler(f.getParent(), language);
+                    if(gameClass != null){
+                        Object obj = gameClass.getDeclaredConstructor().newInstance();
+                        this.setVisible(false);
+                        Engine engine = new Engine(obj, language);
+                        Engine.engine(engine, language);
+                        this.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, language.getDocument().getElementsByTagName("interpretation_error").item(0).getTextContent(), language.getDocument().getElementsByTagName("error").item(0).getTextContent(), JOptionPane.ERROR_MESSAGE);
                     }
                 }
-                Class gameClass = Compiler.compiler(f.getParent());
-                if(gameClass != null){
-                    Object obj = gameClass.getDeclaredConstructor().newInstance();
-                    this.setVisible(false);
-                   //Engine engine = new Engine(obj);
-                    //Engine.engine(engine);
-                    this.setVisible(true);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Errore nell'interpretazione del file!\nControllare la console per ulteriori informazioni.", "Errore", JOptionPane.ERROR_MESSAGE);
+                else{
+                    JOptionPane.showMessageDialog(null, language.getDocument().getElementsByTagName("file_not_supported").item(0).getTextContent(), language.getDocument().getElementsByTagName("error").item(0).getTextContent(), JOptionPane.ERROR_MESSAGE);
                 }
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Il file selezionato non è supportato!", "Errore", JOptionPane.ERROR_MESSAGE);
+
+        }else {
+            if (command.equals("en")) {
+                LanguageSelector language = new LanguageSelector("en");
+
+                if(returnVal == JFileChooser.APPROVE_OPTION){
+                    File f = fc.getSelectedFile();
+                    if(textFileCheck(f)){
+                        FileInputStream in;
+                        FileOutputStream out = null;
+                        try{
+                            in = new FileInputStream(f);
+                            out = new FileOutputStream(f.getParent() + "/Game.java");
+                            int c;
+                            while ((c = in.read()) != -1) {
+                                out.write(c);
+                            }
+                        }catch (FileNotFoundException ex){
+                            JOptionPane.showMessageDialog(null, language.getDocument().getElementsByTagName("file_not_found").item(0).getTextContent(), language.getDocument().getElementsByTagName("attention").item(0).getTextContent(), JOptionPane.WARNING_MESSAGE);
+                        }
+                        finally {
+                            if (out != null) {
+                                out.close();
+                            }
+                        }
+                        Class gameClass = Compiler.compiler(f.getParent(), language);
+                        if(gameClass != null){
+                            Object obj = gameClass.getDeclaredConstructor().newInstance();
+                            this.setVisible(false);
+                            Engine engine = new Engine(obj, language);
+                            Engine.engine(engine, language);
+                            this.setVisible(true);
+                        }else{
+                            JOptionPane.showMessageDialog(null, language.getDocument().getElementsByTagName("interpretation_error").item(0).getTextContent(), language.getDocument().getElementsByTagName("error").item(0).getTextContent(), JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, language.getDocument().getElementsByTagName("file_not_supported").item(0).getTextContent(), language.getDocument().getElementsByTagName("error").item(0).getTextContent(), JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
         }
+
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

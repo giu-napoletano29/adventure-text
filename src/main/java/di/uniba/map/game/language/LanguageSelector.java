@@ -18,7 +18,7 @@ public class LanguageSelector {
 
         if(language.equals("it")) {
 
-            File lang = new File("/Users/domenico_sarcina/adventure-text/src/main/java/di/uniba/map/game/resources/strings_it.xml");
+            File lang = new File("strings_it.xml");
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
             try{
@@ -26,12 +26,12 @@ public class LanguageSelector {
                 Document document = documentBuilder.parse(lang);
                 this.document = document;
             } catch (ParserConfigurationException | SAXException | IOException e){
-                System.out.println("Errore nel selezioanmento della lingua");
+                System.out.println("Errore nel selezionamento della lingua");
             }
 
 
         } else{
-            File lang = new File("/Users/domenico_sarcina/adventure-text/src/main/java/di/uniba/map/game/resources/strings_en.xml");
+            File lang = new File("strings_en.xml");
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
             try{

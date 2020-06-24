@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phrases>
+    <empty_inv>There aren't items in your inventory.</empty_inv>
+    <not_good_decision>Maybe an unwise decision, but still a decision.</not_good_decision>
+    <win>You win!</win>
+    <lose>You lose.</lose>
+    <cant_pick>Ypu can't pick up something if </cant_pick>
+    <is_closed> is closed!</is_closed>
+    <cant_pick2>Ehi you can'y pick up </cant_pick2>
+    <no_item>The item you are looking for is not there!</no_item>
+    <is_throw> is dropped.</is_throw>
+    <no_item_inv>The item isn't in the inventory.</no_item_inv>
+    <look_in>Looking inside...</look_in>
+    <is_empty>It's empty!</is_empty>
+    <is_opened> was opened!</is_opened>
+    <cant_open>It can't be opened </cant_open>
+    <with> with </with>
+    <not_in_inv> is not in inventory!</not_in_inv>
+    <cant_opening>I can't open </cant_opening>
+    <no_item_searched>The item you are looking for is not there!</no_item_searched>
+    <dont_annoy>: Do not disturb me.</dont_annoy>
+    <no_npc_here>That guy is not there!</no_npc_here>
+    <looking_for>Lest's search...</looking_for>
+    <found_something>Found something!</found_something>
+    <is_there_anybody>Is there anyone..</is_there_anybody>
+    <justit>that's all!</justit>
+    <found_nothing_interesting>I have not found anything interesting!</found_nothing_interesting>
+    <cant_equip>I can't equip this item!</cant_equip>
+    <no_item_in_inv>This item is not in the inventory!</no_item_in_inv>
+    <max_hp>life is at max!</max_hp>
+    <cant_eat>Can't eat this!</cant_eat>
+    <cant_fit>Can't wear this!</cant_fit>
+    <junior_dragon_ball>: Don't waste your time with me. I'm invincible.</junior_dragon_ball>
+    <dont_attack_without_weapon>It is not convenient to attack someone without weapons..</dont_attack_without_weapon>
+    <cant_attack_someone_not_here>You can't attack someone who isn't there..</cant_attack_someone_not_here>
+    <cant_understand>Ehm... I didn't understand the command.</cant_understand>
+    <is_blocked>It's blocked, you can't pass!</is_blocked>
+    <nothing_here>Ehi there is nothing here.</nothing_here>
+    <file_not_found>File not found! It is possible that you do not have permission to run in this folder.</file_not_found>
+    <attention>Attention!</attention>
+    <interpretation_error>Error in file interpretation! Check the console for more information.</interpretation_error>
+    <file_not_supported>The file is not supported</file_not_supported>
+    <error>Error</error>
+    <class_error>Error during class loading.</class_error>
+</phrases>
