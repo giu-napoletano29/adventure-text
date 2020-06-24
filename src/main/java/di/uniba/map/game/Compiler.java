@@ -23,7 +23,7 @@ public class Compiler {
         return loadGameThread.loadedClass;
     }
 
-    static class LoadGameThread extends Thread {
+    private static class LoadGameThread extends Thread {
 
         private String fname;
         private Class<?> loadedClass;

@@ -426,7 +426,7 @@ public class GothicGame extends GameDescription{
         talk1.getAns().add(answer);
     }
 
-    private static void e_guardDialog(Npc e_guard, Item key_b) {
+    private void e_guardDialog(Npc e_guard, Item key_b) {
         Talk talk1 = new Talk();
         e_guard.setTalk(talk1);
         Talk talk2 = new Talk();
@@ -480,7 +480,7 @@ public class GothicGame extends GameDescription{
         commonDialog(talk1, e_guard);
     }
 
-    private static void gate_guardDialog(Npc gate_guard, Item letter, Room b_room) {
+    private void gate_guardDialog(Npc gate_guard, Item letter, Room b_room) {
         Talk talk1 = new Talk();
         gate_guard.setTalk(talk1);
         Talk talk2 = new Talk();
@@ -547,7 +547,7 @@ public class GothicGame extends GameDescription{
         commonDialog(talk1, gate_guard);
     }
 
-    private static void fabbroDialog(Npc fabbro, Room room, Npc b1, Npc b2, Item key) {
+    private void fabbroDialog(Npc fabbro, Room room, Npc b1, Npc b2, Item key) {
         Talk talk1 = new Talk();
         fabbro.setTalk(talk1);
         Talk talk2 = new Talk();

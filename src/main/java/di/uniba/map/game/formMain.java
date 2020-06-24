@@ -114,13 +114,13 @@ public class formMain extends javax.swing.JFrame {
                 FileOutputStream out = null;
                 try{
                     in = new FileInputStream(f);
-                    out = new FileOutputStream(f.getParent() + "/Game.java");
+                    out = new FileOutputStream(f.getParent() + "/Game.java"); //TODO: Controllo se file con quel nome già esiste
                     int c;
                     while ((c = in.read()) != -1) {
                         out.write(c);
                     }
                 }catch (FileNotFoundException ex){
-                    JOptionPane.showMessageDialog(null, "File non trovato!\n E' possibile che non si abbiano i permessi per eseguire in questa cartella.", "Attenzione!", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "File non trovato!\n E' possibile che non si abbiano i permessi per scrivere in questa cartella.", "Attenzione!", JOptionPane.WARNING_MESSAGE);
                 }
                 finally {
                     if (out != null) {

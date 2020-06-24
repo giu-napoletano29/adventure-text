@@ -53,7 +53,7 @@ public abstract class GameDescription {
         return player.getInventory();
     }
 
-    public static Player getPlayer(){ return player;}
+    public Player getPlayer(){ return player;}
 
 
 }
