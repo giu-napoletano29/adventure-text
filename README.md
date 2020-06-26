@@ -11,7 +11,7 @@
 
 
 
-**Students**: Giuseppe Napoletano, Domenico Sarcina
+**Students**: Giuseppe Napoletano
 
 
 
