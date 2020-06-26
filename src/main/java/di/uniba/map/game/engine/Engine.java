@@ -25,7 +25,7 @@ public class Engine {
 
     protected void begin(){
         System.out.println("--------------------------------------------------------------");
-        System.out.println("    Game Engine - by Giuseppe Napoletano & Domenico Sarcina   ");
+        System.out.println("             Game Engine - by Giuseppe Napoletano             ");
         System.out.println("--------------------------------------------------------------");
     }
 
@@ -39,14 +39,9 @@ public class Engine {
                 break;
             }else{
                 u.move(command, game);
-                //u.printRoom(game); //Inserire enum per capire quale messaggio stampare in base a movimento o azione
             }
-            if(game.isWin()){
-                System.out.println("Hai vinto!");
-                break;
-            }
-            else if(game.isLose()){
-                System.out.println("Sei morto!");
+            if(game.isWin() || game.isLose()){
+                System.out.println("Game Over.. ");
                 break;
             }
 

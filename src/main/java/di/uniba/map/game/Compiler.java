@@ -58,8 +58,6 @@ public class Compiler {
                         try{
                             File f = new File(fname + "/Game.class");
                             f.delete();
-                            f = new File(fname + "/Game.java");
-                            f.delete();
                         }catch(Exception ex){
                             System.out.println("Errore nel rimuovere i file temporanei: " + ex + " (Non fatale)");
                         }

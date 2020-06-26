@@ -1,15 +1,15 @@
-import di.uniba.map.game.engine.GameDescription;
 import di.uniba.map.game.type.*;
+import di.uniba.map.game.engine.GameDescription;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class Game extends GameDescription {
+public class Game extends GameDescription{
     @Override
     public void init() {
-        System.out.println("Eletto");
         //Commands
+	System.out.println("Vamonos");
         Command nord = new Command(CommandType.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
         getCommands().add(nord);
@@ -114,7 +114,7 @@ public class Game extends GameDescription {
         Room final_room = new Room(15, "Stanza del Barone", "Stanza del Boss");
         final_room.setLook("Qui c'è il Barone!");
 
-        Room testRoom = new Room(2, "Test Room", "Stanza Test"); //TODO: da rendere stanza reward con password per accedere e bonus
+        Room testRoom = new Room(2, "Test Room", "Stanza Test");
         testRoom.setLook("Che bella stanza di test! Sembra ci sia da provare un foglio, una cassa e Alessandra con cui parlare!");
         testRoom.setTriggerReference(() -> {
             System.out.println("Per poter entrare in questa stanza è necessaria una password: ");
@@ -153,8 +153,6 @@ public class Game extends GameDescription {
         entry_woods.setWest(woods_end);
         entry_woods.setNorth(woods_2);
         entry_woods.setEast(woods_3);
-        //woods_1.setEast(entry_woods);
-        //woods_1.setWest(woods_end);
         woods_2.setSouth(entry_woods);
         woods_3.setWest(entry_woods);
         woods_3.setSouth(woods_4);
@@ -165,14 +163,10 @@ public class Game extends GameDescription {
         entry_old_camp.setNorth(old_camp_1);
         old_camp_1.setSouth(entry_old_camp);
         old_camp_1.setEast(old_camp_gate);
-        //old_camp_2.setWest(old_camp_1);
-        //old_camp_2.setEast(old_camp_gate);
         old_camp_gate.setWest(old_camp_1);
         old_camp_gate.setEast(old_camp_3);
         old_camp_gate.setNorth(baron_room);
         old_camp_3.setWest(old_camp_gate);
-        //old_camp_3.setEast(old_camp_4);
-        //old_camp_4.setWest(old_camp_3);
         baron_room.setSouth(old_camp_gate);
         baron_room.setNorth(final_room);
         final_room.setSouth(baron_room);
@@ -431,7 +425,7 @@ public class Game extends GameDescription {
         talk1.getAns().add(answer);
     }
 
-    private static void e_guardDialog(Npc e_guard, Item key_b) {
+    private void e_guardDialog(Npc e_guard, Item key_b) {
         Talk talk1 = new Talk();
         e_guard.setTalk(talk1);
         Talk talk2 = new Talk();
@@ -485,7 +479,7 @@ public class Game extends GameDescription {
         commonDialog(talk1, e_guard);
     }
 
-    private static void gate_guardDialog(Npc gate_guard, Item letter, Room b_room) {
+    private void gate_guardDialog(Npc gate_guard, Item letter, Room b_room) {
         Talk talk1 = new Talk();
         gate_guard.setTalk(talk1);
         Talk talk2 = new Talk();
@@ -552,7 +546,7 @@ public class Game extends GameDescription {
         commonDialog(talk1, gate_guard);
     }
 
-    private static void fabbroDialog(Npc fabbro, Room room, Npc b1, Npc b2, Item key) {
+    private void fabbroDialog(Npc fabbro, Room room, Npc b1, Npc b2, Item key) {
         Talk talk1 = new Talk();
         fabbro.setTalk(talk1);
         Talk talk2 = new Talk();
@@ -634,6 +628,7 @@ public class Game extends GameDescription {
                 .collect(Collectors.toList());
         if(boss.isEmpty()){
             win = true;
+            System.out.println("Hai vinto!");
         }
         return win;
     }
@@ -642,6 +637,7 @@ public class Game extends GameDescription {
         boolean lose = false;
         if(getPlayer().getHp() <= 0){
             lose = true;
+            System.out.println("Sei morto!");
         }
         return lose;
     }

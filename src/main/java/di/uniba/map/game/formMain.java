@@ -112,12 +112,19 @@ public class formMain extends javax.swing.JFrame {
             if(textFileCheck(f)){
                 FileInputStream in;
                 FileOutputStream out = null;
+                int writeFile = 0;
                 try{
                     in = new FileInputStream(f);
-                    out = new FileOutputStream(f.getParent() + "/Game.java"); //TODO: Controllo se file con quel nome già esiste
-                    int c;
-                    while ((c = in.read()) != -1) {
-                        out.write(c);
+                    File fGame = new File((f.getParent() + "/Game.java"));
+                    if(fGame.exists()){
+                        writeFile = JOptionPane.showConfirmDialog(null, "Un file col nome 'Game.java' è già presente. Sovrascrivere?", "Attenzione!",JOptionPane.YES_NO_OPTION);
+                    }
+                    if(writeFile == 0) {
+                        out = new FileOutputStream(f.getParent() + "/Game.java");
+                        int c;
+                        while ((c = in.read()) != -1) {
+                            out.write(c);
+                        }
                     }
                 }catch (FileNotFoundException ex){
                     JOptionPane.showMessageDialog(null, "File non trovato!\n E' possibile che non si abbiano i permessi per scrivere in questa cartella.", "Attenzione!", JOptionPane.WARNING_MESSAGE);
@@ -127,15 +134,17 @@ public class formMain extends javax.swing.JFrame {
                         out.close();
                     }
                 }
-                Class gameClass = Compiler.compiler(f.getParent());
-                if(gameClass != null){
-                    Object obj = gameClass.getDeclaredConstructor().newInstance();
-                    this.setVisible(false);
-                    Engine engine = new Engine(obj);
-                    Engine.engine(engine);
-                    this.setVisible(true);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Errore nell'interpretazione del file!\nControllare la console per ulteriori informazioni.", "Errore", JOptionPane.ERROR_MESSAGE);
+                if(writeFile == 0){
+                    Class gameClass = Compiler.compiler(f.getParent());
+                    if(gameClass != null){
+                        Object obj = gameClass.getDeclaredConstructor().newInstance();
+                        this.setVisible(false);
+                        Engine engine = new Engine(obj);
+                        Engine.engine(engine);
+                        this.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Errore nell'interpretazione del file!\nControllare la console per ulteriori informazioni.", "Errore", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
             else{

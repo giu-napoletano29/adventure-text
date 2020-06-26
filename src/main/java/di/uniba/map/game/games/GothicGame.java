@@ -11,6 +11,7 @@ public class GothicGame extends GameDescription{
     @Override
     public void init() {
         //Commands
+        getPlayer().setName("Eroe senza nome");
         Command nord = new Command(CommandType.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
         getCommands().add(nord);
@@ -81,10 +82,10 @@ public class GothicGame extends GameDescription{
         Room woods_2 = new Room(4, "Bosco", "Bosco a nord");
         woods_2.setLook("Sento il rumore di qualche animale..");
 
-        Room woods_3 = new Room(5, "Bosco", "Bosco a ovest");
+        Room woods_3 = new Room(5, "Bosco", "Bosco a est");
         woods_3.setLook("In questa zona pare ci siano solo animali");
 
-        Room woods_4 = new Room(6, "Bosco", "Bosco a sud-ovest");
+        Room woods_4 = new Room(6, "Bosco", "Bosco a sud-est");
         woods_4.setLook("Qui c'è un po' più di tranquillità. Si vede una strana bottiglia.");
 
         Room woods_end = new Room(7, "Bosco", "Uscita del Bosco");
@@ -236,6 +237,7 @@ public class GothicGame extends GameDescription{
         cassa.setOpenWith(key);
         cassa.setIsContainer(true);
         cassa.getItemList().add(letter);
+        cassa.getItemList().add(potion);
         getItemList().add(cassa);
 
         Item key_b = new Item(14, "chiavello", "Utile per aprire qualche lucchetto..");
@@ -379,11 +381,13 @@ public class GothicGame extends GameDescription{
         entry_woods.getItems().add(mela);
         entry_woods.getItems().add(broken_spada);
         woods_end.getItems().add(light_armor);
+        woods_end.getItems().add(potion);
         woods_2.getItems().add(cassa);
         woods_3.getItems().add(mela);
         woods_3.getItems().add(w_clothes);
         woods_4.getItems().add(potion);
         baron_room.getItems().add(potion);
+        baron_room.getItems().add(mela);
         baron_room.getItems().add(armadio);
 
         //NPC
@@ -629,6 +633,7 @@ public class GothicGame extends GameDescription{
                 .collect(Collectors.toList());
         if(boss.isEmpty()){
             win = true;
+            System.out.println("Hai vinto!");
         }
         return win;
     }
@@ -637,6 +642,7 @@ public class GothicGame extends GameDescription{
         boolean lose = false;
         if(getPlayer().getHp() <= 0){
             lose = true;
+            System.out.println("Sei morto!");
         }
         return lose;
     }
