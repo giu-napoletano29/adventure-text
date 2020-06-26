@@ -184,38 +184,6 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | getInventory(setClothesEquip(clothesEquip))    | Error |
 | getClothesEquip(Player(hp, name, description)) | Error |
 
-
-
-### Character
-
-| Specifica sintattica |                                             |
-| -------------------- | ------------------------------------------- |
-| Tipi:                | Character, Int, String, Item                |
-| Operatori:           | Character(Int, String, String) -> Character |
-|                      | getName() -> String                         |
-|                      | getHp() -> Int                              |
-|                      | setHp(Int) -> Character                     |
-|                      | getArmor() -> Int                           |
-|                      | setArmor(Int) -> Character                  |
-|                      | getWeaponEquip() -> Item                    |
-|                      | setWeaponEquip(Item) -> Character           |
-|                      | getDescription() -> String                  |
-
-| Specifica semantica                                          | Pre e Post condizioni                                        |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| hero:Character, hp:Int, armor:Int, name:String, description:String, weaponEquip:Item |                                                              |
-| Character(hp, name, description) -> hero                     | PRE : /                                                                                                              POST: hero = {hp, name, description, armor, weaponEquip} |
-| getName() -> name                                            | PRE : / POST : name                                          |
-| getHp() -> hp                                                | PRE : / POST : hp                                            |
-| setHp(hp) -> hero                                            | PRE : 0 < hp <= 100                                                                                          POST : hp' = hp, hero = {hp', name, description, armor, weaponEquip} |
-| getArmor() -> armor                                          | PRE : / POST : armor                                         |
-| setArmor(armor) -> hero                                      | PRE : armor == "armatura leggera" \|\| armor == "armatura" \|\| armor == "vestiti".                                              POST : armor' = armor, hero ={hp, name, description, armor', weaponEquip} |
-| getWeaponEquip() -> weaponEquip                              | PRE : /  POST : weaponEquip                                  |
-| setWeaponEquip(weaponEquip) -> hero                          | PRE : weaponEquip == "spada" \|\| weaponEquip == "spada_rotta" \|\| weaponEquip == "mazza" \|\| weaponEquip == "super_spada"                         POST : weaponEquip' = weaponEquip, hero = {hp, name, description, armor, weaponEquip'} |
-| getDescription() -> description                              | PRE : / POST : description                                   |
-
-
-
 (Strumenti utilizzati)
 
 Swing - Reflection - Lambda Exp - Compiler Runtime - File
