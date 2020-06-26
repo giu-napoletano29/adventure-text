@@ -124,7 +124,7 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | speech | String       | new            | Frase del dialogo pronunciata da Npc   |
 | ans    | List<Answer> | new            | Lista di risposte possibili alla frase |
 
-
+---
 
 ### 3.1 Specifiche algebriche ###
 
