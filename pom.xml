@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>di.uniba.map</groupId>
     <artifactId>game</artifactId>
-    <version>0.8-ALPHA</version>
+    <version>1.0-RELEASE</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
