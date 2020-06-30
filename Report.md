@@ -142,7 +142,7 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | Osservazioni             | Costruttori di Inventory | Costruttori di Inventory                                     |
 | ------------------------ | ------------------------ | ------------------------------------------------------------ |
 |                          | creaInventario()         | aggiungiOggetto(i, obj)                                      |
-| rimuoviOggetto(i', obj') | Error                    | if i == ^ then creaInventario() else   aggiungiOggetto(rimuoviOggetto(i ,obj)) |
+| rimuoviOggetto(i', obj') | Error                    | if obj == obj' then i else   aggiungiOggetto(rimuoviOggetto(i ,obj)) |
 
 | Specifica semantica                     |                                                              |
 | --------------------------------------- | ------------------------------------------------------------ |
