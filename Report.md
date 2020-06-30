@@ -147,7 +147,7 @@ Per implementare le diverse funzionalità del motore, sono state definite le seg
 | Specifica semantica                     |                                                              |
 | --------------------------------------- | ------------------------------------------------------------ |
 | declare i:Inventario, obj:Oggetto       |                                                              |
-| rimuoviOggetto(aggiungiOggetto(i, obj)) | if i == ^ then creaInventario() else aggiungiOggetto(rimuoviOggetto(i ,obj)) |
+| rimuoviOggetto(aggiungiOggetto(i, obj)) | if obj == obj' then i else aggiungiOggetto(rimuoviOggetto(i ,obj)) |
 
 | Specifica di restrizioni         |       |
 | -------------------------------- | ----- |
